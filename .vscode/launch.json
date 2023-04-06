@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/test2.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "FightBuddy",
+            "program": "lib/test2.dart"
+        }
+    ]
+}
