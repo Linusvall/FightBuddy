@@ -1,18 +1,21 @@
 import 'package:mysql1/mysql1.dart';
 
-class Test {
-  var settings = ConnectionSettings(
+
+Future main() async {
+  // Open a connection (testdb should already exist)
+  final connection = await MySqlConnection.connect(ConnectionSettings(
   host: 'mysql681.loopia.se', 
   port: 3306,
   user: 'fightbud@a337869',
   password: 'fightbuddy',
   db: 'aifboxning_se_db_4'
-  );
-  var conn = await MySqlConnection.connect(settings);
-  var userId = 1;
-  var results = await conn.query('select username from users where id = ?', [userId]);
-
+      ));
+  var results = await connection.query('select * from tableName');
   for (var row in results) {
-    print('Username: ${row[0]}');
+    print('${row[0]}');
   }
+
+  // Finally, close the connection
+  await connection.close();
 }
+
