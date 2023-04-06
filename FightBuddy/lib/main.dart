@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mysql1/mysql1.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
   //test
   // This widget is the root of your application.
@@ -44,16 +44,6 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-  var settings = new ConnectionSettings(
-  host: 'mysql681.loopia.se', 
-  port: 3306,
-  user: 'fightbud@a337869',
-  password: 'fightbuddy',
-  db: 'aifboxning_se_db_4'
-);
-var conn = await MySqlConnection.connect(settings);
-var userId = 1;
-var results = await conn.query('select username from users where id = ?', [userId]);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -116,10 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             
           ],
-          for (var row in results) {
-          print('Username: ${row[0]}');
-          }),
-
         ),
       ),
       floatingActionButton: FloatingActionButton(
