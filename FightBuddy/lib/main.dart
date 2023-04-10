@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage>{
   final _passController = TextEditingController();
   
   String userName = '';
-
+  String password = '';
 
    @override
   Widget build(BuildContext context) {
@@ -86,7 +86,8 @@ class _HomePageState extends State<HomePage>{
                 onPressed: () {
                   setState(() {
                   userName = _nameController.text;
-                  sqlQuery(userName);
+                  password = _passController.text;
+                  sqlInsert(userName, password);
                   });
                   
                 },

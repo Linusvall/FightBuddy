@@ -1,12 +1,11 @@
 import 'package:mysql1/mysql1.dart';
 
 void main() {
-  sqlQuery('David');
 }
 
 
   
-   Future<String> sqlQuery(String userName) async {
+   Future sqlLogin(String userName, password) async {
     // Open a connection (testdb should already exist)
     final connection = await MySqlConnection.connect(ConnectionSettings(
     host: 'mysql681.loopia.se', 
@@ -15,20 +14,47 @@ void main() {
     password: 'fightbuddy',
     db: 'aifboxning_se_db_4'
       ));
-    String pass = '';
-    Results results = await connection.query('SELECT username, password FROM users WHERE username = "$userName"');
-    for (var row in results) {
-       pass = ('${row[1]}');
+    
+    Results results = await connection.query('SELECT * FROM users WHERE username = "$userName" AND password = "PASSWORD($password)"');
+   // for (var row in results) {
+    //   pass = ('${row[1]}');
+   // }s
+
+    if(results.isNotEmpty){
+       print(results);
+    }else{
+      print('Wrong username or password');
     }
-
-    print(pass);
-
+   
     // Finally, close the connection
     await connection.close();
-
-    return pass;
     
+
   }
+
+
+
+   Future sqlInsert(String userName, password) async {
+    // Open a connection (testdb should already exist)
+    final connection = await MySqlConnection.connect(ConnectionSettings(
+    host: 'mysql681.loopia.se', 
+    port: 3306,
+    user: 'fightbud@a337869',
+    password: 'fightbuddy',
+    db: 'aifboxning_se_db_4'
+      ));
+ 
+    Results results = await connection.query('INSERT INTO users (username, password) VALUES("$userName", PASSWORD("$password"))');
+   
+    // Finally, close the connection
+    await connection.close();
+    
+
+  }
+
+
+
+
 
  
 
