@@ -1,13 +1,12 @@
 import 'package:mysql1/mysql1.dart';
 
-//GitHub vscode test
-void main(){
-  Test t = Test();
-  t.main();
+void main() {
+  sqlQuery('David');
 }
 
-class Test {
-  Future main() async {
+
+  
+   Future<String> sqlQuery(String userName) async {
     // Open a connection (testdb should already exist)
     final connection = await MySqlConnection.connect(ConnectionSettings(
     host: 'mysql681.loopia.se', 
@@ -15,14 +14,22 @@ class Test {
     user: 'fightbud@a337869',
     password: 'fightbuddy',
     db: 'aifboxning_se_db_4'
-    
       ));
-    var results = await connection.query('select * from users');
+    String pass = '';
+    Results results = await connection.query('SELECT username, password FROM users WHERE username = "$userName"');
     for (var row in results) {
-      print('${row[1]}');
+       pass = ('${row[1]}');
     }
+
+    print(pass);
 
     // Finally, close the connection
     await connection.close();
+
+    return pass;
+    
   }
-}
+
+ 
+
+
