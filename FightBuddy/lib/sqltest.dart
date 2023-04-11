@@ -15,7 +15,7 @@ void main() {
     db: 'aifboxning_se_db_4'
       ));
     
-    Results results = await connection.query('SELECT * FROM users WHERE username = "$userName" AND password = "PASSWORD($password)"');
+    Results results = await connection.query('SELECT * FROM users WHERE username = "$userName" AND password = "$password"');
    // for (var row in results) {
     //   pass = ('${row[1]}');
    // }s
