@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'sqltest.dart';
+import 'homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,8 @@ class _LoginPageState extends State<LoginPage> {
 
   String userName = '';
   String password = '';
-
+  bool loggedIn = false;
+  bool loginFail = false;
   var _passwordVisible;
 
   @override
@@ -62,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
+                    errorText: loginFail ? 'Wrong username or password' : null,
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -81,12 +84,24 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                 child: const Text('Login'),
-                onPressed: () {
+                onPressed: () async {
+                  loginFail = false;
                   setState(() {
                     userName = _nameController.text;
                     password = _passController.text;
-                    sqlLogin(userName, password);
                   });
+                  loggedIn = await sqlLogin(userName, password);
+                  if (!mounted) return;
+                  if (loggedIn) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  } else {
+                    setState(() {
+                      loginFail = true;
+                    });
+                  }
                 },
               ),
             ),
