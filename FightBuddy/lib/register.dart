@@ -1,122 +1,105 @@
 import 'package:flutter/material.dart';
 import 'sqltest.dart';
 
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
-
 }
 
-class _RegisterPageState extends State<RegisterPage>{
+class _RegisterPageState extends State<RegisterPage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
   final _passController1 = TextEditingController();
   final _passController2 = TextEditingController();
-  
+
   String userName = '';
   String password1 = '';
-  String password2= '';
+  String password2 = '';
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        title: const Text('FightBuddy'),
-        centerTitle: true
-      ),
-
-      body: Center(child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        
+      appBar: AppBar(title: const Text('Sign up'), centerTitle: true),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-        const Padding(
-              padding: EdgeInsets.all(10),
-              child: Text('Register'),
-            ),
-               Padding(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                controller: _nameController,  
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User name',
-                  suffixIcon: IconButton(
-                onPressed: () {
-                  _nameController.clear();
-                },
-                icon: const Icon(Icons.clear),
+          SizedBox(height: 25),
+          Form(
+            key: formKey,
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      labelText: 'Username',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter a username';
+                      }
+                      return null;
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: _passController1,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password field is empty';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                    controller: _passController2,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      labelText: 'Confirm password',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password field is empty';
+                      }
+                      if (value != _passController1.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    }),
               )
-                )
-                          ),
-              ),
-           Padding(
-              padding: EdgeInsets.all(10),
-              child:  TextField(
-              controller: _passController1, 
-              obscureText: true,
-              decoration: InputDecoration(
-               border: OutlineInputBorder(),
-              labelText: 'Password',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  _passController1.clear();
-                },
-                icon: const Icon(Icons.clear),
-              )
-              ),
-                      ),
+            ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ElevatedButton(
+              child: const Text('Create Account'),
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  sqlInsert(userName, password1);
+                }
+              },
             ),
-             Padding(
-              padding: EdgeInsets.all(10),
-              child:  TextField(
-              controller: _passController2, 
-              obscureText: true,
-              decoration: InputDecoration(
-               border: OutlineInputBorder(),
-              labelText: 'Confirm password',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  _passController2.clear();
-                },
-                icon: const Icon(Icons.clear),
-              )
-              ),
-                      ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                child: const Text('Confirm'),
-                onPressed: () {
-                  setState(() {
-                  userName = _nameController.text;
-                  password1 = _passController1.text;
-                  password2 = _passController2.text;
-
-                  //anropa sqlmetod för insert
-                  if(password1 == password2){
-                    sqlInsert(userName, password1);
-                  }else{
-                    //Visa på skärmen istället för print här
-                    print('Passwords do not match');
-                  }
-                  
-                  });
-                  
-                },
-              ),
-            ),
-      ],)),
-
-
-      
+          ),
+        ],
+      )),
     );
   }
-
 }
- 
-
