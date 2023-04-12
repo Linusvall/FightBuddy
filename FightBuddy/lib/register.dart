@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Password field is empty';
+                      return 'Enter a password';
                     }
                     return null;
                   },
@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Password field is empty';
+                        return 'Confirm password';
                       }
                       if (value != _passController1.text) {
                         return 'Passwords do not match';
