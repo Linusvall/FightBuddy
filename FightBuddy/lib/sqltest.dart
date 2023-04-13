@@ -4,7 +4,7 @@ import 'package:mysql1/mysql1.dart';
 
 void main() {}
 
-Future<bool> sqlLogin(String userName, password) async {
+Future<bool> sqlLogin(String? userName, password) async {
   // Open a connection (testdb should already exist)
   final connection = await MySqlConnection.connect(ConnectionSettings(
       host: 'mysql681.loopia.se',
