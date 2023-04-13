@@ -3,7 +3,7 @@ import 'register.dart';
 import 'login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: Color.fromARGB(255, 46, 201, 141),
+        primaryColor: const Color.fromARGB(255, 46, 201, 141),
 
         // Define the default font family.
         //fontFamily: 'Georgia',
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const WelcomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
