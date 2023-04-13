@@ -41,7 +41,7 @@ Future sqlInsert(String userName, password) async {
       db: 'aifboxning_se_db_4'));
 
   Results results = await connection.query(
-      'INSERT INTO users (username, password) VALUES("$userName", PASSWORD("$password"))');
+      'INSERT INTO users (username, password) VALUES("$userName", "$password")');
 
   // Finally, close the connection
   await connection.close();

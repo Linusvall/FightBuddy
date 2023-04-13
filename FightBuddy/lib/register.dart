@@ -92,6 +92,10 @@ class _RegisterPageState extends State<RegisterPage> {
             child: ElevatedButton(
               child: const Text('Create Account'),
               onPressed: () {
+                setState(() {
+                  userName = _nameController.text;
+                  password1 = _passController1.text;
+                });
                 if (formKey.currentState!.validate()) {
                   sqlInsert(userName, password1);
                 }
