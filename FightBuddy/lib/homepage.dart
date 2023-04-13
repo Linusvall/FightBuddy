@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('Home'), centerTitle: true),
-        body: pages[currentPage] ,
+        body: const Center(),
         bottomNavigationBar: NavigationBar(
         destinations: const [ 
           NavigationDestination(icon: Icon(Icons.home), label: 'Hem'),
