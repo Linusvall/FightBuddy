@@ -30,9 +30,6 @@ class GenderPage extends StatefulWidget{
     _manHasBeenPressed = false;
     _womanHasBeenPressed = false;
 
-    setState(() {
-      
-    });
 
     if(button == 'man'){
       _manHasBeenPressed = true;
@@ -64,7 +61,8 @@ class GenderPage extends StatefulWidget{
               Padding(padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 
-                style: ElevatedButton.styleFrom(fixedSize: const Size(250,60),
+                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                   primary: _womanHasBeenPressed ? Color.fromRGBO(0,181,169,100) : Colors.white,
                   
                 ),
@@ -75,7 +73,7 @@ class GenderPage extends StatefulWidget{
                 child: Row(
                   children: [
                     Align(alignment: Alignment.centerLeft,
-                      child: Text("Kvinna                                         ",
+                      child: Text("Kvinna                                                      ",
                       style: TextStyle(color: Color.fromRGBO(112,112,112,100))
                       )
                       ),
@@ -89,7 +87,8 @@ class GenderPage extends StatefulWidget{
                 Padding(padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 
-                style: ElevatedButton.styleFrom(fixedSize: const Size(250,60),
+                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                   primary: _manHasBeenPressed ? Color.fromRGBO(0,181,169,100) : Colors.white,
                 ),
                 onPressed: () => setState(() {
@@ -99,7 +98,7 @@ class GenderPage extends StatefulWidget{
                 child: Row(
                   children: [
                     Align(alignment: Alignment.centerLeft,
-                      child: Text("Man                                             ",
+                      child: Text("Man                                                          ",
                       style: TextStyle(color: Color.fromRGBO(112,112,112,100))
                       )
                     ),
@@ -114,8 +113,9 @@ class GenderPage extends StatefulWidget{
                 Padding(padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                 
-                style: ElevatedButton.styleFrom(fixedSize: const Size(250,60),
-                  primary: _nothingHasBeenPressed ? Color.fromRGBO(0,181,169,100) : Colors.white,
+                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                  primary : _nothingHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
                 ),
                 onPressed: () => setState(() {
                   pressedbutton("nothing");
@@ -124,7 +124,7 @@ class GenderPage extends StatefulWidget{
                 child: Row(
                   children: [
                     Align(alignment: Alignment.centerLeft,
-                      child: Text("Vill inte ange                              ",
+                      child: Text("Vill inte ange                                          ",
                       style: TextStyle(color: Color.fromRGBO(112,112,112,100))
                       )
                     ),
@@ -137,8 +137,9 @@ class GenderPage extends StatefulWidget{
                 ), 
                 Padding(padding: const EdgeInsets.all(70),
                 child: ElevatedButton(
-                  onPressed: () => print("hej"),
+                  onPressed: () => print("pressed"),
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                     primary: Color.fromRGBO(0,181,169,100),
                     minimumSize: Size(250,70)
                   ),
@@ -147,7 +148,8 @@ class GenderPage extends StatefulWidget{
                   style: TextStyle(color: Colors.white,
                   fontSize: 20,
 
-                  )),
+                  )
+                  ),
 
                 )
                 )
@@ -156,7 +158,7 @@ class GenderPage extends StatefulWidget{
       )
     );
   }
-  }
+}
 
   
 
