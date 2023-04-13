@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'sqltest.dart';
 import 'homepage.dart';
+import 'utils/secure_storage.dart';
 
 void main() {
   runApp(MyApp());
@@ -93,9 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                   loggedIn = await sqlLogin(userName, password);
                   if (!mounted) return;
                   if (loggedIn) {
-                    Navigator.push(
+                    UserSecureStorage.setUsername(userName);
+                    UserSecureStorage.setPassword(password);
+                    Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                      (route) => false,
                     );
                   } else {
                     setState(() {

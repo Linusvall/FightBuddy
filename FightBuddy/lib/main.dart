@@ -1,16 +1,46 @@
+import 'package:fight_buddy/sqltest.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'login.dart';
+import 'utils/secure_storage.dart';
+import 'sqltest.dart';
+import 'homepage.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool loggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _readFromStorage();
+  }
+
+  Future<void> _readFromStorage() async {
+    final String? userName = await UserSecureStorage.getUsername();
+    final String? password = await UserSecureStorage.getPassword();
+    final bool isLoggedIn = await sqlLogin(userName, password);
+    setState(() {
+      loggedIn = isLoggedIn;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget homePage = const WelcomePage();
+    if (loggedIn) {
+      homePage = const HomePage();
+    }
     return MaterialApp(
       theme: ThemeData(
         // Define the default brightness and colors.
@@ -28,6 +58,10 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
+
+      //Auto login till homepage, utkommenterad tills vi har utloggningsknapp
+      //home: loggedIn ? const HomePage() : const WelcomePage(),
+
       home: const WelcomePage(),
       debugShowCheckedModeBanner: false,
     );

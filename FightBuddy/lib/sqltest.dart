@@ -4,7 +4,7 @@ import 'package:mysql1/mysql1.dart';
 
 void main() {}
 
-Future<bool> sqlLogin(String userName, password) async {
+Future<bool> sqlLogin(String? userName, password) async {
   // Open a connection (testdb should already exist)
   final connection = await MySqlConnection.connect(ConnectionSettings(
       host: 'mysql681.loopia.se',
@@ -41,7 +41,7 @@ Future sqlInsert(String userName, password) async {
       db: 'aifboxning_se_db_4'));
 
   Results results = await connection.query(
-      'INSERT INTO users (username, password) VALUES("$userName", PASSWORD("$password"))');
+      'INSERT INTO users (username, password) VALUES("$userName", "$password")');
 
   // Finally, close the connection
   await connection.close();

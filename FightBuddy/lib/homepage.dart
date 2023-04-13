@@ -6,31 +6,28 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-} 
+}
 
 class _HomePageState extends State<HomePage> {
   int currentPage = 0;
-  List<Widget> pages = const[
-    HomePage(), 
-    ProfilePage()
-  ];
+  List<Widget> pages = const [HomePage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Home'), centerTitle: true),
-        body: const Center(),
-        bottomNavigationBar: NavigationBar(
-        destinations: const [ 
+      appBar: AppBar(title: const Text('Home'), centerTitle: true),
+      body: const Center(),
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Hem'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
         ],
-        onDestinationSelected: (int index){
+        onDestinationSelected: (int index) {
           setState(() {
             currentPage = index;
-            });
-          },
-          selectedIndex: currentPage,
-        ),
+          });
+        },
+        selectedIndex: currentPage,
+      ),
     );
   }
 }
