@@ -62,7 +62,7 @@ class GenderPage extends StatefulWidget{
              child: Column(
              children: <Widget>[
               const Padding(
-               padding: EdgeInsets.all(50),
+               padding: EdgeInsets.all(90),
                  child: Text(
                  "Jag är en",
                   style:
@@ -161,14 +161,14 @@ Padding(padding: const EdgeInsets.all(5),
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(160,50)
                   ),
 
               child: const Text(
                 "Hoppa över",
                style: TextStyle(
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color:  Color.fromARGB(255, 255, 255, 255),
                     fontSize: 15,
                ),
               ),

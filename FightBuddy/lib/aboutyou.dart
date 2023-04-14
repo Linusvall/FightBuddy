@@ -2,54 +2,36 @@ import 'package:flutter/material.dart';
 
 
 void main(){
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: GenderPage(),
     );
   }
 }
 
 class GenderPage extends StatefulWidget{
+  const GenderPage({super.key});
+
  @override
-  _genderPageState createState() => _genderPageState();
+  GenderPageState createState() => GenderPageState();
   }
 
-  class _genderPageState extends State<GenderPage>{
-    bool _womanHasBeenPressed = false;
-    bool _nothingHasBeenPressed = false;
-    bool _manHasBeenPressed = false;
-    var gender = '';
-
+  class GenderPageState extends State<GenderPage>{
     pressedbutton(String button){
-    _nothingHasBeenPressed = false;
-    _manHasBeenPressed = false;
-    _womanHasBeenPressed = false;
-
-
-    if(button == 'man'){
-      _manHasBeenPressed = true;
-      gender = 'man';
-    }
-    else if(button == 'woman'){
-      _womanHasBeenPressed = true;
-      gender = 'woman';
-    }
-    else{
-      _nothingHasBeenPressed = true; 
-      gender = 'nothing';
-    }
   }
 
   @override
   Widget build(BuildContext context) {
      return Scaffold(
       appBar: AppBar(
-        title: const Text("Kön"),
+        title: const Text("Om dig"),
         centerTitle: true,
       ),
       body: Stack(
@@ -58,17 +40,11 @@ class GenderPage extends StatefulWidget{
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(100),
+                  padding: EdgeInsets.all(90),
                   child: Text(
-                    "Jag fyller år ",
+                    "Berätta lite om dig själv",
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: Text(
-                    "Vi kommer  förmodligen inte fira med tårta (sorry!) men vi kommer att rekommendera fightbuddys, grupper och aktiviteter utifrån din ålder",
                   ),
                 ),
                 Row(
@@ -77,41 +53,9 @@ class GenderPage extends StatefulWidget{
                       child: TextField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'DD',
+                          hintText: 'Du kan börja med att säga hej, berätta om vilken kampsport du utövar, när du vill träna osv...',
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'MM',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'YYYY',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
+                          horizontal: 10, vertical: 60),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
@@ -129,10 +73,10 @@ class GenderPage extends StatefulWidget{
             top: 15.0, // adjust this value to change the position of the button
             right: 10.0, // adjust this value to change the position of the button
             child: ElevatedButton(
-              onPressed: ()  => print("pressed"),
+              onPressed: ()  {},
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(160,50)
                   ),
 
@@ -147,33 +91,34 @@ class GenderPage extends StatefulWidget{
           ),
 
  Positioned(
-            top: 15.0, // adjust this value to change the position of the button
-            left: 10.0, // adjust this value to change the position of the button
-            child: ElevatedButton(
-              onPressed: ()  => print("pressed"),
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(50,50)
-                  ),
+           top: 15.0, // adjust this value to change the position of the button
+           left: 10.0, // adjust this value to change the position of the button
+           child: ElevatedButton(
+             onPressed: () {},
+             style: ElevatedButton.styleFrom(
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 backgroundColor: const Color.fromARGB(156, 0, 171, 159),
+                 minimumSize: const Size(50,50)
+                 ),
 
-              child: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Color.fromRGBO(255, 255, 255, 255)), 
-                  
-                  onPressed: () => print("PRESSED"),
-              ),
-            ),
-          ),
+
+             child: IconButton(
+                 icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)),
+                
+                 onPressed: () {},
+             ),
+           ),
+         ),
 
       Padding(
             padding: const EdgeInsets.all(70),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
-                onPressed: () => print("pressed"),
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(250,70)
                 ),
                 child: const Text(

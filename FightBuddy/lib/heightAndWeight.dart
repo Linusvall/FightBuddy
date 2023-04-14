@@ -43,7 +43,7 @@ class HeightAndWeightPage extends StatefulWidget{
            child: Column(
             children: <Widget>[
            const Padding(
-             padding: EdgeInsets.all(50),
+             padding: EdgeInsets.all(90),
              child: Text(
                "Vikt & Längd",
                style:
@@ -98,10 +98,10 @@ keyboardType: TextInputType.number,
            top: 15.0, // adjust this value to change the position of the button
            right: 10.0, // adjust this value to change the position of the button
            child: ElevatedButton(
-             onPressed: ()  => print("pressed"),
+             onPressed: ()  {},
              style: ElevatedButton.styleFrom(
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 primary: Color.fromARGB(156, 0, 171, 159),
+                 backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                  minimumSize: const Size(160,50)
                  ),
 
@@ -121,10 +121,10 @@ Positioned(
            top: 15.0, // adjust this value to change the position of the button
            left: 10.0, // adjust this value to change the position of the button
            child: ElevatedButton(
-             onPressed: ()  => print("pressed"),
+             onPressed: () {},
              style: ElevatedButton.styleFrom(
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 primary: Color.fromARGB(156, 0, 171, 159),
+                 backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                  minimumSize: const Size(50,50)
                  ),
 
@@ -132,7 +132,7 @@ Positioned(
              child: IconButton(
                  icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)),
                 
-                 onPressed: () => print("PRESSED"),
+                 onPressed: () {},
              ),
            ),
          ),
@@ -143,10 +143,10 @@ Positioned(
            child: Align(
              alignment: Alignment.bottomCenter,
              child: ElevatedButton(
-               onPressed: () => print("pressed"),
+               onPressed: () {},
                style: ElevatedButton.styleFrom(
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 primary: Color.fromARGB(156, 0, 171, 159),
+                 backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                  minimumSize: const Size(250,70)
                ),
                child: const Text(

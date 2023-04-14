@@ -11,49 +11,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: GenderPage(),
+      home: BirthPage(),
     );
   }
 }
 
-class GenderPage extends StatefulWidget{
-  const GenderPage({super.key});
-
+class BirthPage extends StatefulWidget{
+  const BirthPage({super.key});
  @override
-  genderPageState createState() => genderPageState();
+  BirthPageState createState() => BirthPageState();
   }
-
-  class genderPageState extends State<GenderPage>{
-    bool womanHasBeenPressed = false;
-    bool nothingHasBeenPressed = false;
-    bool manHasBeenPressed = false;
-    var gender = '';
-
-    pressedbutton(String button){
-    nothingHasBeenPressed = false;
-    manHasBeenPressed = false;
-    womanHasBeenPressed = false;
-
-
-    if(button == 'man'){
-      manHasBeenPressed = true;
-      gender = 'man';
-    }
-    else if(button == 'woman'){
-      womanHasBeenPressed = true;
-      gender = 'woman';
-    }
-    else{
-      nothingHasBeenPressed = true;
-      gender = 'nothing';
-    }
-  }
-
+  class BirthPageState extends State<BirthPage>{
   @override
   Widget build(BuildContext context) {
      return Scaffold(
       appBar: AppBar(
-        title: const Text("Kön"),
+        title: const Text("Ålder"),
         centerTitle: true,
       ),
       body: Stack(
@@ -62,9 +35,9 @@ class GenderPage extends StatefulWidget{
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(100),
+                  padding: EdgeInsets.all(90),
                   child: Text(
-                    "Jag fyller år ",
+                    "Jag är född ",
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
@@ -92,7 +65,7 @@ class GenderPage extends StatefulWidget{
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
                         keyboardType: TextInputType.number,
@@ -108,7 +81,7 @@ class GenderPage extends StatefulWidget{
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
                         keyboardType: TextInputType.number,
@@ -133,10 +106,10 @@ class GenderPage extends StatefulWidget{
             top: 15.0, // adjust this value to change the position of the button
             right: 10.0, // adjust this value to change the position of the button
             child: ElevatedButton(
-              onPressed: ()  => print("pressed"),
+              onPressed: ()  {},
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(160,50)
                   ),
 
@@ -154,30 +127,31 @@ class GenderPage extends StatefulWidget{
             top: 15.0, // adjust this value to change the position of the button
             left: 10.0, // adjust this value to change the position of the button
             child: ElevatedButton(
-              onPressed: ()  => print("pressed"),
+              onPressed: ()  {},
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(50,50)
                   ),
 
               child: IconButton(
                   icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)), 
                   
-                  onPressed: () => print("PRESSED"),
+                  onPressed: () {},
               ),
             ),
           ),
+
 
       Padding(
             padding: const EdgeInsets.all(70),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
-                onPressed: () => print("pressed"),
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: Color.fromARGB(156, 0, 171, 159),
+                  backgroundColor:const Color.fromARGB(156, 0, 171, 159),
                   minimumSize: const Size(250,70)
                 ),
                 child: const Text(
