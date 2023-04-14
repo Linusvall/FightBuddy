@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: const Color.fromARGB(255, 46, 201, 141),
+        primaryColor: Color.fromARGB(255, 211, 0, 253),
 
         // Define the default font family.
         //fontFamily: 'Georgia',
@@ -53,8 +53,16 @@ class _MyAppState extends State<MyApp> {
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          titleLarge: TextStyle(fontSize: 20.0, fontStyle: FontStyle.italic),
+          displayLarge: TextStyle(
+              fontFamily: 'Paytone',
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(3, 137, 129, 50)),
+          titleLarge: TextStyle(
+              fontFamily: 'Paytone',
+              fontSize: 20.0,
+              fontStyle: null,
+              color: Color.fromRGBO(3, 137, 129, 50)),
           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
@@ -74,21 +82,51 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FightBuddy'),
-        centerTitle: true,
-        // backgroundColor:
-      ),
       body: Center(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Image.asset(
+            'lib/assets/images/logo.png',
+            fit: BoxFit.contain,
+            height: 150,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            'FightBuddy',
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+          const SizedBox(
+            height: 100,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              //   backgroundColor:
-              fixedSize: const Size(250, 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+              fixedSize: const Size(250, 50),
             ),
-            child: const Text('Login'),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Spacer(),
+                Text(
+                  '     LOGGA IN',
+                  style: TextStyle(fontSize: 15),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.arrow_forward,
+                  size: 20,
+                ),
+              ],
+            ),
             onPressed: () {
               //gå till login
               Navigator.push(
@@ -97,11 +135,29 @@ class WelcomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(
+            height: 10,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              fixedSize: const Size(250, 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+              fixedSize: const Size(250, 50),
             ),
-            child: const Text('Sign up'),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Spacer(),
+                Text('      SKAPA KONTO', style: TextStyle(fontSize: 15)),
+                Spacer(),
+                Icon(
+                  Icons.arrow_forward,
+                  size: 20,
+                ),
+              ],
+            ),
             onPressed: () {
               //gå till register
               Navigator.push(
@@ -115,3 +171,26 @@ class WelcomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+/*appBar: AppBar(
+        backgroundColor: const Color.fromARGB(245, 245, 245, 245),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'lib/assets/images/logo.png',
+              fit: BoxFit.contain,
+              height: 50,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'FightBuddy',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+            )
+          ],
+        ),
+      ),*/

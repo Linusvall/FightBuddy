@@ -22,12 +22,25 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign up'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Sign up'),
+        centerTitle: true,
+      ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(height: 25),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                'Skapa konto',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
           Form(
             key: formKey,
             child: Column(children: [
@@ -38,7 +51,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
                       labelText: 'Username',
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -55,7 +70,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     labelText: 'Password',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -73,7 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
                       labelText: 'Confirm password',
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -88,9 +107,16 @@ class _RegisterPageState extends State<RegisterPage> {
             ]),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(50),
             child: ElevatedButton(
-              child: const Text('Create Account'),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                fixedSize: const Size(250, 50),
+              ),
+              child: const Text('SKAPA KONTO'),
               onPressed: () {
                 setState(() {
                   userName = _nameController.text;
