@@ -1,138 +1,166 @@
 import 'package:flutter/material.dart';
 
-
 void main(){
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HeightAndWeightPage(),
     );
   }
 }
 
 class HeightAndWeightPage extends StatefulWidget{
+  const HeightAndWeightPage({super.key});
+
  @override
-  _HeightAndWeightPageState createState() => _HeightAndWeightPageState();
+  HeightAndWeightPageState createState() => HeightAndWeightPageState();
   }
 
 
-  class _HeightAndWeightPageState extends State<HeightAndWeightPage>{
+  class HeightAndWeightPageState extends State<HeightAndWeightPage>{
 
-    final _weightController = TextEditingController();
-    final _heightController = TextEditingController();
-    bool _weightButton = false;
-    bool _heightButton = false;
+    final weightController = TextEditingController();
+    final heightController = TextEditingController();
+    bool weightButton = false;
+    bool heightButton = false;
 
-    @override 
-    Widget build(BuildContext context){
-      return Scaffold(
-        appBar: AppBar(title: Text("Vikt & Längd"), centerTitle: true ),
+    @override
+ Widget build(BuildContext context) {
+    return Scaffold(
+     appBar: AppBar(
+       title: const Text("Vikt & Längd"),
+       centerTitle: true,
+     ),
+     body: Stack(
+       children: [
+         Center(
+           child: Column(
+            children: <Widget>[
+           const Padding(
+             padding: EdgeInsets.all(50),
+             child: Text(
+               "Vikt & Längd",
+               style:
+               TextStyle(fontSize: 30, fontWeight: FontWeight.bold), 
+             ),
+           ),
+      Row(
+     children: [
+       Expanded(
+      child: TextField(
+keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+     hintText: 'VIKT KG',
+     contentPadding: const EdgeInsets.symmetric(
+    horizontal: 16, vertical: 10),
+                         border: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(5),
+                         ),
+                         isDense: true,
+                       ),
+                       style: const TextStyle(fontSize: 16),
+                     ),
+                   ),
+                   const SizedBox(width: 16),
+                   Expanded(
+                     child: TextField(
+                       keyboardType: TextInputType.number,
+                       decoration: InputDecoration(
+                         hintText: 'Längd cm',
+                         contentPadding: const EdgeInsets.symmetric(
+                             horizontal: 16, vertical: 10),
+                         border: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(5),
+                         ),
+                         isDense: true,
+                       ),
+                       style: const TextStyle(fontSize: 16),
+                     ),
+                   ),
+           ],
+       ),
+           const Padding(
+             padding: EdgeInsets.all(40),
+             child : Text("Eller",
+             style: TextStyle(fontSize: 30),
+             ),
+             ),
+            ],
+           ),
+         ),
+         Positioned(
+           top: 15.0, // adjust this value to change the position of the button
+           right: 10.0, // adjust this value to change the position of the button
+           child: ElevatedButton(
+             onPressed: ()  => print("pressed"),
+             style: ElevatedButton.styleFrom(
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 primary: Color.fromARGB(156, 0, 171, 159),
+                 minimumSize: const Size(160,50)
+                 ),
 
-        body: Center(
-        
-        child: Column(
-          children: <Widget>[
-            Padding( padding: const EdgeInsets.all(50),
-              child: const Text("Vikt & Längd",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),  
-              )
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: TextField(
-                
-                  controller: _weightController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-                    border: OutlineInputBorder(),
-                    labelText: 'Ange vikt i kilogram',
-                  )
-                  ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child : Text("Eller"
-                
-              )
+
+             child: const Text(
+               "Hoppa över",
+              style: TextStyle(
+                   color: Colors.white,
+                   fontSize: 15,
               ),
-              Padding(padding: const EdgeInsets.all(5),
-              child: ElevatedButton(
+             ),
+           ),
+         ),
+
+
+Positioned(
+           top: 15.0, // adjust this value to change the position of the button
+           left: 10.0, // adjust this value to change the position of the button
+           child: ElevatedButton(
+             onPressed: ()  => print("pressed"),
+             style: ElevatedButton.styleFrom(
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 primary: Color.fromARGB(156, 0, 171, 159),
+                 minimumSize: const Size(50,50)
+                 ),
+
+
+             child: IconButton(
+                 icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)),
                 
-                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: _weightButton ? Color.fromRGBO(0,181,169,100) : Colors.white,
-                  
-                ),
-                onPressed: () => setState((){
-                  _weightButton = !_weightButton;
-                }
-                ), child: Text("Vill inte ange",
-                style: TextStyle(color: Colors.black)
-                )
-              )
-              ),
-
-              Padding(
-              padding: EdgeInsets.all(20),
-              child: TextField(
-                
-                  controller: _heightController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-                    border: OutlineInputBorder(),
-                    labelText: 'Ange längd i centimeter',
-                  )
-                  ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child : Text("Eller"
-                
-              )
-              ),
-              Padding(padding: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                
-                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: _heightButton ? Color.fromRGBO(0,181,169,100) : Colors.white,
-                  
-                ),
-                onPressed: () => setState((){
-                  _heightButton = !_heightButton;
-                }
-                ), child: Text("Vill inte ange",
-                style: TextStyle(color: Colors.black)
-                )
-              )
-              ),
-
-              Padding(padding: const EdgeInsets.all(70),
-                child: ElevatedButton(
-                  onPressed: () => print("pressed"),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                    primary: Color.fromRGBO(0,181,169,100),
-                    minimumSize: Size(250,70)
-                  ),
-                  
-                  child: Text("Gå vidare",
-                  style: TextStyle(color: Colors.white,
-                  fontSize: 20,
-
-                  )
-                  ),
-
-                )
-                )
+                 onPressed: () => print("PRESSED"),
+             ),
+           ),
+         ),
 
 
-        ])
-        )
-      );
-    }
-  }
+     Padding(
+           padding: const EdgeInsets.all(70),
+           child: Align(
+             alignment: Alignment.bottomCenter,
+             child: ElevatedButton(
+               onPressed: () => print("pressed"),
+               style: ElevatedButton.styleFrom(
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 primary: Color.fromARGB(156, 0, 171, 159),
+                 minimumSize: const Size(250,70)
+               ),
+               child: const Text(
+                 "Gå vidare",
+                 style: TextStyle(
+                   color: Colors.white,
+                   fontSize: 20,
+               ),
+             ),
+           ),
+          ),
+         ),
+       ],
+     ),
+   );
+ }
+}

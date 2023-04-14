@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 
 
 void main(){
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: GenderPage(),
     );
   }
 }
 
 class GenderPage extends StatefulWidget{
+  const GenderPage({super.key});
+
  @override
-  _genderPageState createState() => _genderPageState();
+  GenderPageState createState() => GenderPageState();
   }
 
-  class _genderPageState extends State<GenderPage>{
+  class GenderPageState extends State<GenderPage>{
     bool _womanHasBeenPressed = false;
     bool _nothingHasBeenPressed = false;
     bool _manHasBeenPressed = false;
@@ -45,122 +49,174 @@ class GenderPage extends StatefulWidget{
     }
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Kön"), centerTitle: true,),
-      body: Center(
-        
-        child: Column(
-          children: <Widget>[
-            Padding( padding: const EdgeInsets.all(100),
-              child: const Text("Jag är en ",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),  
-              )
-              ),
-              Padding(padding: const EdgeInsets.all(5),
-              child: ElevatedButton(
+     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Kön"),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: [
+            Center(
+             child: Column(
+             children: <Widget>[
+              const Padding(
+               padding: EdgeInsets.all(50),
+                 child: Text(
+                 "Jag är en",
+                  style:
+                TextStyle(fontSize: 30,),
+           ),
+         ),
+Padding(padding: const EdgeInsets.all(5),
+             child: ElevatedButton(
+              
+               style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 backgroundColor: _womanHasBeenPressed ?const Color.fromRGBO(0,181,169,100) : Colors.white,
                 
-                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+               ),
+               onPressed: () => setState((){
+                 pressedbutton("woman");
+               }
+               ),
+               child: Row(
+                 children: const [
+                   Align (alignment: Alignment.centerLeft,
+                     child: Text("Kvinna                                                      ",
+                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
+                     )
+                     ),
+                   Align(alignment: Alignment.centerRight,
+                     child: Icon(Icons.check)
+                   ),
+                 ],
+               ),
+               )
+  
+               ),
+            
+               Padding(padding: const EdgeInsets.all(5),
+             child: ElevatedButton(
+              
+               style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 backgroundColor: _manHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
+               ),
+               onPressed: () => setState(() {
+                 pressedbutton("man");
+               }
+               ),
+               child: Row(
+                 children: const [
+                   Align(alignment: Alignment.centerLeft,
+                     child: Text("Man                                                          ",
+                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
+                     )
+                   ),
+                   Align(alignment: Alignment.centerRight,
+                     child: Icon(Icons.check)
+                   ),
+                 ],
+             ),
+               ),
+               ),
+
+
+               Padding(padding: const EdgeInsets.all(5),
+             child: ElevatedButton(
+              
+               style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
+               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                 backgroundColor : _nothingHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
+               ),
+               onPressed: () => setState(() {
+                 pressedbutton("nothing");
+               }
+               ),
+               child: Row(
+                 children: const [
+                   Align(alignment: Alignment.centerLeft,
+                     child: Text("Vill inte ange,                                        ",
+                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
+                     )
+                   ),
+                   Align(alignment: Alignment.centerRight,
+                     child: Icon(Icons.check)
+                   ),
+                 ],
+               ),
+             ),
+               )
+             ],
+               ),
+             ),
+      
+
+          Positioned(
+            top: 15.0, // adjust this value to change the position of the button
+            right: 10.0, // adjust this value to change the position of the button
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: _womanHasBeenPressed ? Color.fromRGBO(0,181,169,100) : Colors.white,
-                  
-                ),
-                onPressed: () => setState((){
-                  pressedbutton("woman");
-                }
-                ),
-                child: Row(
-                  children: [
-                    Align(alignment: Alignment.centerLeft,
-                      child: Text("Kvinna                                                      ",
-                      style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                      )
-                      ),
-                    Align(alignment: Alignment.centerRight,
-                      child: Icon(Icons.check)
-                    )
-                  ],
-                )
-                )
-                ),
-                Padding(padding: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                
-                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary: _manHasBeenPressed ? Color.fromRGBO(0,181,169,100) : Colors.white,
-                ),
-                onPressed: () => setState(() {
-                  pressedbutton("man");
-                }
-                ),
-                child: Row(
-                  children: [
-                    Align(alignment: Alignment.centerLeft,
-                      child: Text("Man                                                          ",
-                      style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                      )
-                    ),
-                    Align(alignment: Alignment.centerRight,
-                      child: Icon(Icons.check)
-                    )
-                  ],
-                )
-                )
-                ),
-
-                Padding(padding: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                
-                style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  primary : _nothingHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
-                ),
-                onPressed: () => setState(() {
-                  pressedbutton("nothing");
-                }
-                ),
-                child: Row(
-                  children: [
-                    Align(alignment: Alignment.centerLeft,
-                      child: Text("Vill inte ange                                          ",
-                      style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                      )
-                    ),
-                    Align(alignment: Alignment.centerRight,
-                      child: Icon(Icons.check)
-                    )
-                  ],
-                )
-                )
-                ), 
-                Padding(padding: const EdgeInsets.all(70),
-                child: ElevatedButton(
-                  onPressed: () => print("pressed"),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                    primary: Color.fromRGBO(0,181,169,100),
-                    minimumSize: Size(250,70)
-                  ),
-                  
-                  child: Text("Gå vidare",
-                  style: TextStyle(color: Colors.white,
-                  fontSize: 20,
-
-                  )
+                  backgroundColor: Color.fromARGB(156, 0, 171, 159),
+                  minimumSize: const Size(160,50)
                   ),
 
-                )
-                )
-          ]
-        )
-      )
-    );
+              child: const Text(
+                "Hoppa över",
+               style: TextStyle(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 15,
+               ),
+              ),
+            ),
+          ),
+
+ Positioned(
+            top: 15.0, // adjust this value to change the position of the button
+            left: 10.0, // adjust this value to change the position of the button
+            child: ElevatedButton(
+              onPressed: ()  {},
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
+                  minimumSize: const Size(50,50)
+                  ),
+
+              child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)), 
+                  
+                  onPressed: () {},
+              ),
+            ),
+          ),
+
+      Padding(
+            padding: const EdgeInsets.all(70),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
+                  minimumSize: const Size(250,70)
+                ),
+                child: const Text(
+                  "Gå vidare",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                ),
+              ),
+            ),
+           ),
+      ),
+      ],
+      ),
+     );
   }
-}
-
-  
-
-
-  
+  }
