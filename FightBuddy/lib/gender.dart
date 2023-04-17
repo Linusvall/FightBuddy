@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'globals.dart' as global;
 
 void main() {
   runApp(MyApp());
@@ -20,12 +19,6 @@ class GenderPage extends StatefulWidget {
 }
 
 class _genderPageState extends State<GenderPage> {
-  pressed() {
-    print(global.hello);
-    global.hello = "ändrad";
-    print(global.hello);
-  }
-
   bool _womanHasBeenPressed = false;
   bool _nothingHasBeenPressed = false;
   bool _manHasBeenPressed = false;
@@ -147,7 +140,7 @@ class _genderPageState extends State<GenderPage> {
           Padding(
               padding: const EdgeInsets.all(70),
               child: ElevatedButton(
-                onPressed: () => pressed(),
+                onPressed: () => print("pressed"),
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0)),
