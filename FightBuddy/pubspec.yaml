@@ -46,6 +46,7 @@ dependencies:
   firebase_auth: ^4.4.1
   firebase_in_app_messaging: ^0.7.1
   firebase_database: ^10.1.0
+  path_provider:
 
 dev_dependencies:
   flutter_test:
