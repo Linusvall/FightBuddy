@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
-
-void main(){
+void main() {
   runApp(const MyApp());
 }
 
@@ -11,212 +14,152 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: GenderPage(),
+      home: ProfilePicture(),
     );
   }
 }
 
-class GenderPage extends StatefulWidget{
-  const GenderPage({super.key});
+class ProfilePicture extends StatefulWidget {
+  const ProfilePicture({super.key});
 
- @override
-  GenderPageState createState() => GenderPageState();
-  }
+  @override
+  ProfilePictureState createState() => ProfilePictureState();
+}
 
-  class GenderPageState extends State<GenderPage>{
-    bool _womanHasBeenPressed = false;
-    bool _nothingHasBeenPressed = false;
-    bool _manHasBeenPressed = false;
-    var gender = '';
+class ProfilePictureState extends State<ProfilePicture> {
+  File? image;
 
-    pressedbutton(String button){
-    _nothingHasBeenPressed = false;
-    _manHasBeenPressed = false;
-    _womanHasBeenPressed = false;
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
 
-
-    if(button == 'man'){
-      _manHasBeenPressed = true;
-      gender = 'man';
-    }
-    else if(button == 'woman'){
-      _womanHasBeenPressed = true;
-      gender = 'woman';
-    }
-    else{
-      _nothingHasBeenPressed = true; 
-      gender = 'nothing';
+      final imageTemporary = File(image.path);
+      setState(() {
+        this.image = imageTemporary;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
     }
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: const Text("Bild"),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-            Center(
-             child: Column(
-             children: <Widget>[
-              const Padding(
-               padding: EdgeInsets.all(7),
-                 child: Text(
-                 "Lägg till profilbild",
-                  style:
-                TextStyle(fontSize: 30,),
-           ),
-         ),
-Padding(padding: const EdgeInsets.all(5),
-             child: ElevatedButton(
-              
-               style: ElevatedButton.styleFrom(fixedSize: const Size(130,130),
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 backgroundColor: _womanHasBeenPressed ?const Color.fromRGBO(0,181,169,100) : Colors.white,
-                
-               ),
-               onPressed: () => setState((){
-                 pressedbutton("woman");
-               }
-               ),
-               child: Row(
-                 children: const [
-                   Align (alignment: Alignment.centerLeft,
-                     child: Text("Bild                                                      ",
-                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                     )
-                     ),
-                   Align(alignment: Alignment.centerRight,
-                     child: Icon(Icons.check)
-                   ),
-                 ],
-               ),
-               )
-  
-               ),
-            
-               Padding(padding: const EdgeInsets.all(5),
-             child: ElevatedButton(
-              
-               style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 backgroundColor: _manHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
-               ),
-               onPressed: () => setState(() {
-                 pressedbutton("man");
-               }
-               ),
-               child: Row(
-                 children: const [
-                   Align(alignment: Alignment.centerLeft,
-                     child: Text("  Välj bild                                                          ",
-                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                     )
-                   ),
-                   Align(alignment: Alignment.centerRight,
-                     child: Icon(Icons.check)
-                   ),
-                 ],
-             ),
-               ),
-               ),
-
-
-               Padding(padding: const EdgeInsets.all(5),
-             child: ElevatedButton(
-              
-               style: ElevatedButton.styleFrom(fixedSize: const Size(300,60),
-               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 backgroundColor : _nothingHasBeenPressed ? const Color.fromRGBO(0,181,169,100) : Colors.white,
-               ),
-               onPressed: () => setState(() {
-                 pressedbutton("nothing");
-               }
-               ),
-               child: Row(
-                 children: const [
-                   Align(alignment: Alignment.centerLeft,
-                     child: Text("  Ta en selfie                                        ",
-                     style: TextStyle(color: Color.fromRGBO(112,112,112,100))
-                     )
-                   ),
-                   Align(alignment: Alignment.centerRight,
-                     child: Icon(Icons.check)
-                   ),
-                 ],
-               ),
-             ),
-               )
-             ],
-               ),
-             ),
-      
-
-          Positioned(
-            top: 15.0, // adjust this value to change the position of the button
-            right: 10.0, // adjust this value to change the position of the button
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(160,50)
-                  ),
-
-              child: const Text(
-                "Hoppa över",
-               style: TextStyle(
-                    color:  Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 15,
-               ),
-              ),
-            ),
-          ),
-
- Positioned(
-            top: 15.0, // adjust this value to change the position of the button
-            left: 10.0, // adjust this value to change the position of the button
-            child: ElevatedButton(
-              onPressed: ()  {},
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(50,50)
-                  ),
-
-              child: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)), 
-                  
-                  onPressed: () {},
-              ),
-            ),
-          ),
-
-      Padding(
-            padding: const EdgeInsets.all(70),
-            child: Align(
-              alignment: Alignment.bottomCenter,
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          //Någon titeltext?
+          title: const Text(""),
+          centerTitle: true,
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //Hoppa över och gå vidare
+                },
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(250,70)
-                ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    backgroundColor: Colors.white,
+                    minimumSize: const Size(160, 10)),
                 child: const Text(
-                  "Gå vidare",
+                  "Hoppa över",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    color: Color.fromRGBO(3, 137, 129, 50),
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ),
-           ),
-      ),
-      ],
-      ),
-     );
+          ]),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          const Text('Lägg till en profilbild',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(
+            height: 100,
+          ),
+          image != null
+              ? Image.file(
+                  image!,
+                  width: 160,
+                  height: 160,
+                )
+              : Image.asset(
+                  'lib/assets/images/face.png',
+                  fit: BoxFit.contain,
+                  height: 150,
+                ),
+          const SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              backgroundColor: Colors.white,
+              fixedSize: const Size(250, 50),
+            ),
+            child: const Text(
+              'Välj bild',
+              style: TextStyle(color: Colors.black54, fontSize: 15),
+            ),
+            onPressed: () {
+              pickImage(ImageSource.gallery);
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              backgroundColor: Colors.white,
+              fixedSize: const Size(250, 50),
+            ),
+            child: const Text('Ta en selfie',
+                style: TextStyle(color: Colors.black54, fontSize: 15)),
+            onPressed: () {
+              pickImage(ImageSource.camera);
+            },
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Expanded(
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                        fixedSize: const Size(250, 50),
+                      ),
+                      onPressed: () {
+                        //Gå vidare till nästa sida
+                      },
+                      child: const Text('Gå vidare',
+                          style: TextStyle(fontSize: 20))))),
+          const SizedBox(
+            height: 25,
+          ),
+        ],
+      )),
+    );
   }
-  }
+}
