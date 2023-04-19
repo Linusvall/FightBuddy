@@ -35,24 +35,26 @@ class ProfilePictureState extends State<ProfilePicture> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
 
-      //final imageTemporary = File(image.path);
-      final imagePermanent = await saveImagePermanently(image.path);
+      final imageTemporary = File(image.path);
+
+      //Spara bilden permanent (funkar inte av någon anledning, ska kika på det)
+      // final imagePermanent = await saveImagePermanently(image.path);
 
       setState(() {
-        this.image = imagePermanent;
+        this.image = imageTemporary;
       });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
 
-  Future<File> saveImagePermanently(String imagePath) async {
+  /* Future<File> saveImagePermanently(String imagePath) async {
     final directory = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);
     final image = File('${directory.path}/$name');
 
     return File(imagePath).copy(imagePath);
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
