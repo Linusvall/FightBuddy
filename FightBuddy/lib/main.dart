@@ -1,4 +1,5 @@
 import 'package:fight_buddy/sqltest.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'login.dart';
@@ -6,7 +7,7 @@ import 'utils/secure_storage.dart';
 import 'sqltest.dart';
 import 'homepage.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

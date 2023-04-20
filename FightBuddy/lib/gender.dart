@@ -155,3 +155,7 @@ class _genderPageState extends State<GenderPage> {
         ])));
   }
 }
+
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
