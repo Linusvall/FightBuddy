@@ -45,9 +45,33 @@ class _genderPageState extends State<GenderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Kön"),
-          centerTitle: true,
-        ),
+            elevation: 0,
+            backgroundColor: Colors.white10,
+            //Någon titeltext?
+            title: const Text(""),
+            centerTitle: true,
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //Hoppa över och gå vidare
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      backgroundColor: Colors.white,
+                      minimumSize: const Size(160, 10)),
+                  child: const Text(
+                    "Hoppa över",
+                    style: TextStyle(
+                      color: Color.fromRGBO(3, 137, 129, 50),
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+            ]),
         body: Center(
             child: Column(children: <Widget>[
           Padding(
@@ -137,21 +161,21 @@ class _genderPageState extends State<GenderPage> {
                           child: Icon(Icons.check))
                     ],
                   ))),
-          Padding(
-              padding: const EdgeInsets.all(70),
-              child: ElevatedButton(
-                onPressed: () => print("pressed"),
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    primary: Color.fromRGBO(0, 181, 169, 100),
-                    minimumSize: Size(250, 70)),
-                child: Text("Gå vidare",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    )),
-              ))
+          const SizedBox(
+            height: 190,
+          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                fixedSize: const Size(250, 50),
+              ),
+              onPressed: () {
+                //Gå vidare till nästa sida
+              },
+              child: const Text('Gå vidare', style: TextStyle(fontSize: 20)))
         ])));
   }
 }

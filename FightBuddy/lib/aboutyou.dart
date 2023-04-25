@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-void main(){
+void main() {
   runApp(const MyApp());
 }
 
@@ -16,122 +15,90 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class GenderPage extends StatefulWidget{
+class GenderPage extends StatefulWidget {
   const GenderPage({super.key});
 
- @override
+  @override
   GenderPageState createState() => GenderPageState();
-  }
+}
 
-  class GenderPageState extends State<GenderPage>{
-    pressedbutton(String button){
-  }
+class GenderPageState extends State<GenderPage> {
+  pressedbutton(String button) {}
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: const Text("Om dig"),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(90),
-                  child: Text(
-                    "Berätta lite om dig själv",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'Du kan börja med att säga hej, berätta om vilken kampsport du utövar, när du vill träna osv...',
-                          contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 60),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 15.0, // adjust this value to change the position of the button
-            right: 10.0, // adjust this value to change the position of the button
-            child: ElevatedButton(
-              onPressed: ()  {},
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(160,50)
-                  ),
-
-              child: const Text(
-                "Hoppa över",
-               style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-               ),
-              ),
-            ),
-          ),
-
- Positioned(
-           top: 15.0, // adjust this value to change the position of the button
-           left: 10.0, // adjust this value to change the position of the button
-           child: ElevatedButton(
-             onPressed: () {},
-             style: ElevatedButton.styleFrom(
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                 backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                 minimumSize: const Size(50,50)
-                 ),
-
-
-             child: IconButton(
-                 icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(255, 255, 255, 1)),
-                
-                 onPressed: () {},
-             ),
-           ),
-         ),
-
-      Padding(
-            padding: const EdgeInsets.all(70),
-            child: Align(
-              alignment: Alignment.bottomCenter,
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          //Någon titeltext?
+          title: const Text(""),
+          centerTitle: true,
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //Hoppa över och gå vidare
+                },
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(250,70)
-                ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    backgroundColor: Colors.white,
+                    minimumSize: const Size(160, 10)),
                 child: const Text(
-                  "Gå vidare",
+                  "Hoppa över",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    color: Color.fromRGBO(3, 137, 129, 50),
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ),
-           ),
+          ]),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(90),
+                child: Text(
+                  "Berätta lite om dig själv",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText:
+                      'Du kan börja med att säga hej, berätta om vilken kampsport du utövar, när du vill träna osv...',
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  isDense: true,
+                ),
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(
+                height: 220,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                    fixedSize: const Size(250, 50),
+                  ),
+                  onPressed: () {
+                    //Gå vidare till nästa sida
+                  },
+                  child:
+                      const Text('Gå vidare', style: TextStyle(fontSize: 20)))
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
