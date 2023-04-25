@@ -1,5 +1,6 @@
 import 'package:fight_buddy/sqltest.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'login.dart';
@@ -77,9 +78,14 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +109,7 @@ class WelcomePage extends StatelessWidget {
             style: Theme.of(context).textTheme.displayLarge,
           ),
           const SizedBox(
-            height: 100,
+            height: 50,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -137,41 +143,35 @@ class WelcomePage extends StatelessWidget {
             },
           ),
           const SizedBox(
-            height: 10,
+            height: 320,
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
-              fixedSize: const Size(250, 50),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Spacer(),
-                Text('      SKAPA KONTO', style: TextStyle(fontSize: 15)),
-                Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                ),
-              ],
-            ),
-            onPressed: () {
-              //gå till register
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const RegisterPage()),
-              );
-            },
-          ),
+          RichText(
+              text: TextSpan(
+                  style: TextStyle(color: Colors.black),
+                  text: 'Har du inget konto?  ',
+                  children: [
+                TextSpan(
+                  text: 'Skapa konto',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      //gå till register
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterPage()),
+                      );
+                    },
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Color.fromRGBO(3, 137, 129, 50)),
+                )
+              ]))
         ],
       )),
     );
   }
 }
+
 
 
 

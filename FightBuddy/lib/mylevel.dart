@@ -31,7 +31,10 @@ class PrefLevelPageState extends State<PrefLevelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
+      appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+          ),
           elevation: 0,
           backgroundColor: Colors.white10,
           //Någon titeltext?
@@ -75,7 +78,6 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                   padding: EdgeInsets.all(20.0),
                   child: Text("Checka dom boxarna som stämmer in på dig"),
                 ),
-               
                 Row(
                   children: [
                     const SizedBox(width: 16),
@@ -132,52 +134,46 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                     const Text("Jag är nybörjare"),
                   ],
                 ),
-              const Padding(
+                const Padding(
                   padding: EdgeInsets.all(20.0),
-            
                   child: Text("Hur länge har du utövat kampsport"),
                 ),
                 const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          hintText: 'Ange tid i år',
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
+                Expanded(
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Ange tid i år',
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      isDense: true,
                     ),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
               ],
             ),
           ),
- 
-  
-      Padding(
-            padding: const EdgeInsets.all(30),
+          Padding(
+            padding: const EdgeInsets.all(40),
             child: Align(
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor:const Color.fromARGB(156, 0, 171, 159),
-                  minimumSize: const Size(250,70)
-                ),
-                child: const Text(
-                  "Gå vidare",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                ),
-              ),
-            ),
-           ),
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                      fixedSize: const Size(250, 50),
+                    ),
+                    onPressed: () {
+                      //Gå vidare till nästa sida
+                    },
+                    child: const Text('Gå vidare',
+                        style: TextStyle(fontSize: 20)))),
           ),
         ],
       ),

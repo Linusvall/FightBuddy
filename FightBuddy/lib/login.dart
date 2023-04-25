@@ -30,7 +30,17 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login'), centerTitle: true),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        //Någon titeltext?
+        title: const Text("Logga in"),
+        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+        centerTitle: true,
+      ),
       body: Center(
         child: SingleChildScrollView(
           reverse: true,
@@ -109,7 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                       UserSecureStorage.setPassword(password);
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
                         (route) => false,
                       );
                     } else {

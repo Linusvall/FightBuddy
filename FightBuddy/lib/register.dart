@@ -23,24 +23,21 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign up'),
+        iconTheme: IconThemeData(
+          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        //Någon titeltext?
+        title: const Text("Skapa konto"),
+        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 25),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text(
-                'Skapa konto',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
+          SizedBox(height: 50),
           Form(
             key: formKey,
             child: Column(children: [

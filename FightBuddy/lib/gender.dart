@@ -45,6 +45,9 @@ class _genderPageState extends State<GenderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            iconTheme: const IconThemeData(
+              color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+            ),
             elevation: 0,
             backgroundColor: Colors.white10,
             //Någon titeltext?
@@ -162,7 +165,7 @@ class _genderPageState extends State<GenderPage> {
                     ],
                   ))),
           const SizedBox(
-            height: 190,
+            height: 170,
           ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
