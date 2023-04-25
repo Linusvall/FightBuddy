@@ -10,23 +10,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HeightAndWeightPage(),
+      home: KampsportPage(),
     );
   }
 }
 
-class HeightAndWeightPage extends StatefulWidget {
-  const HeightAndWeightPage({super.key});
-
+class KampsportPage extends StatefulWidget {
+  const KampsportPage({super.key});
   @override
-  HeightAndWeightPageState createState() => HeightAndWeightPageState();
+  KampsportPageState createState() => KampsportPageState();
 }
 
-class HeightAndWeightPageState extends State<HeightAndWeightPage> {
-  final weightController = TextEditingController();
-  final heightController = TextEditingController();
-  bool weightButton = false;
-  bool heightButton = false;
+class KampsportPageState extends State<KampsportPage> {
+  List<String> options = [
+    "Boxning",
+    "MMA",
+    "Taekwondo",
+    "Judo",
+    "Karate",
+    "Kickboxning",
+    "Kendo",
+    "Sumo",
+    "Wushu",
+  ];
+
+  List<String> selectedOptions = [];
+
+  void _onOptionSelected(String option) {
+    setState(() {
+      if (selectedOptions.contains(option)) {
+        selectedOptions.remove(option);
+      } else {
+        selectedOptions.add(option);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,53 +83,33 @@ class HeightAndWeightPageState extends State<HeightAndWeightPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(90),
+                  padding: EdgeInsets.all(70),
                   child: Text(
-                    "Vikt & Längd",
+                    "Nya kampssportsintressen",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'VIKT KG',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'Längd cm',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    "Välj kampsporter som du är nyfiken på att testa!",
+                  ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.all(40),
-                  child: Text(
-                    "Eller",
-                    style: TextStyle(fontSize: 30),
-                  ),
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Välj max 6 stycken"),
+                ),
+                Wrap(
+                  children: options.map((option) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FilterChip(
+                        label: Text(option),
+                        selected: selectedOptions.contains(option),
+                        onSelected: (_) => _onOptionSelected(option),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),

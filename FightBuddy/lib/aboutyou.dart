@@ -10,19 +10,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: GenderPage(),
+      home: AboutYouPage(),
     );
   }
 }
 
-class GenderPage extends StatefulWidget {
-  const GenderPage({super.key});
+class AboutYouPage extends StatefulWidget {
+  const AboutYouPage({super.key});
 
   @override
-  GenderPageState createState() => GenderPageState();
+  AboutYouPageState createState() => AboutYouPageState();
 }
 
-class GenderPageState extends State<GenderPage> {
+class AboutYouPageState extends State<AboutYouPage> {
   pressedbutton(String button) {}
 
   @override

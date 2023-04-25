@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    super.initState();
     _passwordVisible = false;
   }
 
@@ -53,23 +54,23 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(10),
                 child: TextField(
                     controller: _nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'User name',
                       prefixIcon: Icon(Icons.person),
                     )),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: TextField(
                   controller: _passController,
                   obscureText: !_passwordVisible,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       labelText: 'Password',
                       errorText:
                           loginFail ? 'Wrong username or password' : null,
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _passwordVisible
@@ -108,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       UserSecureStorage.setPassword(password);
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => const HomePage()),
                         (route) => false,
                       );
                     } else {
