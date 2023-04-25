@@ -1,5 +1,8 @@
+import 'package:fight_buddy/gender.dart';
+import 'package:fight_buddy/globals.dart';
 import 'package:flutter/material.dart';
-import 'sqltest.dart';
+
+import 'database.dart' as database;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -120,8 +123,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   password1 = _passController1.text;
                 });
                 if (formKey.currentState!.validate()) {
-                  sqlInsert(userName, password1);
+                  database.createUsers(userName, password1);
                 }
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GenderPage()));
               },
             ),
           ),

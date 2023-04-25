@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class HeightWeightPage extends StatefulWidget {
 }
 
 class HeightWeightPageState extends State<HeightWeightPage> {
+  final DatabaseService database = DatabaseService();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
   bool weightButton = false;
@@ -132,6 +134,9 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
+                      database.updateUserHeightAndWeight(
+                          heightController.toString(),
+                          weightController.toString());
                       //Gå vidare till nästa sida
                     },
                     child: const Text('Gå vidare',

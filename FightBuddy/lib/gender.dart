@@ -1,4 +1,6 @@
+import 'package:fight_buddy/birth.dart';
 import 'package:flutter/material.dart';
+import 'database.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +21,7 @@ class GenderPage extends StatefulWidget {
 }
 
 class _genderPageState extends State<GenderPage> {
+  final DatabaseService database = DatabaseService();
   bool _womanHasBeenPressed = false;
   bool _nothingHasBeenPressed = false;
   bool _manHasBeenPressed = false;
@@ -176,7 +179,9 @@ class _genderPageState extends State<GenderPage> {
                 fixedSize: const Size(250, 50),
               ),
               onPressed: () {
-                //Gå vidare till nästa sida
+                database.updateUserGender(gender);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BirthPage()));
               },
               child: const Text('Gå vidare', style: TextStyle(fontSize: 20)))
         ])));

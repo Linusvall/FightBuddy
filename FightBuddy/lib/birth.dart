@@ -1,4 +1,6 @@
+import 'package:fight_buddy/heightweight.dart';
 import 'package:flutter/material.dart';
+import 'database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +24,7 @@ class BirthPage extends StatefulWidget {
 }
 
 class BirthPageState extends State<BirthPage> {
+  final DatabaseService database = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +144,10 @@ class BirthPageState extends State<BirthPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HeightWeightPage()));
                       //Gå vidare till nästa sida
                     },
                     child: const Text('Gå vidare',

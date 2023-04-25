@@ -1,14 +1,15 @@
-import 'package:fight_buddy/sqltest.dart';
+import 'package:fight_buddy/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'login.dart';
 import 'utils/secure_storage.dart';
-import 'sqltest.dart';
 import 'homepage.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -31,10 +32,6 @@ class _MyAppState extends State<MyApp> {
   Future<void> _readFromStorage() async {
     final String? userName = await UserSecureStorage.getUsername();
     final String? password = await UserSecureStorage.getPassword();
-    final bool isLoggedIn = await sqlLogin(userName, password);
-    setState(() {
-      loggedIn = isLoggedIn;
-    });
   }
 
   @override

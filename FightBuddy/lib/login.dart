@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'sqltest.dart';
+
 import 'homepage.dart';
 import 'utils/secure_storage.dart';
 
@@ -112,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                       userName = _nameController.text;
                       password = _passController.text;
                     });
-                    loggedIn = await sqlLogin(userName, password);
                     if (!mounted) return;
                     if (loggedIn) {
                       UserSecureStorage.setUsername(userName);
