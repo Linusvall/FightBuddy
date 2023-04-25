@@ -11,17 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BirthPage(),
+      home: TrainingPage(),
     );
   }
 }
 
-class BirthPage extends StatefulWidget{
-  const BirthPage({super.key});
+class TrainingPage extends StatefulWidget{
+  const TrainingPage({super.key});
  @override
-  BirthPageState createState() => BirthPageState();
+  TrainingPageState createState() => TrainingPageState();
   }
-  class BirthPageState extends State<BirthPage>{
+  class TrainingPageState extends State<TrainingPage>{
   @override
   Widget build(BuildContext context) {
      return Scaffold(

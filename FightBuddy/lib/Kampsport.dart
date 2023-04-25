@@ -11,17 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BirthPage(),
+      home: KampsportPage(),
     );
   }
 }
 
-class BirthPage extends StatefulWidget{
-  const BirthPage({super.key});
+class KampsportPage extends StatefulWidget{
+  const KampsportPage({super.key});
  @override
-  BirthPageState createState() => BirthPageState();
+  KampsportPageState createState() => KampsportPageState();
   }
-  class BirthPageState extends State<BirthPage>{
+  class KampsportPageState extends State<KampsportPage>{
   List<String> options = [    "Boxning",    "MMA",    "Taekwondo",    "Judo",    "Karate",    "Kickboxning",    "Kendo",    "Sumo",    "Wushu",  ];
 
   List<String> selectedOptions = [];
