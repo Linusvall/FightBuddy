@@ -29,6 +29,9 @@ class AboutYouPageState extends State<AboutYouPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+          ),
           elevation: 0,
           backgroundColor: Colors.white10,
           //Någon titeltext?
@@ -81,7 +84,7 @@ class AboutYouPageState extends State<AboutYouPage> {
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(
-                height: 220,
+                height: 180,
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
