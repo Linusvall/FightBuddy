@@ -24,6 +24,9 @@ class BirthPage extends StatefulWidget {
 }
 
 class BirthPageState extends State<BirthPage> {
+  final dayController = TextEditingController();
+  final monthController = TextEditingController();
+  final yearController = TextEditingController();
   final DatabaseService database = DatabaseService();
   @override
   Widget build(BuildContext context) {
@@ -81,6 +84,7 @@ class BirthPageState extends State<BirthPage> {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: dayController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'DD',
@@ -97,6 +101,7 @@ class BirthPageState extends State<BirthPage> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: monthController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'MM',
@@ -113,6 +118,7 @@ class BirthPageState extends State<BirthPage> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: yearController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'YYYY',
@@ -144,6 +150,9 @@ class BirthPageState extends State<BirthPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
+                      database.updateUserDateOfBirth(yearController.text +
+                          monthController.text +
+                          dayController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

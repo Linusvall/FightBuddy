@@ -80,6 +80,7 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: weightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'VIKT KG',
@@ -96,6 +97,7 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: 'Längd cm',
@@ -135,8 +137,7 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                     ),
                     onPressed: () {
                       database.updateUserHeightAndWeight(
-                          heightController.toString(),
-                          weightController.toString());
+                          heightController.text, weightController.text);
                       //Gå vidare till nästa sida
                     },
                     child: const Text('Gå vidare',
