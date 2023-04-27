@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'mainpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +25,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MainPage(),
+      home: LoginPage2(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class LoginPage2 extends StatelessWidget {
+  const LoginPage2({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -39,7 +40,7 @@ class MainPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const HomePage();
+              return const MainPage();
             } else {
               return const LoginWidget();
             }

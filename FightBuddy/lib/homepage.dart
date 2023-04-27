@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'profile.dart';
+import 'aboutyou.dart';
+import 'birth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,64 +14,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentPage = 0;
-  List<Widget> pages = const [HomePage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(245, 245, 245, 245),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-              'lib/assets/images/logo.png',
-              fit: BoxFit.contain,
-              height: 50,
+        body: Center(
+      child: Column(
+        children: [
+          const Text(
+            "Startsidan",
+            style: TextStyle(fontSize: 30),
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(60),
             ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'FightBuddy',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            )
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return [];
-              },
-              child: IconButton(
-                icon: const Icon(Icons.notifications,
-                    color: Color.fromRGBO(80, 82, 86, 100)),
-                onPressed: () {},
-              ),
+            icon: const Icon(Icons.exit_to_app_sharp, size: 32),
+            label: const Text(
+              "Logga ut",
+              style: TextStyle(fontSize: 24),
             ),
+            onPressed: signOut,
           ),
         ],
       ),
-      body: const Center(),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Hem'),
-          NavigationDestination(
-              icon: Icon(Icons.calendar_month_sharp), label: 'Bokade pass'),
-          NavigationDestination(
-              icon: Icon(Icons.mail_outline_sharp), label: 'Meddelanden'),
-          NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        selectedIndex: currentPage,
-      ),
-    );
+    ));
+  }
+
+  Future signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
