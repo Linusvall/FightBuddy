@@ -15,7 +15,18 @@ class AuthService {
         'weight': '',
         'height': '',
         'gender': '',
+        'profilePicture': '',
+        'information': '',
+        'place': '',
+        'club': '',
+        'martialArts': '',
+        'level': '',
+        'newMartialArts': '',
+        'prefGender': '',
+        'prefWeight': '',
+        'prefLevel': '',
       });
     } catch (e) {}
   }
 }
+//gender - birthday - height and weight - profilepicture - information - where you want to train - member of club - fightstyles - information about certain style - new fighting styles - pref gender- pref weight - pref level

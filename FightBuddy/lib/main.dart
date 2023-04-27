@@ -1,11 +1,11 @@
-import 'package:fight_buddy/firebase_options.dart';
+import 'package:fight_buddy/handlers/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'register.dart';
-import 'login.dart';
+import 'screens/registration/register.dart';
+import 'screens/login.dart';
 import 'utils/secure_storage.dart';
-import 'homepage.dart';
+import 'screens/homepage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

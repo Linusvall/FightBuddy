@@ -1,4 +1,6 @@
+import 'package:fight_buddy/screens/registration/profilpicture.dart';
 import 'package:flutter/material.dart';
+import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +12,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TrainingPage(),
+      home: HeightWeightPage(),
     );
   }
 }
 
-class TrainingPage extends StatefulWidget {
-  const TrainingPage({super.key});
+class HeightWeightPage extends StatefulWidget {
+  const HeightWeightPage({super.key});
+
   @override
-  TrainingPageState createState() => TrainingPageState();
+  HeightWeightPageState createState() => HeightWeightPageState();
 }
 
-class TrainingPageState extends State<TrainingPage> {
+class HeightWeightPageState extends State<HeightWeightPage> {
+  final DatabaseService database = DatabaseService();
+  final weightController = TextEditingController();
+  final heightController = TextEditingController();
+  bool weightButton = false;
+  bool heightButton = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,24 +71,41 @@ class TrainingPageState extends State<TrainingPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(70),
+                  padding: EdgeInsets.all(90),
                   child: Text(
-                    "Var vill du träna? ",
+                    "Vikt & Längd",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Row(
                   children: [
+                    Expanded(
+                      child: TextField(
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'VIKT KG',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Skriv in en eller flera stadsdelar',
+                          hintText: 'Längd cm',
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                              horizontal: 16, vertical: 10),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           isDense: true,
                         ),
@@ -89,9 +115,11 @@ class TrainingPageState extends State<TrainingPage> {
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.all(100.0),
+                  padding: EdgeInsets.all(40),
                   child: Text(
-                      "**Vi kan alternativt ha en radius här som dom väljer med**"),
+                    "Eller",
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ),
               ],
             ),
@@ -109,7 +137,12 @@ class TrainingPageState extends State<TrainingPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updateUserHeightAndWeight(
+                          heightController.text, weightController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfilePicture()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

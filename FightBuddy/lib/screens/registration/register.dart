@@ -1,8 +1,8 @@
-import 'package:fight_buddy/gender.dart';
+import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'database.dart';
-import 'auth.dart';
+import '../../handlers/database.dart';
+import '../../handlers/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/preflevel.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,19 +12,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LevelPage(),
+      home: PrefWeightPage(),
     );
   }
 }
 
-class LevelPage extends StatefulWidget {
-  const LevelPage({Key? key}) : super(key: key);
+class PrefWeightPage extends StatefulWidget {
+  const PrefWeightPage({Key? key}) : super(key: key);
 
   @override
-  LevelPageState createState() => LevelPageState();
+  PrefWeightPageState createState() => PrefWeightPageState();
 }
 
-class LevelPageState extends State<LevelPage> {
+class PrefWeightPageState extends State<PrefWeightPage> {
+  DatabaseService database = DatabaseService();
   bool _value1 = false;
   bool _value2 = false;
   bool _value3 = false;
@@ -32,15 +35,36 @@ class LevelPageState extends State<LevelPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white10,
-        //Någon titeltext?
-        title: const Text(""),
-        centerTitle: true,
-      ),
+          iconTheme: const IconThemeData(
+            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          //Någon titeltext?
+          title: const Text(""),
+          centerTitle: true,
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  //Hoppa över och gå vidare
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    backgroundColor: Colors.white,
+                    minimumSize: const Size(160, 10)),
+                child: const Text(
+                  "Hoppa över",
+                  style: TextStyle(
+                    color: Color.fromRGBO(3, 137, 129, 50),
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
+          ]),
       body: Stack(
         children: [
           Center(
@@ -49,13 +73,14 @@ class LevelPageState extends State<LevelPage> {
                 const Padding(
                   padding: EdgeInsets.all(30),
                   child: Text(
-                    "Vilken nivå tränar du på",
+                    "Vem vill du träna med?",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(20.0),
-                  child: Text("Checka dom boxarna som stämmer in på dig"),
+                  child: Text(
+                      "Checka dom boxarna som stämmer in på dig, detta hjälper oss att hitta fightbuddys till dig😉"),
                 ),
                 Row(
                   children: [
@@ -68,7 +93,7 @@ class LevelPageState extends State<LevelPage> {
                         });
                       },
                     ),
-                    const Text("Jag tävlar"),
+                    const Text("Samma viktklass som mig"),
                   ],
                 ),
                 Row(
@@ -82,7 +107,7 @@ class LevelPageState extends State<LevelPage> {
                         });
                       },
                     ),
-                    const Text("Jag är erfaren"),
+                    const Text("+/- 5 kg mer än mig"),
                   ],
                 ),
                 Row(
@@ -96,7 +121,7 @@ class LevelPageState extends State<LevelPage> {
                         });
                       },
                     ),
-                    const Text("Jag är motionär"),
+                    const Text("+/- 10 kg mer än mig"),
                   ],
                 ),
                 Row(
@@ -110,28 +135,8 @@ class LevelPageState extends State<LevelPage> {
                         });
                       },
                     ),
-                    const Text("Jag är nybörjare"),
+                    const Text("Spelar ingen roll"),
                   ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text("Hur länge har du utövat kampsport"),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: 'Ange tid i år',
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 50, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      isDense: true,
-                    ),
-                    style: const TextStyle(fontSize: 16),
-                  ),
                 ),
               ],
             ),
@@ -149,7 +154,11 @@ class LevelPageState extends State<LevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updatePrefWeight('test');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PrefLevelPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

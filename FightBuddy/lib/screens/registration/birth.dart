@@ -1,6 +1,6 @@
-import 'package:fight_buddy/heightweight.dart';
+import 'package:fight_buddy/screens/registration/heightweight.dart';
 import 'package:flutter/material.dart';
-import 'database.dart';
+import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());

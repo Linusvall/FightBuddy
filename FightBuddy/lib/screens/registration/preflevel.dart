@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,6 +25,7 @@ class PrefLevelPage extends StatefulWidget {
 }
 
 class PrefLevelPageState extends State<PrefLevelPage> {
+  DatabaseService database = DatabaseService();
   bool _value1 = false;
   bool _value2 = false;
 
@@ -121,7 +124,11 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updatePrefLevel('test');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),
