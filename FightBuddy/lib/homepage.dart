@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'profile.dart';
+import 'aboutyou.dart';
+import 'birth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,8 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentPage = 0;
-  List<Widget> pages = const [HomePage(), ProfilePage()];
+  int _currentPageIndex = 0;
+  final List<Widget> _pages = const [
+    ProfilePage(),
+    AboutYouPage(),
+    BirthPage()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,24 +58,70 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: const Center(),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Hem'),
-          NavigationDestination(
-              icon: Icon(Icons.calendar_month_sharp), label: 'Bokade pass'),
-          NavigationDestination(
-              icon: Icon(Icons.mail_outline_sharp), label: 'Meddelanden'),
-          NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-        onDestinationSelected: (int index) {
+      body: PageView(
+          children: _pages,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPageIndex = index;
+            });
+          }
+          /*       Center(
+        child: Column(
+          children: [
+            const Text(
+              "Startsidan",
+              style: TextStyle(fontSize: 30),
+            ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(60),
+              ),
+              icon: const Icon(Icons.exit_to_app_sharp, size: 32),
+              label: const Text(
+                "Logga ut",
+                style: TextStyle(fontSize: 24),
+              ),
+              onPressed: signOut,
+            ),
+          ],
+        ),
+      ),
+      */
+          ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentPageIndex,
+        onTap: (index) {
           setState(() {
-            currentPage = index;
+            _currentPageIndex = index;
           });
         },
-        selectedIndex: currentPage,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: Color.fromRGBO(80, 82, 86, 100)),
+            label: 'Hem',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month_sharp,
+                  color: Color.fromRGBO(80, 82, 86, 100)),
+              label: 'Bokade pass'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.mail_outline_sharp,
+                  color: Color.fromRGBO(80, 82, 86, 100)),
+              label: 'Meddelanden'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat, color: Color.fromRGBO(80, 82, 86, 100)),
+              label: 'Chat'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person, color: Color.fromRGBO(80, 82, 86, 100)),
+              label: 'Profil'),
+        ],
+        unselectedItemColor: Color.fromRGBO(80, 82, 86, 100),
+        selectedItemColor: const Color.fromRGBO(80, 82, 86, 100),
       ),
     );
+  }
+
+  Future signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
