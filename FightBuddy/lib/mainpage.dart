@@ -20,6 +20,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     AboutYouPage(),
     BirthPage(),
+    BirthPage(),
     ProfilePage()
   ];
 

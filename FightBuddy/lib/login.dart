@@ -31,14 +31,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color.fromRGBO(3, 137, 129, 50), //change your color here
         ),
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
         title: const Text("Logga in"),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                            builder: (context) => const MainPage()),
                         (route) => false,
                       );
                     } else {
