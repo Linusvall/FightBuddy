@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/martialarts.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,41 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: KampsportPage(),
+      home: MembershipPage(),
     );
   }
 }
 
-class KampsportPage extends StatefulWidget {
-  const KampsportPage({super.key});
+class MembershipPage extends StatefulWidget {
+  const MembershipPage({super.key});
   @override
-  KampsportPageState createState() => KampsportPageState();
+  MembershipPageState createState() => MembershipPageState();
 }
 
-class KampsportPageState extends State<KampsportPage> {
-  List<String> options = [
-    "Boxning",
-    "MMA",
-    "Taekwondo",
-    "Judo",
-    "Karate",
-    "Kickboxning",
-    "Kendo",
-    "Sumo",
-    "Wushu",
-  ];
+class MembershipPageState extends State<MembershipPage> {
+  DatabaseService database = DatabaseService();
 
-  List<String> selectedOptions = [];
-
-  void _onOptionSelected(String option) {
-    setState(() {
-      if (selectedOptions.contains(option)) {
-        selectedOptions.remove(option);
-      } else {
-        selectedOptions.add(option);
-      }
-    });
-  }
+  var clubController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -88,33 +70,59 @@ class KampsportPageState extends State<KampsportPage> {
                 const Padding(
                   padding: EdgeInsets.all(70),
                   child: Text(
-                    "Nya kampssportsintressen",
+                    "Ange vilken klubb är du medlem i ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                    "Välj kampsporter som du är nyfiken på att testa!",
-                  ),
+                      "Ange vilken eller vilka klubbar du är medlem i du kan max välja 3 stycken"),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Välj max 6 stycken"),
-                ),
-                Wrap(
-                  children: options.map((option) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FilterChip(
-                        label: Text(option),
-                        selected: selectedOptions.contains(option),
-                        onSelected: (_) => _onOptionSelected(option),
+                Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        controller: clubController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          hintText: 'Sök...',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  ],
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            bottom:
+                240.0, // adjust this value to change the position of the button
+            left:
+                50.0, // adjust this value to change the position of the button
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                  minimumSize: const Size(300, 50)),
+              child: const Text(
+                "Jag är inte medlem i någon klubb",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
             ),
           ),
           Padding(
@@ -130,7 +138,11 @@ class KampsportPageState extends State<KampsportPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updatePlace(clubController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MartialArtsPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/level.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,26 +7,48 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PrefLevelPage(),
+      home: MartialArtsPage(),
     );
   }
 }
 
-class PrefLevelPage extends StatefulWidget {
-  const PrefLevelPage({Key? key}) : super(key: key);
-
+class MartialArtsPage extends StatefulWidget {
+  const MartialArtsPage({super.key});
   @override
-  PrefLevelPageState createState() => PrefLevelPageState();
+  MartialArtsPageState createState() => MartialArtsPageState();
 }
 
-class PrefLevelPageState extends State<PrefLevelPage> {
-  bool _value1 = false;
-  bool _value2 = false;
+class MartialArtsPageState extends State<MartialArtsPage> {
+  DatabaseService database = DatabaseService();
+
+  List<String> options = [
+    "Boxning",
+    "MMA",
+    "Taekwondo",
+    "Judo",
+    "Karate",
+    "Kickboxning",
+    "Kendo",
+    "Sumo",
+    "Wushu",
+  ];
+
+  List<String> selectedOptions = [];
+
+  void _onOptionSelected(String option) {
+    setState(() {
+      if (selectedOptions.contains(option)) {
+        selectedOptions.remove(option);
+      } else {
+        selectedOptions.add(option);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,44 +90,33 @@ class PrefLevelPageState extends State<PrefLevelPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(70),
                   child: Text(
-                    "Vem vill du träna med?",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    "Dina kampssportsintressen",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                      "Checka dom boxarna som stämmer in på dig, detta hjälper oss att hitta fightbuddys till dig 😉"),
+                    "Välj kampsporter som du aktivt utövar. Vi kommer matcha ihop dig med personer med samma intressen😊 ",
+                  ),
                 ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Checkbox(
-                      value: _value1,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _value1 = value!;
-                        });
-                      },
-                    ),
-                    const Text("Samma nivå som mig"),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Välj max 6 stycken"),
                 ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Checkbox(
-                      value: _value2,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _value2 = value!;
-                        });
-                      },
-                    ),
-                    const Text("Spelar ingen roll"),
-                  ],
+                Wrap(
+                  children: options.map((option) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FilterChip(
+                        label: Text(option),
+                        selected: selectedOptions.contains(option),
+                        onSelected: (_) => _onOptionSelected(option),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
@@ -121,7 +134,11 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updateMartialArts("test");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LevelPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

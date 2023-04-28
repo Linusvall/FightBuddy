@@ -1,4 +1,6 @@
+import 'package:fight_buddy/screens/registration/heightweight.dart';
 import 'package:flutter/material.dart';
+import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +12,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TrainingPage(),
+      home: BirthPage(),
     );
   }
 }
 
-class TrainingPage extends StatefulWidget {
-  const TrainingPage({super.key});
+class BirthPage extends StatefulWidget {
+  const BirthPage({super.key});
   @override
-  TrainingPageState createState() => TrainingPageState();
+  BirthPageState createState() => BirthPageState();
 }
 
-class TrainingPageState extends State<TrainingPage> {
+class BirthPageState extends State<BirthPage> {
+  final dayController = TextEditingController();
+  final monthController = TextEditingController();
+  final yearController = TextEditingController();
+  final DatabaseService database = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,24 +68,64 @@ class TrainingPageState extends State<TrainingPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(70),
+                  padding: EdgeInsets.all(90),
                   child: Text(
-                    "Var vill du träna? ",
+                    "Jag är född ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Text(
+                    "Vi kommer  förmodligen inte fira med tårta (sorry!) men vi kommer att rekommendera fightbuddys, grupper och aktiviteter utifrån din ålder",
                   ),
                 ),
                 Row(
                   children: [
+                    Expanded(
+                      child: TextField(
+                        controller: dayController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'DD',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: monthController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Skriv in en eller flera stadsdelar',
+                          hintText: 'MM',
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                              horizontal: 16, vertical: 10),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        controller: yearController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'YYYY',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           isDense: true,
                         ),
@@ -87,11 +133,6 @@ class TrainingPageState extends State<TrainingPage> {
                       ),
                     ),
                   ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(100.0),
-                  child: Text(
-                      "**Vi kan alternativt ha en radius här som dom väljer med**"),
                 ),
               ],
             ),
@@ -109,6 +150,13 @@ class TrainingPageState extends State<TrainingPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
+                      database.updateUserDateOfBirth(yearController.text +
+                          monthController.text +
+                          dayController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HeightWeightPage()));
                       //Gå vidare till nästa sida
                     },
                     child: const Text('Gå vidare',

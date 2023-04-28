@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/newmartialarts.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,19 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PrefGenderPage(),
+      home: LevelPage(),
     );
   }
 }
 
-class PrefGenderPage extends StatefulWidget {
-  const PrefGenderPage({Key? key}) : super(key: key);
+class LevelPage extends StatefulWidget {
+  const LevelPage({Key? key}) : super(key: key);
 
   @override
-  PrefGenderPageState createState() => PrefGenderPageState();
+  LevelPageState createState() => LevelPageState();
 }
 
-class PrefGenderPageState extends State<PrefGenderPage> {
+class LevelPageState extends State<LevelPage> {
+  DatabaseService database = DatabaseService();
+  var yearController = TextEditingController();
   bool _value1 = false;
   bool _value2 = false;
   bool _value3 = false;
@@ -32,36 +36,15 @@ class PrefGenderPageState extends State<PrefGenderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white10,
-          //Någon titeltext?
-          title: const Text(""),
-          centerTitle: true,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  //Hoppa över och gå vidare
-                },
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    backgroundColor: Colors.white,
-                    minimumSize: const Size(160, 10)),
-                child: const Text(
-                  "Hoppa över",
-                  style: TextStyle(
-                    color: Color.fromRGBO(3, 137, 129, 50),
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ]),
+        iconTheme: const IconThemeData(
+          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        //Någon titeltext?
+        title: const Text(""),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
           Center(
@@ -70,14 +53,13 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                 const Padding(
                   padding: EdgeInsets.all(30),
                   child: Text(
-                    "Vem vill du träna med?",
+                    "Vilken nivå tränar du på",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(20.0),
-                  child: Text(
-                      "Checka dom boxarna som stämmer in på dig, detta hjälper oss att hitta fightbuddys till dig😉ps. du kan checka flera boxar"),
+                  child: Text("Checka dom boxarna som stämmer in på dig"),
                 ),
                 Row(
                   children: [
@@ -90,7 +72,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                         });
                       },
                     ),
-                    const Text("Kvinna"),
+                    const Text("Jag tävlar"),
                   ],
                 ),
                 Row(
@@ -104,7 +86,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                         });
                       },
                     ),
-                    const Text("Man"),
+                    const Text("Jag är erfaren"),
                   ],
                 ),
                 Row(
@@ -118,7 +100,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                         });
                       },
                     ),
-                    const Text("Annat"),
+                    const Text("Jag är motionär"),
                   ],
                 ),
                 Row(
@@ -132,8 +114,29 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                         });
                       },
                     ),
-                    const Text("Spelar ingen roll"),
+                    const Text("Jag är nybörjare"),
                   ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text("Hur länge har du utövat kampsport"),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: TextField(
+                    controller: yearController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Ange tid i år',
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      isDense: true,
+                    ),
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 ),
               ],
             ),
@@ -151,7 +154,12 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updateLevel(yearController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const NewMartialArtsPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

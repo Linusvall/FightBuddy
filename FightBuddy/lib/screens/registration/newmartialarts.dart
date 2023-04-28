@@ -1,5 +1,6 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/prefgender.dart';
 import 'package:flutter/material.dart';
-import 'database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,24 +12,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HeightWeightPage(),
+      home: NewMartialArtsPage(),
     );
   }
 }
 
-class HeightWeightPage extends StatefulWidget {
-  const HeightWeightPage({super.key});
-
+class NewMartialArtsPage extends StatefulWidget {
+  const NewMartialArtsPage({super.key});
   @override
-  HeightWeightPageState createState() => HeightWeightPageState();
+  NewMartialArtsPageState createState() => NewMartialArtsPageState();
 }
 
-class HeightWeightPageState extends State<HeightWeightPage> {
-  final DatabaseService database = DatabaseService();
-  final weightController = TextEditingController();
-  final heightController = TextEditingController();
-  bool weightButton = false;
-  bool heightButton = false;
+class NewMartialArtsPageState extends State<NewMartialArtsPage> {
+  DatabaseService database = DatabaseService();
+  List<String> options = [
+    "Boxning",
+    "MMA",
+    "Taekwondo",
+    "Judo",
+    "Karate",
+    "Kickboxning",
+    "Kendo",
+    "Sumo",
+    "Wushu",
+  ];
+
+  List<String> selectedOptions = [];
+
+  void _onOptionSelected(String option) {
+    setState(() {
+      if (selectedOptions.contains(option)) {
+        selectedOptions.remove(option);
+      } else {
+        selectedOptions.add(option);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,53 +89,33 @@ class HeightWeightPageState extends State<HeightWeightPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(90),
+                  padding: EdgeInsets.all(70),
                   child: Text(
-                    "Vikt & Längd",
+                    "Nya kampssportsintressen",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'VIKT KG',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'Längd cm',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    "Välj kampsporter som du är nyfiken på att testa!",
+                  ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.all(40),
-                  child: Text(
-                    "Eller",
-                    style: TextStyle(fontSize: 30),
-                  ),
+                  padding: EdgeInsets.all(5.0),
+                  child: Text("Välj max 6 stycken"),
+                ),
+                Wrap(
+                  children: options.map((option) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FilterChip(
+                        label: Text(option),
+                        selected: selectedOptions.contains(option),
+                        onSelected: (_) => _onOptionSelected(option),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
@@ -134,10 +133,11 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateUserHeightAndWeight(
-                          heightController.toString(),
-                          weightController.toString());
-                      //Gå vidare till nästa sida
+                      database.updateNewMartialArts("test");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PrefGenderPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

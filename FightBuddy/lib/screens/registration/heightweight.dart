@@ -1,6 +1,6 @@
-import 'package:fight_buddy/heightweight.dart';
+import 'package:fight_buddy/screens/registration/profilpicture.dart';
 import 'package:flutter/material.dart';
-import 'database.dart';
+import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,19 +12,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BirthPage(),
+      home: HeightWeightPage(),
     );
   }
 }
 
-class BirthPage extends StatefulWidget {
-  const BirthPage({super.key});
+class HeightWeightPage extends StatefulWidget {
+  const HeightWeightPage({super.key});
+
   @override
-  BirthPageState createState() => BirthPageState();
+  HeightWeightPageState createState() => HeightWeightPageState();
 }
 
-class BirthPageState extends State<BirthPage> {
+class HeightWeightPageState extends State<HeightWeightPage> {
   final DatabaseService database = DatabaseService();
+  final weightController = TextEditingController();
+  final heightController = TextEditingController();
+  bool weightButton = false;
+  bool heightButton = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,23 +73,18 @@ class BirthPageState extends State<BirthPage> {
                 const Padding(
                   padding: EdgeInsets.all(90),
                   child: Text(
-                    "Jag är född ",
+                    "Vikt & Längd",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: Text(
-                    "Vi kommer  förmodligen inte fira med tårta (sorry!) men vi kommer att rekommendera fightbuddys, grupper och aktiviteter utifrån din ålder",
                   ),
                 ),
                 Row(
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: weightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'DD',
+                          hintText: 'VIKT KG',
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 10),
                           border: OutlineInputBorder(
@@ -97,25 +98,10 @@ class BirthPageState extends State<BirthPage> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
+                        controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'MM',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'YYYY',
+                          hintText: 'Längd cm',
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 10),
                           border: OutlineInputBorder(
@@ -127,6 +113,13 @@ class BirthPageState extends State<BirthPage> {
                       ),
                     ),
                   ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(40),
+                  child: Text(
+                    "Eller",
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ),
               ],
             ),
@@ -144,11 +137,12 @@ class BirthPageState extends State<BirthPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
+                      database.updateUserHeightAndWeight(
+                          heightController.text, weightController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HeightWeightPage()));
-                      //Gå vidare till nästa sida
+                              builder: (context) => const ProfilePicture()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

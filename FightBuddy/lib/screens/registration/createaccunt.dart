@@ -1,4 +1,3 @@
-import 'package:fight_buddy/globals.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -59,7 +58,7 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
           Center(
             child: Column(
               children: <Widget>[
-              const Padding(
+                const Padding(
                   padding: EdgeInsets.all(30),
                   child: Text(
                     "Skapa konto ",
@@ -67,7 +66,7 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                 Row(
+                Row(
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
@@ -86,11 +85,10 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
-                    
                   ],
                 ),
                 const SizedBox(width: 16),
-                 Row(
+                Row(
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
@@ -109,10 +107,9 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
-                    
                   ],
                 ),
-                 Row(
+                Row(
                   children: [
                     const SizedBox(width: 16),
                     const SizedBox(height: 16),
@@ -132,10 +129,9 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
-                    
                   ],
                 ),
-                 Row(
+                Row(
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
@@ -159,7 +155,6 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
               ],
             ),
           ),
-          
           Padding(
             padding: const EdgeInsets.all(20),
             child: Align(

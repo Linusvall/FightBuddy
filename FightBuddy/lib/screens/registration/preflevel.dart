@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,23 +12,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PrefWeightPage(),
+      home: PrefLevelPage(),
     );
   }
 }
 
-class PrefWeightPage extends StatefulWidget {
-  const PrefWeightPage({Key? key}) : super(key: key);
+class PrefLevelPage extends StatefulWidget {
+  const PrefLevelPage({Key? key}) : super(key: key);
 
   @override
-  PrefWeightPageState createState() => PrefWeightPageState();
+  PrefLevelPageState createState() => PrefLevelPageState();
 }
 
-class PrefWeightPageState extends State<PrefWeightPage> {
+class PrefLevelPageState extends State<PrefLevelPage> {
+  DatabaseService database = DatabaseService();
   bool _value1 = false;
   bool _value2 = false;
-  bool _value3 = false;
-  bool _value4 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                 const Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                      "Checka dom boxarna som stämmer in på dig, detta hjälper oss att hitta fightbuddys till dig😉"),
+                      "Checka dom boxarna som stämmer in på dig, detta hjälper oss att hitta fightbuddys till dig 😉"),
                 ),
                 Row(
                   children: [
@@ -90,7 +91,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                         });
                       },
                     ),
-                    const Text("Samma viktklass som mig"),
+                    const Text("Samma nivå som mig"),
                   ],
                 ),
                 Row(
@@ -101,34 +102,6 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
-                        });
-                      },
-                    ),
-                    const Text("+/- 5 kg mer än mig"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Checkbox(
-                      value: _value3,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _value3 = value!;
-                        });
-                      },
-                    ),
-                    const Text("+/- 10 kg mer än mig"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Checkbox(
-                      value: _value4,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _value4 = value!;
                         });
                       },
                     ),
@@ -151,7 +124,11 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updatePrefLevel('test');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

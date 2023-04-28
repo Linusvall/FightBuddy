@@ -1,3 +1,5 @@
+import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/screens/registration/membership.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,42 +12,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: KampsportPage(),
+      home: TrainingPage(),
     );
   }
 }
 
-class KampsportPage extends StatefulWidget {
-  const KampsportPage({super.key});
+class TrainingPage extends StatefulWidget {
+  const TrainingPage({super.key});
   @override
-  KampsportPageState createState() => KampsportPageState();
+  TrainingPageState createState() => TrainingPageState();
 }
 
-class KampsportPageState extends State<KampsportPage> {
-  List<String> options = [
-    "Boxning",
-    "MMA",
-    "Taekwondo",
-    "Judo",
-    "Karate",
-    "Kickboxning",
-    "Kendo",
-    "Sumo",
-    "Wushu",
-  ];
-
-  List<String> selectedOptions = [];
-
-  void _onOptionSelected(String option) {
-    setState(() {
-      if (selectedOptions.contains(option)) {
-        selectedOptions.remove(option);
-      } else {
-        selectedOptions.add(option);
-      }
-    });
-  }
-
+class TrainingPageState extends State<TrainingPage> {
+  var placeController = TextEditingController();
+  DatabaseService database = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,31 +68,35 @@ class KampsportPageState extends State<KampsportPage> {
                 const Padding(
                   padding: EdgeInsets.all(70),
                   child: Text(
-                    "Dina kampssportsintressen",
+                    "Var vill du träna? ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    "Välj kampsporter som du aktivt utövar. Vi kommer matcha ihop dig med personer med samma intressen😊 ",
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("Välj max 6 stycken"),
-                ),
-                Wrap(
-                  children: options.map((option) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FilterChip(
-                        label: Text(option),
-                        selected: selectedOptions.contains(option),
-                        onSelected: (_) => _onOptionSelected(option),
+                Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        controller: placeController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'Skriv in en eller flera stadsdelar',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(100.0),
+                  child: Text(
+                      "**Vi kan alternativt ha en radius här som dom väljer med**"),
                 ),
               ],
             ),
@@ -130,7 +114,11 @@ class KampsportPageState extends State<KampsportPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      //Gå vidare till nästa sida
+                      database.updatePlace(placeController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MembershipPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

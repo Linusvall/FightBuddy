@@ -1,6 +1,7 @@
-import 'package:fight_buddy/birth.dart';
+import 'package:fight_buddy/screens/registration/birth.dart';
 import 'package:flutter/material.dart';
-import 'database.dart';
+import '../../handlers/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,19 +10,20 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: GenderPage(),
     );
   }
 }
 
 class GenderPage extends StatefulWidget {
+  const GenderPage({super.key});
   @override
-  _genderPageState createState() => _genderPageState();
+  GenderPageState createState() => GenderPageState();
 }
 
-class _genderPageState extends State<GenderPage> {
-  final DatabaseService database = DatabaseService();
+class GenderPageState extends State<GenderPage> {
+  DatabaseService database = DatabaseService();
   bool _womanHasBeenPressed = false;
   bool _nothingHasBeenPressed = false;
   bool _manHasBeenPressed = false;
@@ -181,7 +183,7 @@ class _genderPageState extends State<GenderPage> {
               onPressed: () {
                 database.updateUserGender(gender);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BirthPage()));
+                    MaterialPageRoute(builder: (context) => const BirthPage()));
               },
               child: const Text('Gå vidare', style: TextStyle(fontSize: 20)))
         ])));

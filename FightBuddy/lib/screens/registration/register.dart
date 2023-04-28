@@ -1,8 +1,8 @@
-import 'package:fight_buddy/gender.dart';
-import 'package:fight_buddy/globals.dart';
+import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
-
-import 'database.dart' as database;
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../handlers/database.dart';
+import '../../handlers/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -123,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   password1 = _passController1.text;
                 });
                 if (formKey.currentState!.validate()) {
-                  database.createUsers(userName, password1);
+                  auth.registerUser(userName, password1);
                 }
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GenderPage()));

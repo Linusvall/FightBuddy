@@ -1,4 +1,6 @@
+import 'package:fight_buddy/screens/registration/training.dart';
 import 'package:flutter/material.dart';
+import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +25,8 @@ class AboutYouPage extends StatefulWidget {
 }
 
 class AboutYouPageState extends State<AboutYouPage> {
+  var informationController = TextEditingController();
+  DatabaseService database = DatabaseService();
   pressedbutton(String button) {}
 
   @override
@@ -71,6 +75,7 @@ class AboutYouPageState extends State<AboutYouPage> {
                 ),
               ),
               TextField(
+                controller: informationController,
                 decoration: InputDecoration(
                   hintText:
                       'Du kan börja med att säga hej, berätta om vilken kampsport du utövar, när du vill träna osv...',
@@ -95,7 +100,12 @@ class AboutYouPageState extends State<AboutYouPage> {
                     fixedSize: const Size(250, 50),
                   ),
                   onPressed: () {
-                    //Gå vidare till nästa sida
+                    database
+                        .updateAboutYouInformation(informationController.text);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TrainingPage()));
                   },
                   child:
                       const Text('Gå vidare', style: TextStyle(fontSize: 20)))

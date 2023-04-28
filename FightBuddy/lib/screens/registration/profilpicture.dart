@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fight_buddy/screens/registration/aboutyou.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
@@ -167,7 +168,10 @@ class ProfilePictureState extends State<ProfilePicture> {
                         fixedSize: const Size(250, 50),
                       ),
                       onPressed: () {
-                        //Gå vidare till nästa sida
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutYouPage()));
                       },
                       child: const Text('Gå vidare',
                           style: TextStyle(fontSize: 20))))),
