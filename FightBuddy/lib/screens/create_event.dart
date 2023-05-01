@@ -1,7 +1,6 @@
 import '../../handlers/eventDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../handlers/eventAuth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -610,7 +609,6 @@ class _createEventPageState extends State<createEventPage> {
                           if (formKey.currentState!.validate()) {
                             print('validated');
                             //skicka grejs till databasen
-                            auth.registerUser(userName, password1);
                           }
                           // Navigator.push(     );
                         },
