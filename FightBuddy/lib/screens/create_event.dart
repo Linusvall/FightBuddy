@@ -1,3 +1,7 @@
+import '../../handlers/eventDatabase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../handlers/eventAuth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,6 +24,7 @@ class createEventPage extends StatefulWidget {
 }
 
 class _createEventPageState extends State<createEventPage> {
+  AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _nameInput = TextEditingController();
   final _dateInput = TextEditingController();
@@ -605,6 +610,7 @@ class _createEventPageState extends State<createEventPage> {
                           if (formKey.currentState!.validate()) {
                             print('validated');
                             //skicka grejs till databasen
+                            auth.registerUser(userName, password1);
                           }
                           // Navigator.push(     );
                         },
