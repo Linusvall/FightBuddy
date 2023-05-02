@@ -1,17 +1,16 @@
-import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../handlers/database.dart';
-import '../../handlers/auth.dart';
+import '../../../handlers/database.dart';
+import '../../../handlers/auth.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -33,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
-        title: const Text("Skapa konto"),
+        title: const Text(""),
         titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
@@ -50,15 +49,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail),
-                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.lock),
+                      labelText: 'Gammalt lösenord',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter a username';
+                        return 'Enter a password';
                       }
                       return null;
                     }),
@@ -70,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
-                    labelText: 'Password',
+                    labelText: 'Nytt lösenord',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -90,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
-                      labelText: 'Confirm password',
+                      labelText: 'Bekräfta lösenord',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -117,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
                 fixedSize: const Size(250, 50),
               ),
-              child: const Text('SKAPA KONTO'),
+              child: const Text('ÄNDRA LÖSENORD'),
               onPressed: () {
                 setState(() {
                   userName = _nameController.text;
@@ -125,8 +124,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
                 if (formKey.currentState!.validate()) {
                   auth.registerUser(userName, password1);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GenderPage()));
                 }
               },
             ),

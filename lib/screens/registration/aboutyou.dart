@@ -82,11 +82,10 @@ class AboutYouPageState extends State<AboutYouPage> {
                 controller: informationController,
                 decoration: InputDecoration(
                   hintText:
-                      'Du kan börja med att säga hej, berätta om vilken kampsport du utövar, när du vill träna osv...',
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+                      'Du kan börja med att säga hej, berätta om vilken kampsport du utövar när du vill träna osv...',
+                  contentPadding: const EdgeInsets.all(80),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(45),
                   ),
                   isDense: true,
                 ),

@@ -1,8 +1,9 @@
+import 'package:fight_buddy/screens/create_event.dart';
+import 'package:fight_buddy/screens/settings/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'profile.dart';
-import 'registration/aboutyou.dart';
 import 'registration/birth.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,9 +17,10 @@ class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    AboutYouPage(),
+    createEventPage(),
     BirthPage(),
-    ProfilePage()
+    ProfilePage(),
+    SettingsPage(),
   ];
 
   late final PageController _pageController = PageController(initialPage: 0);

@@ -1,5 +1,6 @@
-import 'package:fight_buddy/screens/changeemail.dart';
-import 'package:fight_buddy/screens/changepassword.dart';
+import 'package:fight_buddy/screens/settings/changeemail.dart';
+import 'package:fight_buddy/screens/settings/changepassword.dart';
+import 'package:fight_buddy/screens/settings/changeprofile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,10 +48,13 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
               title: const Text("Redigera profil"),
               trailing: IconButton(
-                iconSize: 20,
-                icon: Icon(Icons.arrow_forward_ios),
-                onPressed: () => print("pressed"),
-              )),
+                  iconSize: 20,
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ChangeProfilePage()),
+                      ))),
           const Divider(),
           ListTile(
               title: const Text("Ändra lösenord"),

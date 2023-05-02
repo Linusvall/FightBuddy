@@ -1,6 +1,7 @@
 import 'package:fight_buddy/screens/registration/profilpicture.dart';
 import 'package:flutter/material.dart';
 import '../../handlers/database.dart';
+import 'package:fight_buddy/globals.dart' as globals;
 
 void main() {
   runApp(const MyApp());
@@ -145,6 +146,8 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                     onPressed: () {
                       database.updateUserHeightAndWeight(
                           heightController.text, weightController.text);
+                      globals.height = heightController.text;
+                      globals.weight = weightController.text;
                       Navigator.push(
                           context,
                           MaterialPageRoute(

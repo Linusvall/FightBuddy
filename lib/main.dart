@@ -1,9 +1,10 @@
 import 'package:fight_buddy/handlers/firebase_options.dart';
-import 'package:fight_buddy/screens/settings/settings.dart';
+import 'package:fight_buddy/screens/mainpage.dart';
+import 'package:fight_buddy/screens/registration/aboutyou.dart';
+import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'screens/registration/register.dart';
 import 'screens/login.dart';
 import 'utils/secure_storage.dart';
 import 'screens/homepage.dart';
@@ -158,10 +159,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     ..onTap = () {
                       //gå till register
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SettingsPage()),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()));
                     },
                   style: TextStyle(
                       decoration: TextDecoration.underline,
