@@ -64,6 +64,10 @@ class GenderPageState extends State<GenderPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     //Hoppa över och gå vidare
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BirthPage()));
                   },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -82,9 +86,9 @@ class GenderPageState extends State<GenderPage> {
             ]),
         body: Center(
             child: Column(children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.all(100),
-              child: const Text(
+          const Padding(
+              padding: EdgeInsets.all(100),
+              child: Text(
                 "Jag är en ",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               )),
@@ -103,7 +107,7 @@ class GenderPageState extends State<GenderPage> {
                         pressedbutton("woman");
                       }),
                   child: Row(
-                    children: [
+                    children: const [
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -130,7 +134,7 @@ class GenderPageState extends State<GenderPage> {
                         pressedbutton("man");
                       }),
                   child: Row(
-                    children: [
+                    children: const [
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -157,7 +161,7 @@ class GenderPageState extends State<GenderPage> {
                         pressedbutton("nothing");
                       }),
                   child: Row(
-                    children: [
+                    children: const [
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text(

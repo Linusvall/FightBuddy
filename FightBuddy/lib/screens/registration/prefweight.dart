@@ -30,6 +30,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
   bool _value2 = false;
   bool _value3 = false;
   bool _value4 = false;
+  var weight = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,10 @@ class PrefWeightPageState extends State<PrefWeightPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PrefLevelPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -90,6 +95,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
+                          weight = 'same weight';
                         });
                       },
                     ),
@@ -104,6 +110,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
+                          weight = '+-5kg';
                         });
                       },
                     ),
@@ -118,6 +125,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value3 = value!;
+                          weight = '+-10kg';
                         });
                       },
                     ),
@@ -132,6 +140,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value4 = value!;
+                          weight = 'anything';
                         });
                       },
                     ),
@@ -154,7 +163,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefWeight('test');
+                      database.updatePrefWeight(weight);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

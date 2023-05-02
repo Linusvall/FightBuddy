@@ -1,4 +1,5 @@
 import 'package:fight_buddy/handlers/firebase_options.dart';
+import 'package:fight_buddy/screens/settings/settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +160,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
+                            builder: (context) => const SettingsPage()),
                       );
                     },
                   style: TextStyle(

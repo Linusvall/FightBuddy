@@ -9,6 +9,16 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
+  Future changePassword(String password) async {
+    //Pass in the password to updatePassword.
+    user?.updatePassword(password).then((_) {
+      print("Successfully changed password");
+    }).catchError((error) {
+      print("Password can't be changed" + error.toString());
+      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
+    });
+  }
+
   Future updateUserGender(String gender) async {
     final user1 = FirebaseAuth.instance.currentUser;
     var uid = user1?.uid;

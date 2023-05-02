@@ -46,6 +46,10 @@ class MembershipPageState extends State<MembershipPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MartialArtsPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -110,7 +114,12 @@ class MembershipPageState extends State<MembershipPage> {
             left:
                 50.0, // adjust this value to change the position of the button
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MartialArtsPage()));
+              },
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0)),

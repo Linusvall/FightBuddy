@@ -44,6 +44,10 @@ class TrainingPageState extends State<TrainingPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MembershipPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -78,7 +82,7 @@ class TrainingPageState extends State<TrainingPage> {
                     Expanded(
                       child: TextField(
                         controller: placeController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           hintText: 'Skriv in en eller flera stadsdelar',
                           contentPadding: const EdgeInsets.symmetric(
@@ -95,8 +99,6 @@ class TrainingPageState extends State<TrainingPage> {
                 ),
                 const Padding(
                   padding: EdgeInsets.all(100.0),
-                  child: Text(
-                      "**Vi kan alternativt ha en radius här som dom väljer med**"),
                 ),
               ],
             ),

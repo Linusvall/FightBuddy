@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-import 'homepage.dart';
+import 'package:fight_buddy/screens/mainpage.dart';
 import '../utils/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -119,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                            builder: (context) => const MainPage()),
                         (route) => false,
                       );
                     } else {

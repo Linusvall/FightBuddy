@@ -125,7 +125,7 @@ class LevelPageState extends State<LevelPage> {
                 Expanded(
                   child: TextField(
                     controller: yearController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: 'Ange tid i år',
                       contentPadding: const EdgeInsets.symmetric(

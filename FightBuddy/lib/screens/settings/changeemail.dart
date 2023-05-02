@@ -1,17 +1,15 @@
 import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../../handlers/database.dart';
 import '../../handlers/auth.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class ChangeEmailPage extends StatefulWidget {
+  const ChangeEmailPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _ChangeEmailPageState createState() => _ChangeEmailPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _ChangeEmailPageState extends State<ChangeEmailPage> {
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -33,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
-        title: const Text("Skapa konto"),
+        title: const Text(""),
         titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
@@ -50,15 +48,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.mail),
+                      labelText: 'Ny email',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter a username';
+                        return 'Enter an email';
                       }
                       return null;
                     }),
@@ -69,42 +67,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _passController1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.mail),
+                    labelText: 'Bekräfta email',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Enter a password';
+                      return 'Enter an email';
                     }
                     return null;
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                    controller: _passController2,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      labelText: 'Confirm password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Confirm password';
-                      }
-                      if (value != _passController1.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    }),
-              )
             ]),
           ),
           Padding(
@@ -117,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
                 fixedSize: const Size(250, 50),
               ),
-              child: const Text('SKAPA KONTO'),
+              child: const Text('ÄNDRA EMAIL'),
               onPressed: () {
                 setState(() {
                   userName = _nameController.text;

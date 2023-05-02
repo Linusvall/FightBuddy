@@ -46,6 +46,10 @@ class BirthPageState extends State<BirthPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HeightWeightPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

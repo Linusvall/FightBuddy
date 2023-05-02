@@ -48,7 +48,11 @@ class HeightWeightPageState extends State<HeightWeightPage> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  //Hoppa över och gå vidare
+                  //Hoppa över och gå vidare¨
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilePicture()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -116,10 +120,12 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                 ),
                 const Padding(
                   padding: EdgeInsets.all(40),
+                  /*
                   child: Text(
                     "Eller",
                     style: TextStyle(fontSize: 30),
                   ),
+                  */
                 ),
               ],
             ),

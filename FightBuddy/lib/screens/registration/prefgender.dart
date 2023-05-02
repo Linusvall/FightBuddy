@@ -32,6 +32,8 @@ class PrefGenderPageState extends State<PrefGenderPage> {
   bool _value3 = false;
   bool _value4 = false;
 
+  var gender = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +52,11 @@ class PrefGenderPageState extends State<PrefGenderPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PrefWeightPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -91,6 +98,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
+                          gender = 'woman';
                         });
                       },
                     ),
@@ -105,6 +113,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
+                          gender = 'man';
                         });
                       },
                     ),
@@ -119,6 +128,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value3 = value!;
+                          gender = 'other';
                         });
                       },
                     ),
@@ -133,6 +143,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value4 = value!;
+                          gender = 'anyone';
                         });
                       },
                     ),
@@ -155,7 +166,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefGender('test');
+                      database.updatePrefGender(gender);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

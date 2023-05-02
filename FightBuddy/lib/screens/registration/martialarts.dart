@@ -68,6 +68,10 @@ class MartialArtsPageState extends State<MartialArtsPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LevelPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -134,7 +138,7 @@ class MartialArtsPageState extends State<MartialArtsPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateMartialArts("test");
+                      database.updateMartialArts(selectedOptions.toString());
                       Navigator.push(
                           context,
                           MaterialPageRoute(
