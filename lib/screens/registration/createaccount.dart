@@ -1,6 +1,4 @@
-import 'package:fight_buddy/screens/registration/profilpicture.dart';
 import 'package:flutter/material.dart';
-import '../../handlers/database.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,34 +10,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HeightWeightPage(),
+      home: CreatAccountPage(),
     );
   }
 }
 
-class HeightWeightPage extends StatefulWidget {
-  const HeightWeightPage({super.key});
-
+class CreatAccountPage extends StatefulWidget {
+  const CreatAccountPage({super.key});
   @override
-  HeightWeightPageState createState() => HeightWeightPageState();
+  CreatAccountPageState createState() => CreatAccountPageState();
 }
 
-class HeightWeightPageState extends State<HeightWeightPage> {
-  final DatabaseService database = DatabaseService();
-  final weightController = TextEditingController();
-  final heightController = TextEditingController();
-  bool weightButton = false;
-  bool heightButton = false;
-
+class CreatAccountPageState extends State<CreatAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-          ),
           elevation: 0,
           backgroundColor: Colors.white10,
+          iconTheme:
+              const IconThemeData(color: Color.fromRGBO(3, 137, 129, 50)),
           //Någon titeltext?
           title: const Text(""),
           centerTitle: true,
@@ -48,11 +38,7 @@ class HeightWeightPageState extends State<HeightWeightPage> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  //Hoppa över och gå vidare¨
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfilePicture()));
+                  //Hoppa över och gå vidare
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -75,41 +61,26 @@ class HeightWeightPageState extends State<HeightWeightPage> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(90),
+                  padding: EdgeInsets.all(30),
                   child: Text(
-                    "Vikt & Längd",
+                    "Skapa konto ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
+                const SizedBox(width: 16),
                 Row(
                   children: [
-                    Expanded(
-                      child: TextField(
-                        controller: weightController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'VIKT KG',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
-                        controller: heightController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          hintText: 'Längd cm',
+                          prefixIcon: const Icon(Icons.email),
+                          hintText: 'För och efternamn',
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
+                              horizontal: 30, vertical: 10),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           isDense: true,
                         ),
@@ -118,20 +89,76 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(40),
-                  /*
-                  child: Text(
-                    "Eller",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  */
+                const SizedBox(width: 16),
+                Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.email),
+                          hintText: 'abc@email.com',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.lock),
+                          hintText: 'lösenord',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.lock),
+                          hintText: 'bekräfta lösenord',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          isDense: true,
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(20),
             child: Align(
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
@@ -143,14 +170,9 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateUserHeightAndWeight(
-                          heightController.text, weightController.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePicture()));
+                      //Gå vidare till nästa sida
                     },
-                    child: const Text('Gå vidare',
+                    child: const Text('Skapa konto',
                         style: TextStyle(fontSize: 20)))),
           ),
         ],

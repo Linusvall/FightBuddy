@@ -1,4 +1,5 @@
 import 'package:fight_buddy/handlers/firebase_options.dart';
+import 'package:fight_buddy/screens/registration/createaccount.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
@@ -161,7 +162,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           MaterialPageRoute(
                               builder: (context) => const RegisterPage()));
                     },
-                  style: TextStyle(
+                  style: const TextStyle(
                       decoration: TextDecoration.underline,
                       color: Color.fromRGBO(3, 137, 129, 50)),
                 )

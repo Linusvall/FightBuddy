@@ -1,7 +1,6 @@
 import 'package:fight_buddy/screens/registration/birth.dart';
 import 'package:flutter/material.dart';
 import '../../handlers/database.dart';
-import 'package:fight_buddy/globals.dart' as globals;
 
 void main() {
   runApp(MyApp());
@@ -186,7 +185,6 @@ class GenderPageState extends State<GenderPage> {
               ),
               onPressed: () {
                 database.updateUserGender(gender);
-                globals.gender = gender;
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const BirthPage()));
               },
