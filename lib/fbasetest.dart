@@ -109,26 +109,3 @@ class _LoginWidgetState extends State<LoginWidget> {
     );
   }
 }
-
-
-
-/*appBar: AppBar(
-        backgroundColor: const Color.fromARGB(245, 245, 245, 245),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-              'lib/assets/images/logo.png',
-              fit: BoxFit.contain,
-              height: 50,
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'FightBuddy',
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-            )
-          ],
-        ),
-      ),*/ 
