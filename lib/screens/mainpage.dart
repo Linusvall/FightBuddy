@@ -14,9 +14,8 @@ class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    ProfilePage(),
-    ProfilePage(),
-    ProfilePage(),
+    createEventPage(),
+    SettingsPage(),
     ProfilePage(),
   ];
 
@@ -69,28 +68,6 @@ class _MainPageState extends State<MainPage> {
         controller: _pageController,
         children: _pages,
       ),
-      /*       Center(
-        child: Column(
-          children: [
-            const Text(
-              "Startsidan",
-              style: TextStyle(fontSize: 30),
-            ),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(60),
-              ),
-              icon: const Icon(Icons.exit_to_app_sharp, size: 32),
-              label: const Text(
-                "Logga ut",
-                style: TextStyle(fontSize: 24),
-              ),
-              onPressed: signOut,
-            ),
-          ],
-        ),
-      ),
-      */
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentPageIndex,
         onTap: (index) {
@@ -105,10 +82,6 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(Icons.calendar_month_sharp,
                   color: Color.fromRGBO(80, 82, 86, 100)),
               label: 'Events'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.mail_outline_sharp,
-                  color: Color.fromRGBO(80, 82, 86, 100)),
-              label: 'Meddelanden'),
           BottomNavigationBarItem(
               icon: Icon(Icons.chat, color: Color.fromRGBO(80, 82, 86, 100)),
               label: 'Chat'),
