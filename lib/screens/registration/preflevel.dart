@@ -1,5 +1,4 @@
 import 'package:fight_buddy/handlers/database.dart';
-import 'package:fight_buddy/screens/homepage.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +28,6 @@ class PrefLevelPageState extends State<PrefLevelPage> {
   DatabaseService database = DatabaseService();
   bool _value1 = false;
   bool _value2 = false;
-  var level = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +47,6 @@ class PrefLevelPageState extends State<PrefLevelPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -94,7 +88,6 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
-                          level = 'same level';
                         });
                       },
                     ),
@@ -109,7 +102,6 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
-                          level = 'does not matter';
                         });
                       },
                     ),
@@ -132,7 +124,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefLevel(level);
+                      database.updatePrefLevel('test');
                       Navigator.push(
                           context,
                           MaterialPageRoute(
