@@ -28,6 +28,8 @@ class CreatAccuntPageState extends State<CreatAccuntPage> {
       appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white10,
+          iconTheme:
+              const IconThemeData(color: Color.fromRGBO(3, 137, 129, 50)),
           //Någon titeltext?
           title: const Text(""),
           centerTitle: true,
