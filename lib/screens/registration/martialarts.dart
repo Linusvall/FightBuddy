@@ -1,6 +1,7 @@
 import 'package:fight_buddy/handlers/database.dart';
 import 'package:fight_buddy/screens/registration/level.dart';
 import 'package:flutter/material.dart';
+import 'package:fight_buddy/globals.dart' as globals;
 
 void main() {
   runApp(const MyApp());
@@ -139,6 +140,7 @@ class MartialArtsPageState extends State<MartialArtsPage> {
                     ),
                     onPressed: () {
                       database.updateMartialArts(selectedOptions.toString());
+                      globals.martialarts = selectedOptions.toString();
                       Navigator.push(
                           context,
                           MaterialPageRoute(

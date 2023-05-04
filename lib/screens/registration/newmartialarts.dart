@@ -1,6 +1,7 @@
 import 'package:fight_buddy/handlers/database.dart';
 import 'package:fight_buddy/screens/registration/prefgender.dart';
 import 'package:flutter/material.dart';
+import 'package:fight_buddy/globals.dart' as globals;
 
 void main() {
   runApp(const MyApp());
@@ -138,6 +139,7 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                     ),
                     onPressed: () {
                       database.updateNewMartialArts(selectedOptions.toString());
+                      globals.newMartialArts = selectedOptions.toString();
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -1,7 +1,5 @@
-import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'homepage.dart';
+import 'package:fight_buddy/screens/mainpage.dart';
 import '../utils/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,14 +29,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(
+        iconTheme: IconThemeData(
           color: Color.fromRGBO(3, 137, 129, 50), //change your color here
         ),
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
         title: const Text("Logga in"),
-        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
+        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(

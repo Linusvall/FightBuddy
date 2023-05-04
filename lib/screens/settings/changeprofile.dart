@@ -1,6 +1,7 @@
 import 'package:fight_buddy/screens/settings/changeemail.dart';
 import 'package:fight_buddy/screens/settings/changepassword.dart';
 import 'package:flutter/material.dart';
+import 'package:fight_buddy/globals.dart' as globals;
 
 void main() {
   runApp(MyApp());
@@ -52,7 +53,7 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               trailing: TextButton(
                   style: TextButton.styleFrom(
                       primary: const Color.fromRGBO(3, 137, 129, 50)),
-                  child: Text(""),
+                  child: Text(globals.gender),
                   onPressed: () => AlertDialog(
                         title: const Text("Kön"),
                         /*
@@ -72,7 +73,7 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               trailing: TextButton(
                 style: TextButton.styleFrom(
                     primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                child: Text(globals.height),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -81,7 +82,7 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               trailing: TextButton(
                 style: TextButton.styleFrom(
                     primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                child: Text(globals.weight),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -90,7 +91,7 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               trailing: TextButton(
                 style: TextButton.styleFrom(
                     primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                child: Text(globals.martialarts),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -99,7 +100,7 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               trailing: TextButton(
                 style: TextButton.styleFrom(
                     primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                child: Text(globals.newMartialArts),
                 onPressed: () => print("pressed"),
               )),
         ]));
