@@ -143,8 +143,8 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateUserHeightAndWeight(
-                          heightController.text, weightController.text);
+                      database.updateUserHeightAndWeight(heightController.text,
+                          int.parse(weightController.text));
                       Navigator.push(
                           context,
                           MaterialPageRoute(

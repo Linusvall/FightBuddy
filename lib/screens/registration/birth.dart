@@ -1,6 +1,7 @@
 import 'package:fight_buddy/screens/registration/heightweight.dart';
 import 'package:flutter/material.dart';
 import '../../handlers/database.dart';
+import 'package:age_calculator/age_calculator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class BirthPage extends StatefulWidget {
 }
 
 class BirthPageState extends State<BirthPage> {
+  late DateTime birthday;
   final dayController = TextEditingController();
   final monthController = TextEditingController();
   final yearController = TextEditingController();
@@ -154,9 +156,12 @@ class BirthPageState extends State<BirthPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateUserDateOfBirth(yearController.text +
-                          monthController.text +
-                          dayController.text);
+                      birthday = DateTime(
+                          int.parse(yearController.text),
+                          int.parse(monthController.text),
+                          int.parse(dayController.text));
+                      DateDuration duration = AgeCalculator.age(birthday);
+                      database.updateUserAge(duration.years);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

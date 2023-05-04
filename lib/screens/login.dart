@@ -1,7 +1,7 @@
+import 'package:fight_buddy/screens/homepage.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'homepage.dart';
 import '../utils/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -113,19 +113,24 @@ class _LoginPageState extends State<LoginPage> {
                       password = _passController.text;
                     });
                     if (!mounted) return;
-                    if (loggedIn) {
-                      UserSecureStorage.setUsername(userName);
-                      UserSecureStorage.setPassword(password);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MainPage()),
-                        (route) => false,
-                      );
-                    } else {
-                      setState(() {
-                        loginFail = true;
-                      });
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: userName, password: password);
+
+                      loggedIn = true;
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
+                    }
+                    if (loggedIn == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()));
                     }
                   },
                 ),

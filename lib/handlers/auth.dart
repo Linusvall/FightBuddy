@@ -11,7 +11,9 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       return await userCollection.doc(_auth.currentUser?.uid).set({
-        'dateOfBirth': '',
+        'firstName': '',
+        'lastName': '',
+        'age': '',
         'weight': '',
         'height': '',
         'gender': '',

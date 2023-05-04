@@ -12,16 +12,21 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  DatabaseService database = DatabaseService();
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _passController1 = TextEditingController();
   final _passController2 = TextEditingController();
 
-  String userName = '';
+  String email = '';
   String password1 = '';
   String password2 = '';
+  String firstName = '';
+  String lastName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +53,10 @@ class _RegisterPageState extends State<RegisterPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                    controller: _nameController,
+                    controller: _emailController,
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.person),
-                      labelText: 'Username',
+                      prefixIcon: const Icon(Icons.mail),
+                      labelText: 'Email',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -59,6 +64,42 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Enter a username';
+                      }
+                      return null;
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                    controller: _firstNameController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person),
+                      labelText: 'First name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter a name';
+                      }
+                      return null;
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                    controller: _lastNameController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person),
+                      labelText: 'Last name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter a name';
                       }
                       return null;
                     }),
@@ -120,11 +161,14 @@ class _RegisterPageState extends State<RegisterPage> {
               child: const Text('SKAPA KONTO'),
               onPressed: () {
                 setState(() {
-                  userName = _nameController.text;
+                  email = _emailController.text;
                   password1 = _passController1.text;
+                  firstName = _firstNameController.text;
+                  lastName = _lastNameController.text;
                 });
                 if (formKey.currentState!.validate()) {
-                  auth.registerUser(userName, password1);
+                  auth.registerUser(email, password1);
+                  database.updateUserFirstAndLastName(firstName, lastName);
                 }
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GenderPage()));

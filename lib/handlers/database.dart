@@ -26,7 +26,16 @@ class DatabaseService {
     return await userCollection.doc(uid).update({'gender': gender});
   }
 
-  Future updateUserHeightAndWeight(String height, String weight) async {
+  Future updateUserFirstAndLastName(String firstName, String lastName) async {
+    var uid = user?.uid;
+
+    return await userCollection.doc(uid).update({
+      'firstName': firstName,
+      'lastName': lastName,
+    });
+  }
+
+  Future updateUserHeightAndWeight(String height, int weight) async {
     var uid = user?.uid;
 
     return await userCollection.doc(uid).update({
@@ -35,11 +44,11 @@ class DatabaseService {
     });
   }
 
-  Future updateUserDateOfBirth(String date) async {
+  Future updateUserAge(int age) async {
     var uid = user?.uid;
 
     return await userCollection.doc(uid).update({
-      'dateOfBirth': date,
+      'age': age,
     });
   }
 
