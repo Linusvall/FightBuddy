@@ -1,6 +1,6 @@
-import '../../handlers/eventDatabase.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../../handlers/eventAuth.dart';
+//import '../../handlers/eventDatabase.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import '../../handlers/eventAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -25,7 +25,7 @@ class createEventPage extends StatefulWidget {
 }
 
 class _createEventPageState extends State<createEventPage> {
-  AuthService auth = AuthService();
+  //AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _nameInput = TextEditingController();
   final _dateInput = TextEditingController();
@@ -57,6 +57,8 @@ class _createEventPageState extends State<createEventPage> {
   late TimeOfDay from;
   late TimeOfDay to;
 
+  bool publicValue = true;
+  bool privateValue = true;
   @override
   void initState() {
     super.initState();
@@ -588,6 +590,84 @@ class _createEventPageState extends State<createEventPage> {
                     ),
                     const SizedBox(
                       height: 50,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Icon(Icons.public),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: RichText(
+                              text: const TextSpan(
+                                text: "Offentligt event",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Switch(
+                              // This bool value toggles the switch.
+                              value: publicValue,
+                              activeColor: Color.fromRGBO(3, 137, 129, 50),
+                              onChanged: (bool value) {
+                                // This is called when the user toggles the switch.
+                                setState(() {
+                                  publicValue = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Icon(Icons.lock),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: RichText(
+                              text: const TextSpan(
+                                children: [
+                                  TextSpan(text: "Privat event"),
+                                ],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Switch(
+                              // This bool value toggles the switch.
+                              value: privateValue,
+                              activeColor: Color.fromRGBO(3, 137, 129, 50),
+                              onChanged: (bool value) {
+                                // This is called when the user toggles the switch.
+                                setState(() {
+                                  privateValue = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Center(
                       child: ElevatedButton(
