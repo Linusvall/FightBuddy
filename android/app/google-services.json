@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "651375807362",
+    "project_id": "fight-buddy",
+    "storage_bucket": "fight-buddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651375807362:android:be52a40effe7d340805d9b",
+        "android_client_info": {
+          "package_name": "com.example.fight_buddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651375807362-40tdfbjoei3gradp71nut650huf7v4ui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATyPnhlOjP07QTCC3dfl7rks5pcvWedNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651375807362-40tdfbjoei3gradp71nut650huf7v4ui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
