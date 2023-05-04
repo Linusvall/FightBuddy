@@ -1,3 +1,4 @@
+import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class LoginPage2 extends StatelessWidget {
-  const LoginPage2({super.key});
+  const LoginPage2({Key? key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -48,7 +49,7 @@ class LoginPage2 extends StatelessWidget {
 }
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+  const LoginWidget({Key? key});
 
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
@@ -57,6 +58,9 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool loggedIn = false;
+  bool loginFail = false;
+  var _passwordVisible = false;
 
   @override
   void dispose() {
@@ -68,38 +72,91 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 40),
-            TextField(
-              controller: emailController,
-              cursorColor: Colors.white,
-              textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: 'Email:'),
-            ),
-            const SizedBox(height: 4),
-            TextField(
+        reverse: true,
+        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Image.asset(
+            'lib/assets/images/logo.png',
+            fit: BoxFit.contain,
+            height: 150,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            'FightBuddy',
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+          const SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'User name',
+                  prefixIcon: Icon(Icons.person),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextField(
               controller: passwordController,
-              cursorColor: Colors.white,
-              textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: 'Password:'),
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password',
+                  errorText: loginFail ? 'Wrong username or password' : null,
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
+                  )),
             ),
-            const SizedBox(height: 4),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(50),
-              ),
-              icon: const Icon(Icons.lock_open, size: 32),
-              label: const Text(
-                'Logga in',
-                style: TextStyle(fontSize: 24),
-              ),
-              onPressed: signIn,
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                      fixedSize: const Size(250, 50),
+                    ),
+                    onPressed: signIn,
+                    child: const Text('LOGGA IN'),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                      fixedSize: const Size(250, 50),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterPage()),
+                      );
+                    },
+                    child: const Text('Skapa konto'),
+                  ),
+                ]),
+          ),
+        ]),
       );
 
   Future signIn() async {

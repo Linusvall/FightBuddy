@@ -27,21 +27,21 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color.fromRGBO(3, 137, 129, 50), //change your color here
         ),
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
         title: const Text("Skapa konto"),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Form(
             key: formKey,
             child: Column(children: [
@@ -50,8 +50,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail),
-                      labelText: 'Email',
+                      prefixIcon: const Icon(Icons.person),
+                      labelText: 'Username',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -125,9 +125,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
                 if (formKey.currentState!.validate()) {
                   auth.registerUser(userName, password1);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GenderPage()));
                 }
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GenderPage()));
               },
             ),
           ),
