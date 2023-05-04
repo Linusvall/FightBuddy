@@ -1,6 +1,4 @@
 import 'package:fight_buddy/handlers/firebase_options.dart';
-import 'package:fight_buddy/screens/mainpage.dart';
-import 'package:fight_buddy/screens/registration/aboutyou.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
