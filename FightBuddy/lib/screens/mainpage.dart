@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'profile.dart';
-import 'registration/aboutyou.dart';
-import 'registration/birth.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,10 +14,10 @@ class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    AboutYouPage(),
-    BirthPage(),
-    BirthPage(),
-    ProfilePage()
+    ProfilePage(),
+    ProfilePage(),
+    ProfilePage(),
+    ProfilePage(),
   ];
 
   late final PageController _pageController = PageController(initialPage: 0);

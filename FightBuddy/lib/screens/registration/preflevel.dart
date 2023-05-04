@@ -1,5 +1,5 @@
 import 'package:fight_buddy/handlers/database.dart';
-import 'package:fight_buddy/screens/homepage.dart';
+import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -128,7 +128,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => const MainPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),
