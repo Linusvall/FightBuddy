@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:core';
-import 'users2.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class LoadingIndicator extends StatelessWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<Users2> users2 = [];
+  List<User> users2 = [];
   String firstname = "";
   String lastname = "";
   int age = 0;

@@ -1,4 +1,4 @@
-import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/prefgender.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class NewMartialArtsPage extends StatefulWidget {
 }
 
 class NewMartialArtsPageState extends State<NewMartialArtsPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   List<String> options = [
     "Boxning",
     "MMA",

@@ -1,6 +1,6 @@
 import 'package:fight_buddy/screens/registration/training.dart';
 import 'package:flutter/material.dart';
-import '../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class AboutYouPage extends StatefulWidget {
 
 class AboutYouPageState extends State<AboutYouPage> {
   var informationController = TextEditingController();
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   pressedbutton(String button) {}
 
   @override

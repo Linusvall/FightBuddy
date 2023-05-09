@@ -1,11 +1,10 @@
-import 'package:fight_buddy/handlers/firebase_options.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'handlers/firebase_options.dart';
 import 'screens/login.dart';
-import 'utils/secure_storage.dart';
-import 'screens/homepage.dart';
+import 'handlers/user_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,31 +23,21 @@ class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   bool loggedIn = false;
 
   @override
   void initState() {
     super.initState();
-    _readFromStorage();
-  }
-
-  Future<void> _readFromStorage() async {
-    final String? userName = await UserSecureStorage.getUsername();
-    final String? password = await UserSecureStorage.getPassword();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget homePage = const WelcomePage();
-    if (loggedIn) {
-      homePage = const HomePage();
-    }
+    if (loggedIn) {}
     return MaterialApp(
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: Color.fromARGB(255, 211, 0, 253),
+        primaryColor: const Color.fromARGB(255, 211, 0, 253),
 
         // Define the default font family.
         //fontFamily: 'Georgia',
@@ -148,7 +137,7 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           RichText(
               text: TextSpan(
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   text: 'Har du inget konto?  ',
                   children: [
                 TextSpan(

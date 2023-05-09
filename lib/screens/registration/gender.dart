@@ -1,6 +1,6 @@
 import 'package:fight_buddy/screens/registration/birth.dart';
 import 'package:flutter/material.dart';
-import '../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +22,7 @@ class GenderPage extends StatefulWidget {
 }
 
 class GenderPageState extends State<GenderPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   bool _womanHasBeenPressed = false;
   bool _nothingHasBeenPressed = false;
   bool _manHasBeenPressed = false;

@@ -1,4 +1,4 @@
-import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class PrefLevelPage extends StatefulWidget {
 }
 
 class PrefLevelPageState extends State<PrefLevelPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   bool _value1 = false;
   bool _value2 = false;
 

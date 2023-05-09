@@ -1,6 +1,6 @@
 import 'package:fight_buddy/screens/registration/profilpicture.dart';
 import 'package:flutter/material.dart';
-import '../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +25,7 @@ class HeightWeightPage extends StatefulWidget {
 }
 
 class HeightWeightPageState extends State<HeightWeightPage> {
-  final DatabaseService database = DatabaseService();
+  final UserHandler database = UserHandler();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
   bool weightButton = false;

@@ -1,7 +1,7 @@
 import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 import '../../handlers/auth.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

@@ -1,22 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:firebase_storage/firebase_storage.dart';
 
-class DatabaseService {
-  final instance = FirebaseAuth.instance;
-
+class UserHandler {
   final user = FirebaseAuth.instance.currentUser;
 
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
-  Future changePassword(String password) async {
-    //Pass in the password to updatePassword.
-    user?.updatePassword(password).then((_) {
-      print("Successfully changed password");
-    }).catchError((error) {
-      print("Password can't be changed" + error.toString());
-      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
-    });
+  Future<List<fightbuddy.User>> getUserList() async {
+    fightbuddy.User fightbuddyUser = await getUser(user!.uid);
+    fightbuddyUser.updateUserList();
+    return fightbuddyUser.userList;
+  }
+
+  //Parameter is a specific user ID and returns a user object tied to it
+  static Future<fightbuddy.User> getUser(String userId) async {
+    DocumentSnapshot document =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+    return fightbuddy.User.fromMap(document.data() as Map<String, dynamic>);
+  }
+
+  //Update realtime changes through stream
+  static Stream<DocumentSnapshot> getUserStream(
+      String userId, FirebaseFirestore firestore) {
+    return firestore.collection('users').doc(userId).snapshots();
+  }
+
+  Future updateUserList() async {}
+
+  Future<String> getPhotoUrl(String userId, FirebaseStorage storage) async {
+    return storage.ref().child("$userId.png").getDownloadURL();
   }
 
   Future updateUserGender(String gender) async {

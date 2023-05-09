@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 import '../../../handlers/auth.dart';
 
 class ChangePasswordPage extends StatefulWidget {

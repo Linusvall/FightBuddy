@@ -1,8 +1,7 @@
-import 'package:fight_buddy/screens/homepage.dart';
+import 'package:fight_buddy/screens/homepageOld.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../utils/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _nameController = TextEditingController();
   final _passController = TextEditingController();
 
-  String userName = '';
+  String email = '';
   String password = '';
   bool loggedIn = false;
   bool loginFail = false;
@@ -109,14 +108,14 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     loginFail = false;
                     setState(() {
-                      userName = _nameController.text;
+                      email = _nameController.text;
                       password = _passController.text;
                     });
                     if (!mounted) return;
                     try {
                       final credential = await FirebaseAuth.instance
                           .signInWithEmailAndPassword(
-                              email: userName, password: password);
+                              email: email, password: password);
 
                       loggedIn = true;
                     } on FirebaseAuthException catch (e) {

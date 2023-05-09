@@ -1,4 +1,4 @@
-import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/membership.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class TrainingPage extends StatefulWidget {
 
 class TrainingPageState extends State<TrainingPage> {
   var placeController = TextEditingController();
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

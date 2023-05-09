@@ -1,4 +1,4 @@
-import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/martialarts.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class MembershipPage extends StatefulWidget {
 }
 
 class MembershipPageState extends State<MembershipPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
 
   var clubController = TextEditingController();
 

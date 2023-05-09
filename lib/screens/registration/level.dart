@@ -1,4 +1,4 @@
-import 'package:fight_buddy/handlers/database.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/newmartialarts.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class LevelPage extends StatefulWidget {
 }
 
 class LevelPageState extends State<LevelPage> {
-  DatabaseService database = DatabaseService();
+  UserHandler database = UserHandler();
   var yearController = TextEditingController();
   bool _value1 = false;
   bool _value2 = false;

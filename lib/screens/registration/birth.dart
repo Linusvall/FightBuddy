@@ -1,6 +1,6 @@
 import 'package:fight_buddy/screens/registration/heightweight.dart';
 import 'package:flutter/material.dart';
-import '../../handlers/database.dart';
+import '../../handlers/user_handler.dart';
 import 'package:age_calculator/age_calculator.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class BirthPageState extends State<BirthPage> {
   final dayController = TextEditingController();
   final monthController = TextEditingController();
   final yearController = TextEditingController();
-  final DatabaseService database = DatabaseService();
+  final UserHandler database = UserHandler();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

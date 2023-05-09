@@ -27,6 +27,7 @@ class AuthService {
         'prefGender': '',
         'prefWeight': '',
         'prefLevel': '',
+        'userList': '',
       });
     } catch (e) {}
   }
