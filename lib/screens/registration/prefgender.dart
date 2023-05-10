@@ -32,7 +32,23 @@ class PrefGenderPageState extends State<PrefGenderPage> {
   bool _value3 = false;
   bool _value4 = false;
 
-  var gender = '';
+  List<String> prefGender = [];
+
+  updateGenderList() {
+    if (_value3 == true) {
+      prefGender.add("none");
+      return;
+    }
+    if (_value1 == true) {
+      prefGender.add("Kvinna");
+    }
+    if (_value2 == true) {
+      prefGender.add("Man");
+    }
+    if (_value4 == true) {
+      prefGender.add("Annat");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +114,6 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
-                          gender = 'woman';
                         });
                       },
                     ),
@@ -113,7 +128,6 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
-                          gender = 'man';
                         });
                       },
                     ),
@@ -128,7 +142,6 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value3 = value!;
-                          gender = 'other';
                         });
                       },
                     ),
@@ -143,7 +156,6 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value4 = value!;
-                          gender = 'anyone';
                         });
                       },
                     ),
@@ -166,7 +178,8 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefGender(gender);
+                      updateGenderList();
+                      database.updatePrefGender(prefGender);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

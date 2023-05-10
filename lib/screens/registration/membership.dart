@@ -91,7 +91,7 @@ class MembershipPageState extends State<MembershipPage> {
                         controller: clubController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: const Icon(Icons.search),
                           hintText: 'Sök...',
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
@@ -147,7 +147,7 @@ class MembershipPageState extends State<MembershipPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePlace(clubController.text);
+                      database.updateMemberOfClub(clubController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

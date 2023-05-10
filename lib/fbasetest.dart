@@ -52,10 +52,10 @@ class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key});
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  LoginWidgetState createState() => LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class LoginWidgetState extends State<LoginWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool loggedIn = false;

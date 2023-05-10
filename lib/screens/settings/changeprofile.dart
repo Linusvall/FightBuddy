@@ -1,5 +1,3 @@
-import 'package:fight_buddy/screens/settings/changeemail.dart';
-import 'package:fight_buddy/screens/settings/changepassword.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,10 +17,10 @@ class ChangeProfilePage extends StatefulWidget {
   const ChangeProfilePage({super.key});
 
   @override
-  _ChangeProfilePageState createState() => _ChangeProfilePageState();
+  ChangeProfilePageState createState() => ChangeProfilePageState();
 }
 
-class _ChangeProfilePageState extends State<ChangeProfilePage> {
+class ChangeProfilePageState extends State<ChangeProfilePage> {
   var items = [
     const DropdownMenuItem(value: "Man", child: Text("Man")),
     const DropdownMenuItem(value: "Kvinna", child: Text("Kvinna")),
@@ -51,10 +49,10 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               title: const Text("Kön"),
               trailing: TextButton(
                   style: TextButton.styleFrom(
-                      primary: const Color.fromRGBO(3, 137, 129, 50)),
-                  child: Text(""),
-                  onPressed: () => AlertDialog(
-                        title: const Text("Kön"),
+                      foregroundColor: const Color.fromRGBO(3, 137, 129, 50)),
+                  child: const Text(""),
+                  onPressed: () => const AlertDialog(
+                        title: Text("Kön"),
                         /*
                         content: DropdownButton<String>(
                             value: globals.gender,
@@ -71,8 +69,8 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               title: const Text("Längd"),
               trailing: TextButton(
                 style: TextButton.styleFrom(
-                    primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                    foregroundColor: const Color.fromRGBO(3, 137, 129, 50)),
+                child: const Text(""),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -80,8 +78,8 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               title: const Text("Vikt"),
               trailing: TextButton(
                 style: TextButton.styleFrom(
-                    primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                    foregroundColor: const Color.fromRGBO(3, 137, 129, 50)),
+                child: const Text(""),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -89,8 +87,8 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               title: const Text("Kampsporter"),
               trailing: TextButton(
                 style: TextButton.styleFrom(
-                    primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                    foregroundColor: const Color.fromRGBO(3, 137, 129, 50)),
+                child: const Text(""),
                 onPressed: () => print("pressed"),
               )),
           const Divider(),
@@ -98,8 +96,8 @@ class _ChangeProfilePageState extends State<ChangeProfilePage> {
               title: const Text("Nya kampsporter"),
               trailing: TextButton(
                 style: TextButton.styleFrom(
-                    primary: const Color.fromRGBO(3, 137, 129, 50)),
-                child: Text(""),
+                    foregroundColor: const Color.fromRGBO(3, 137, 129, 50)),
+                child: const Text(""),
                 onPressed: () => print("pressed"),
               )),
         ]));

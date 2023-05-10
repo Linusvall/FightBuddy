@@ -2,17 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
-
 import '../handlers/user_handler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -59,12 +58,12 @@ class _HomePageState extends State<HomePage> {
                             color: const Color.fromRGBO(3, 137, 129, 50),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [const Text("Updating...")],
+                              children: const [Text("Updating...")],
                             ));
                       }
                     }),
               ),
-              backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
             );
           } else {
             return Container(
@@ -109,6 +108,9 @@ Future<List<fightbuddy.User>> _update(List<String> uidList) async {
   for (String uid in uidList) {
     userList.add(await UserHandler.getUser(uid));
   }
-
   return userList;
+}
+
+Future signOut() async {
+  await FirebaseAuth.instance.signOut();
 }

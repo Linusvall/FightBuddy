@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../../handlers/user_handler.dart';
 import '../../../handlers/auth.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ChangePasswordPageState createState() => _ChangePasswordPageState();
+  ChangePasswordPageState createState() => ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
+class ChangePasswordPageState extends State<ChangePasswordPage> {
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -26,21 +24,21 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color.fromRGBO(3, 137, 129, 50), //change your color here
         ),
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
         title: const Text(""),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Form(
             key: formKey,
             child: Column(children: [
@@ -49,7 +47,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       labelText: 'Gammalt lösenord',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -68,7 +66,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   controller: _passController1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: const Icon(Icons.lock),
                     labelText: 'Nytt lösenord',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -88,7 +86,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     controller: _passController2,
                     obscureText: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       labelText: 'Bekräfta lösenord',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),

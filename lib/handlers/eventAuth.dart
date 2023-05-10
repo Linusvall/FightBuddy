@@ -8,7 +8,7 @@ class AuthService {
 
   Future registerUser(String email, String password) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       return await userCollection.doc(_auth.currentUser?.uid).set({
         'name': '',

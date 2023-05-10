@@ -16,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    createEventPage(),
+    CreateEventPage(),
     SettingsPage(),
     ProfilePage(),
   ];
@@ -91,7 +91,7 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(Icons.person, color: Color.fromRGBO(80, 82, 86, 100)),
               label: 'Profil'),
         ],
-        unselectedItemColor: Color.fromRGBO(80, 82, 86, 100),
+        unselectedItemColor: const Color.fromRGBO(80, 82, 86, 100),
         selectedItemColor: const Color.fromRGBO(80, 82, 86, 100),
       ),
     );

@@ -1,10 +1,11 @@
+import 'package:fight_buddy/screens/homepage.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'handlers/firebase_options.dart';
 import 'screens/login.dart';
-import 'handlers/user_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,11 @@ class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  Future signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   bool loggedIn = false;
 
   @override
@@ -126,6 +132,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             onPressed: () {
               //gå till login
+              signOut();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),

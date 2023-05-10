@@ -6,16 +6,15 @@ class ChangeEmailPage extends StatefulWidget {
   const ChangeEmailPage({Key? key}) : super(key: key);
 
   @override
-  _ChangeEmailPageState createState() => _ChangeEmailPageState();
+  ChangeEmailPageState createState() => ChangeEmailPageState();
 }
 
-class _ChangeEmailPageState extends State<ChangeEmailPage> {
+class ChangeEmailPageState extends State<ChangeEmailPage> {
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
   final _passController1 = TextEditingController();
-  final _passController2 = TextEditingController();
 
   String userName = '';
   String password1 = '';
@@ -25,21 +24,21 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color.fromRGBO(3, 137, 129, 50), //change your color here
         ),
         elevation: 0,
         backgroundColor: Colors.white10,
         //Någon titeltext?
         title: const Text(""),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
         centerTitle: true,
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Form(
             key: formKey,
             child: Column(children: [
@@ -48,7 +47,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                 child: TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail),
+                      prefixIcon: const Icon(Icons.mail),
                       labelText: 'Ny email',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -67,7 +66,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                   controller: _passController1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.mail),
+                    prefixIcon: const Icon(Icons.mail),
                     labelText: 'Bekräfta email',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -101,8 +100,10 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                 });
                 if (formKey.currentState!.validate()) {
                   auth.registerUser(userName, password1);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GenderPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GenderPage()));
                 }
               },
             ),

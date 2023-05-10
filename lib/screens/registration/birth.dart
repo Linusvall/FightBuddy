@@ -51,7 +51,7 @@ class BirthPageState extends State<BirthPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HeightWeightPage()));
+                          builder: (context) => const HeightWeightPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -165,7 +165,7 @@ class BirthPageState extends State<BirthPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HeightWeightPage()));
+                              builder: (context) => const HeightWeightPage()));
                       //Gå vidare till nästa sida
                     },
                     child: const Text('Gå vidare',

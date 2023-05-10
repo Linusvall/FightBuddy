@@ -30,7 +30,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
   bool _value2 = false;
   bool _value3 = false;
   bool _value4 = false;
-  var weight = '';
+  int weight = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
-                          weight = 'same weight';
+                          weight = 0;
                         });
                       },
                     ),
@@ -110,7 +110,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
-                          weight = '+-5kg';
+                          weight = 5;
                         });
                       },
                     ),
@@ -125,7 +125,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value3 = value!;
-                          weight = '+-10kg';
+                          weight = 10;
                         });
                       },
                     ),
@@ -140,7 +140,7 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value4 = value!;
-                          weight = 'anything';
+                          weight = 1000;
                         });
                       },
                     ),

@@ -9,7 +9,11 @@ class User {
   final String height;
   final int weight;
   final String information;
-  final String martialArts;
+  final List<String> level;
+  final int prefWeight;
+  final List<String> prefGender;
+  final String prefLevel;
+  final List<String> martialArts;
   final List<String> uidList;
   late List<User> userList = [];
 
@@ -21,6 +25,10 @@ class User {
     required this.height,
     required this.weight,
     required this.information,
+    required this.level,
+    required this.prefWeight,
+    required this.prefGender,
+    required this.prefLevel,
     required this.martialArts,
     required this.uidList,
   });
@@ -34,7 +42,11 @@ class User {
       height: data['height'],
       weight: data['weight'],
       information: data['information'],
-      martialArts: data['martialArts'],
+      level: <String>[...data['level']],
+      prefWeight: data['prefWeight'],
+      prefGender: <String>[...data['prefGender']],
+      prefLevel: data['prefLevel'],
+      martialArts: <String>[...data['martialArts']],
       uidList: <String>[...data['userList']],
     );
   }

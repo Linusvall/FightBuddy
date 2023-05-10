@@ -1,16 +1,17 @@
-import 'package:fight_buddy/screens/homepageOld.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../handlers/user_handler.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   final _nameController = TextEditingController();
   final _passController = TextEditingController();
 
@@ -18,12 +19,11 @@ class _LoginPageState extends State<LoginPage> {
   String password = '';
   bool loggedIn = false;
   bool loginFail = false;
-  var _passwordVisible;
+  var _passwordVisible = false;
 
   @override
   void initState() {
     super.initState();
-    _passwordVisible = false;
   }
 
   @override
@@ -58,9 +58,9 @@ class _LoginPageState extends State<LoginPage> {
                 'FightBuddy',
                 style: Theme.of(context).textTheme.displayLarge,
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: TextField(
                     controller: _nameController,
                     decoration: const InputDecoration(
@@ -113,9 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                     });
                     if (!mounted) return;
                     try {
-                      final credential = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: email, password: password);
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: email, password: password);
 
                       loggedIn = true;
                     } on FirebaseAuthException catch (e) {

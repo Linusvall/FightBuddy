@@ -49,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text("Redigera profil"),
               trailing: IconButton(
                   iconSize: 20,
-                  icon: Icon(Icons.arrow_forward_ios),
+                  icon: const Icon(Icons.arrow_forward_ios),
                   onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -59,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
               title: const Text("Ändra lösenord"),
               trailing: IconButton(
-                  icon: Icon(Icons.arrow_forward_ios),
+                  icon: const Icon(Icons.arrow_forward_ios),
                   iconSize: 20,
                   onPressed: () => Navigator.push(
                         context,
@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
               title: const Text("Ändra din email"),
               trailing: IconButton(
-                  icon: Icon(Icons.arrow_forward_ios),
+                  icon: const Icon(Icons.arrow_forward_ios),
                   iconSize: 20,
                   onPressed: () => Navigator.push(
                         context,
@@ -81,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             title: const Text("Aktivera notiser"),
             trailing: Switch(
-                activeColor: Color.fromRGBO(3, 137, 129, 50),
+                activeColor: const Color.fromRGBO(3, 137, 129, 50),
                 value: notificationsValue,
                 onChanged: (bool newValue) {
                   setState(() {
@@ -93,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             title: const Text("Visa min vikt"),
             trailing: Switch(
-                activeColor: Color.fromRGBO(3, 137, 129, 50),
+                activeColor: const Color.fromRGBO(3, 137, 129, 50),
                 value: weightValue,
                 onChanged: (bool newValue) {
                   setState(() {

@@ -1,6 +1,5 @@
 import 'package:fight_buddy/screens/registration/gender.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../handlers/user_handler.dart';
 import '../../handlers/auth.dart';
 
@@ -8,10 +7,10 @@ class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  RegisterPageState createState() => RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class RegisterPageState extends State<RegisterPage> {
   UserHandler database = UserHandler();
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -110,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _passController1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: const Icon(Icons.lock),
                     labelText: 'Password',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -130,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: _passController2,
                     obscureText: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       labelText: 'Confirm password',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -159,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 fixedSize: const Size(250, 50),
               ),
               child: const Text('SKAPA KONTO'),
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
                   email = _emailController.text;
                   password1 = _passController1.text;
@@ -167,11 +166,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   lastName = _lastNameController.text;
                 });
                 if (formKey.currentState!.validate()) {
-                  auth.registerUser(email, password1);
+                  await auth.registerUser(email, password1);
                   database.updateUserFirstAndLastName(firstName, lastName);
                 }
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GenderPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GenderPage()));
               },
             ),
           ),

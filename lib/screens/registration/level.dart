@@ -32,6 +32,23 @@ class LevelPageState extends State<LevelPage> {
   bool _value3 = false;
   bool _value4 = false;
 
+  List<String> levelManager() {
+    List<String> level = [];
+    if (_value1 == true) {
+      level.add("competitor");
+    }
+    if (_value2 == true) {
+      level.add("experienced");
+    }
+    if (_value3 == true) {
+      level.add("exerciser");
+    }
+    if (_value4 == true) {
+      level.add("beginner");
+    }
+    return level;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +171,8 @@ class LevelPageState extends State<LevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateLevel(yearController.text);
+                      database.updateLevel(levelManager());
+                      database.yearsOfPractice(yearController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

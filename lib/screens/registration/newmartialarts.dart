@@ -137,7 +137,7 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateNewMartialArts(selectedOptions.toString());
+                      database.updateNewMartialArts(selectedOptions);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

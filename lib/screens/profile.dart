@@ -76,23 +76,23 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
             rows: <DataRow>[
               DataRow(cells: <DataCell>[
-                DataCell(Text('Namn')),
+                const DataCell(Text('Namn')),
                 DataCell(Text(firstname)),
               ]),
               DataRow(cells: <DataCell>[
-                DataCell(Text('Efteramn')),
+                const DataCell(Text('Efteramn')),
                 DataCell(Text(lastname)),
               ]),
               DataRow(cells: <DataCell>[
-                DataCell(Text('Ålder')),
+                const DataCell(Text('Ålder')),
                 DataCell(Text(age.toString())),
               ]),
               DataRow(cells: <DataCell>[
-                DataCell(Text('Vikt')),
+                const DataCell(Text('Vikt')),
                 DataCell(Text(weight.toString())),
               ]),
               DataRow(cells: <DataCell>[
-                DataCell(Text('Längd')),
+                const DataCell(Text('Längd')),
                 DataCell(Text(height)),
               ]),
             ],

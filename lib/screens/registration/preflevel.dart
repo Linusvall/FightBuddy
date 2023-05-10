@@ -1,3 +1,4 @@
+import 'package:fight_buddy/handlers/algorithm_handler.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
   UserHandler database = UserHandler();
   bool _value1 = false;
   bool _value2 = false;
+  String prefLevel = '';
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value1 = value!;
+                          prefLevel = 'same';
                         });
                       },
                     ),
@@ -102,6 +105,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       onChanged: (bool? value) {
                         setState(() {
                           _value2 = value!;
+                          prefLevel = 'none';
                         });
                       },
                     ),
@@ -124,7 +128,8 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefLevel('test');
+                      UserHandler().updatePrefLevel(prefLevel);
+                      UserHandler().startAlgorithm();
                       Navigator.push(
                           context,
                           MaterialPageRoute(

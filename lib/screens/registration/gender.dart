@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../handlers/user_handler.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -35,13 +37,13 @@ class GenderPageState extends State<GenderPage> {
 
     if (button == 'man') {
       _manHasBeenPressed = true;
-      gender = 'man';
+      gender = 'Man';
     } else if (button == 'woman') {
       _womanHasBeenPressed = true;
-      gender = 'woman';
+      gender = 'Kvinna';
     } else {
       _nothingHasBeenPressed = true;
-      gender = 'nothing';
+      gender = '';
     }
   }
 
@@ -96,11 +98,11 @@ class GenderPageState extends State<GenderPage> {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(300, 60),
+                    backgroundColor: _womanHasBeenPressed
+                        ? const Color.fromRGBO(0, 181, 169, 100)
+                        : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0)),
-                    primary: _womanHasBeenPressed
-                        ? Color.fromRGBO(0, 181, 169, 100)
-                        : Colors.white,
                   ),
                   onPressed: () => setState(() {
                         pressedbutton("woman");
@@ -123,11 +125,11 @@ class GenderPageState extends State<GenderPage> {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(300, 60),
+                    backgroundColor: _manHasBeenPressed
+                        ? const Color.fromRGBO(0, 181, 169, 100)
+                        : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0)),
-                    primary: _manHasBeenPressed
-                        ? Color.fromRGBO(0, 181, 169, 100)
-                        : Colors.white,
                   ),
                   onPressed: () => setState(() {
                         pressedbutton("man");
@@ -150,11 +152,11 @@ class GenderPageState extends State<GenderPage> {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(300, 60),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    primary: _nothingHasBeenPressed
+                    backgroundColor: _nothingHasBeenPressed
                         ? const Color.fromRGBO(0, 181, 169, 100)
                         : Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
                   ),
                   onPressed: () => setState(() {
                         pressedbutton("nothing");

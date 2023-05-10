@@ -11,20 +11,20 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: createEventPage(),
+    return const MaterialApp(
+      home: CreateEventPage(),
     );
   }
 }
 
-class createEventPage extends StatefulWidget {
-  const createEventPage({super.key});
+class CreateEventPage extends StatefulWidget {
+  const CreateEventPage({super.key});
 
   @override
-  _createEventPageState createState() => _createEventPageState();
+  CreateEventPageState createState() => CreateEventPageState();
 }
 
-class _createEventPageState extends State<createEventPage> {
+class CreateEventPageState extends State<CreateEventPage> {
   //AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _nameInput = TextEditingController();
@@ -617,7 +617,8 @@ class _createEventPageState extends State<createEventPage> {
                             child: Switch(
                               // This bool value toggles the switch.
                               value: publicValue,
-                              activeColor: Color.fromRGBO(3, 137, 129, 50),
+                              activeColor:
+                                  const Color.fromRGBO(3, 137, 129, 50),
                               onChanged: (bool value) {
                                 // This is called when the user toggles the switch.
                                 setState(() {
@@ -657,7 +658,8 @@ class _createEventPageState extends State<createEventPage> {
                             child: Switch(
                               // This bool value toggles the switch.
                               value: privateValue,
-                              activeColor: Color.fromRGBO(3, 137, 129, 50),
+                              activeColor:
+                                  const Color.fromRGBO(3, 137, 129, 50),
                               onChanged: (bool value) {
                                 // This is called when the user toggles the switch.
                                 setState(() {
