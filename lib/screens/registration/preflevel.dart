@@ -129,7 +129,7 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                     ),
                     onPressed: () {
                       UserHandler().updatePrefLevel(prefLevel);
-                      UserHandler().startAlgorithm();
+                      UserHandler().updateMatches();
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -24,8 +24,6 @@ class MartialArtsPage extends StatefulWidget {
 }
 
 class MartialArtsPageState extends State<MartialArtsPage> {
-  UserHandler database = UserHandler();
-
   List<String> options = [
     "Boxning",
     "MMA",
@@ -138,7 +136,8 @@ class MartialArtsPageState extends State<MartialArtsPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateMartialArts(selectedOptions);
+                      UserHandler().updateMartialArts(selectedOptions);
+                      UserHandler().putUserInMartialArtsMap(selectedOptions);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -10,7 +10,7 @@ class AuthService {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return await userCollection.doc(_auth.currentUser?.uid).set({
+      await userCollection.doc(_auth.currentUser?.uid).set({
         'firstName': '',
         'lastName': '',
         'age': '',
@@ -27,7 +27,7 @@ class AuthService {
         'prefGender': [],
         'prefWeight': '',
         'prefLevel': '',
-        'userList': [],
+        'uidList': [],
         'yearsOfPractice': '',
       });
     } catch (e) {}

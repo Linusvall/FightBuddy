@@ -35,7 +35,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
   List<String> prefGender = [];
 
   updateGenderList() {
-    if (_value3 == true) {
+    if (_value4 == true) {
       prefGender.add("none");
       return;
     }
@@ -45,7 +45,7 @@ class PrefGenderPageState extends State<PrefGenderPage> {
     if (_value2 == true) {
       prefGender.add("Man");
     }
-    if (_value4 == true) {
+    if (_value3 == true) {
       prefGender.add("Annat");
     }
   }

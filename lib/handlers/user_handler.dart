@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/algorithm_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +13,22 @@ class UserHandler {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
+  Future updateUserID() async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({'uid': uid});
+  }
+
+  Future uploadImage(File file) async {
+    var uid = user?.uid;
+    final Reference storageRef =
+        FirebaseStorage.instance.ref().child('images/${file.path}');
+    final TaskSnapshot snapshot = await storageRef.putFile(file);
+    final String downloadUrl = await snapshot.ref.getDownloadURL();
+
+    await userCollection.doc(uid).update({'profilePicture': downloadUrl});
+  }
+
   Future<List<String>> getAllUserIds() async {
     List<String> userIds = [];
     QuerySnapshot querySnapshot = await userCollection.get();
@@ -19,7 +38,29 @@ class UserHandler {
     return userIds;
   }
 
-  startAlgorithm() async {
+  Future<Set<String>> getUIDsFromMartialArt(List<String> martialArts) async {
+    Set<String> userIDs = <String>{};
+    List<Future<void>> futures = [];
+
+    for (String martialArt in martialArts) {
+      Future<void> future = FirebaseFirestore.instance
+          .collection('martialArts')
+          .doc(martialArt)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) async {
+        if (documentSnapshot.exists) {
+          List<dynamic> userIds = documentSnapshot.get('userIDs');
+          userIDs.addAll(userIds.map((id) => id.toString()).toSet());
+        }
+      });
+      futures.add(future);
+    }
+    await Future.wait(futures);
+
+    return userIDs;
+  }
+
+  updateMatches() async {
     var uid = user?.uid;
     fightbuddy.User fightbuddyUser = await getUser(uid!);
 
@@ -40,28 +81,35 @@ class UserHandler {
     return firestore.collection('users').doc(userId).snapshots();
   }
 
+  Future putUserInMartialArtsMap(List<String> martialArts) async {
+    final CollectionReference martialArtsCollection =
+        FirebaseFirestore.instance.collection('martialArts');
+    String? uid = user?.uid;
+    for (String str in martialArts) {
+      await martialArtsCollection.doc(str).update({
+        'userIDs': FieldValue.arrayUnion([uid])
+      });
+    }
+  }
+
   Future updateUserMatchesList(List<String> matches) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({'userList': matches});
-  }
-
-  Future<String> getPhotoUrl(String userId, FirebaseStorage storage) async {
-    return storage.ref().child("$userId.png").getDownloadURL();
+    await userCollection.doc(uid).update({'userList': matches});
   }
 
   Future updateUserGender(String gender) async {
     final user1 = FirebaseAuth.instance.currentUser;
     var uid = user1?.uid;
 
-    return await userCollection.doc(uid).update({'gender': gender});
+    await userCollection.doc(uid).update({'gender': gender});
   }
 
   Future updateUserFirstAndLastName(String firstName, String lastName) async {
     final user1 = FirebaseAuth.instance.currentUser;
     var uid = user1?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'firstName': firstName,
       'lastName': lastName,
     });
@@ -70,7 +118,7 @@ class UserHandler {
   Future updateUserHeightAndWeight(String height, int weight) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'weight': weight,
       'height': height,
     });
@@ -79,7 +127,7 @@ class UserHandler {
   Future updateUserAge(int age) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'age': age,
     });
   }
@@ -87,7 +135,7 @@ class UserHandler {
   Future updateAboutYouInformation(String information) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'information': information,
     });
   }
@@ -95,7 +143,7 @@ class UserHandler {
   Future updatePlace(String place) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'place': place,
     });
   }
@@ -103,7 +151,7 @@ class UserHandler {
   Future updateMemberOfClub(String club) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'club': club,
     });
   }
@@ -111,7 +159,7 @@ class UserHandler {
   Future yearsOfPractice(String years) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'yearsOfPractice': years,
     });
   }
@@ -119,7 +167,7 @@ class UserHandler {
   Future updateMartialArts(List<String> martialArts) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'martialArts': martialArts,
     });
   }
@@ -127,7 +175,7 @@ class UserHandler {
   Future updateLevel(List<String> level) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'level': level,
     });
   }
@@ -135,15 +183,15 @@ class UserHandler {
   Future updateNewMartialArts(List<String> martialArts) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
-      'newMArtialArts': martialArts,
+    await userCollection.doc(uid).update({
+      'newMartialArts': martialArts,
     });
   }
 
   Future updatePrefGender(List<String> gender) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'prefGender': gender,
     });
   }
@@ -151,7 +199,7 @@ class UserHandler {
   Future updatePrefWeight(int weight) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'prefWeight': weight,
     });
   }
@@ -159,7 +207,7 @@ class UserHandler {
   Future updatePrefLevel(String level) async {
     var uid = user?.uid;
 
-    return await userCollection.doc(uid).update({
+    await userCollection.doc(uid).update({
       'prefLevel': level,
     });
   }

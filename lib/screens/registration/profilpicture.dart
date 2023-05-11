@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/aboutyou.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -170,6 +171,7 @@ class ProfilePictureState extends State<ProfilePicture> {
                         fixedSize: const Size(250, 50),
                       ),
                       onPressed: () {
+                        UserHandler().uploadImage(image!);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

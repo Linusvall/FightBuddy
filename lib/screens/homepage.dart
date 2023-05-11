@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import '../assets/theme/colors.dart';
 import '../handlers/user_handler.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +30,6 @@ class HomePageState extends State<HomePage> {
                 ((snapshot.data) as DocumentSnapshot).data()
                     as Map<String, dynamic>);
             return Scaffold(
-              appBar: AppBar(),
               body: Center(
                 child: FutureBuilder(
                     future: _update(thisUser.uidList),
@@ -42,7 +42,7 @@ class HomePageState extends State<HomePage> {
                               itemCount: userList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return SizedBox(
-                                    height: 310,
+                                    height: 150,
                                     child: _userCard(userList[index], context));
                               }),
                         );
@@ -63,7 +63,7 @@ class HomePageState extends State<HomePage> {
                       }
                     }),
               ),
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: fightbuddyGreen,
             );
           } else {
             return Container(
@@ -83,15 +83,20 @@ class HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(user.profilePicture),
+              ),
               tileColor: Colors.white,
               title: Text(
-                user.firstName,
+                "${user.firstName} ${user.lastName}",
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                 ),
               ),
-              subtitle: Text("${user.age} år  ${user.weight}kg ${user.gender}",
+              subtitle: Text(
+                  "${user.age}år   ${user.weight}kg   ${user.gender}    ${user.place}",
                   style: const TextStyle(
                     color: Colors.black,
                   )),

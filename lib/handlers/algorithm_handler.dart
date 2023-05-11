@@ -4,7 +4,8 @@ import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 //Måste lägga in så att man inte får upp sig själv som matchning
 Future algorithm(fightbuddy.User user) async {
   List<String> uidList = [];
-  List<String> users = await UserHandler().getAllUserIds();
+  Set<String> users =
+      await UserHandler().getUIDsFromMartialArt(user.martialArts);
 
   for (String str in users) {
     fightbuddy.User potentialMatch = await UserHandler.getUser(str);
@@ -23,24 +24,15 @@ bool compareUserPreferences(
     fightbuddy.User user, fightbuddy.User potentialMatch) {
   bool foundCommonValue = false;
 
-  for (String value1 in user.martialArts) {
-    for (String value2 in potentialMatch.martialArts) {
-      if (value1 == value2) {
-        foundCommonValue = true;
-        break;
-      }
-    }
-    if (foundCommonValue) {
-      break;
-    }
-  }
-
-  if (foundCommonValue == false) {
+  if (user.uid == potentialMatch.uid) {
     return false;
   }
 
-  if (!user.prefGender.contains(potentialMatch.gender)) {
-    return false;
+  if (!user.prefGender.contains("none")) {
+    if (!user.prefGender.contains(potentialMatch.gender) ||
+        !potentialMatch.prefGender.contains(user.gender)) {
+      return false;
+    }
   }
 
   if (user.weight + user.prefWeight < potentialMatch.weight ||
@@ -61,10 +53,9 @@ bool compareUserPreferences(
         break;
       }
     }
-  }
-
-  if (foundCommonValue == false) {
-    return false;
+    if (foundCommonValue == false) {
+      return false;
+    }
   }
 
   return true;

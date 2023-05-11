@@ -1,6 +1,8 @@
+import 'package:fight_buddy/handlers/algorithm_handler.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 
 import '../handlers/user_handler.dart';
 
