@@ -167,8 +167,7 @@ class RegisterPageState extends State<RegisterPage> {
                 });
                 if (formKey.currentState!.validate()) {
                   await auth.registerUser(email, password1);
-                  UserHandler().updateUserFirstAndLastName(firstName, lastName);
-                  UserHandler().updateUserID();
+                  database.updateUserFirstAndLastName(firstName, lastName);
                 }
                 Navigator.push(
                     context,
