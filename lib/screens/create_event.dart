@@ -3,6 +3,7 @@
 //import '../../handlers/eventAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,14 @@ class CreateEventPage extends StatefulWidget {
 }
 
 class CreateEventPageState extends State<CreateEventPage> {
+  late GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   //AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _nameInput = TextEditingController();
@@ -57,8 +66,8 @@ class CreateEventPageState extends State<CreateEventPage> {
   late TimeOfDay from;
   late TimeOfDay to;
 
-  bool publicValue = true;
-  bool privateValue = true;
+  bool publicValue = false;
+  bool privateValue = false;
   @override
   void initState() {
     super.initState();
