@@ -168,11 +168,11 @@ class RegisterPageState extends State<RegisterPage> {
                 if (formKey.currentState!.validate()) {
                   await auth.registerUser(email, password1);
                   database.updateUserFirstAndLastName(firstName, lastName);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GenderPage()));
                 }
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const GenderPage()));
               },
             ),
           ),
