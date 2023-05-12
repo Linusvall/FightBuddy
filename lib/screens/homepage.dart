@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 import '../assets/theme/colors.dart';
 import '../handlers/user_handler.dart';
+import 'matchprofile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -77,34 +78,101 @@ class HomePageState extends State<HomePage> {
 
   Widget _userCard(fightbuddy.User user, BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(user.profilePicture),
-              ),
-              tileColor: Colors.white,
-              title: Text(
-                "${user.firstName} ${user.lastName}",
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
+                contentPadding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                leading: CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(user.profilePicture),
                 ),
-              ),
-              subtitle: Text(
-                  "${user.age}år   ${user.weight}kg   ${user.gender}    ${user.place}",
-                  style: const TextStyle(
-                    color: Colors.black,
-                  )),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
+                tileColor: Colors.white,
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${user.firstName} ${user.lastName}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        icon: const Icon(Icons.message_rounded),
+                        onPressed: () {
+                          //Implementera att den gå till chatten
+                          print("pressed icon message");
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        "${user.age}år   ${user.weight}kg   ${user.gender}    ${user.place}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                        height: 30,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: user.martialArts.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                                width: 85,
+                                height: 150,
+                                margin: const EdgeInsets.only(right: 7),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                child: Center(
+                                    child: Text(user.martialArts[index],
+                                        style: const TextStyle(
+                                            color: Colors.black))));
+                          },
+                        ))
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MatchProfilePage(user: user)));
+                }),
           ],
         ));
+  }
+
+  Widget _martialArtsRow(List<String> martialArts, BuildContext context) {
+    return Row(
+      children: [
+        Container(
+            height: 30,
+            width: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(color: Colors.black),
+            ),
+            child: const Center(
+              child: Text("hej"),
+            ))
+      ],
+    );
   }
 }
 

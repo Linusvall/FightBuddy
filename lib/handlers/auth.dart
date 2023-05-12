@@ -29,6 +29,7 @@ class AuthService {
         'prefLevel': '',
         'uidList': [],
         'yearsOfPractice': '',
+        'uid': '',
       });
     } catch (e) {}
   }

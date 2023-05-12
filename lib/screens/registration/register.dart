@@ -11,7 +11,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPage> {
-  UserHandler database = UserHandler();
   AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -167,7 +166,8 @@ class RegisterPageState extends State<RegisterPage> {
                 });
                 if (formKey.currentState!.validate()) {
                   await auth.registerUser(email, password1);
-                  database.updateUserFirstAndLastName(firstName, lastName);
+                  UserHandler().updateUserFirstAndLastName(firstName, lastName);
+                  UserHandler().updateUserID();
                 }
                 Navigator.push(
                     context,

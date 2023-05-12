@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/algorithm_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,7 +63,7 @@ class UserHandler {
     var uid = user?.uid;
     fightbuddy.User fightbuddyUser = await getUser(uid!);
 
-    algorithm(fightbuddyUser);
+    findMatches(fightbuddyUser);
   }
 
   //Parameter is a specific user ID and returns a user object tied to it
@@ -95,7 +94,7 @@ class UserHandler {
   Future updateUserMatchesList(List<String> matches) async {
     var uid = user?.uid;
 
-    await userCollection.doc(uid).update({'userList': matches});
+    await userCollection.doc(uid).update({'uidList': matches});
   }
 
   Future updateUserGender(String gender) async {
