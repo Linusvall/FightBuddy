@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'profile.dart';
+import 'chat.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _pages = const [
     HomePage(),
     CreateEventPage(),
+    ChatPage(),
     SettingsPage(),
     ProfilePage(),
   ];
@@ -87,6 +89,10 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.chat, color: Color.fromRGBO(80, 82, 86, 100)),
               label: 'Chat'),
+          BottomNavigationBarItem(
+              icon:
+                  Icon(Icons.settings, color: Color.fromRGBO(80, 82, 86, 100)),
+              label: 'Settings'),
           BottomNavigationBarItem(
               icon: Icon(Icons.person, color: Color.fromRGBO(80, 82, 86, 100)),
               label: 'Profil'),
