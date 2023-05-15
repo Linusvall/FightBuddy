@@ -127,10 +127,10 @@ class LoginPageState extends State<LoginPage> {
                       }
                     }
                     if (loggedIn == true) {
-                      Navigator.push(
-                          context,
+                      Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const MainPage()));
+                              builder: (context) => const MainPage()),
+                          (Route<dynamic> route) => false);
                     }
                   },
                 ),
