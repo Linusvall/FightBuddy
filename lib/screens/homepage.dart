@@ -36,15 +36,15 @@ class HomePageState extends State<HomePage> {
                     future: _update(thisUser.uidList),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        List<fightbuddy.User> userList =
+                        List<fightbuddy.User> matches =
                             snapshot.data as List<fightbuddy.User>;
                         return Center(
                           child: ListView.builder(
-                              itemCount: userList.length,
+                              itemCount: matches.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return SizedBox(
                                     height: 150,
-                                    child: _userCard(userList[index], context));
+                                    child: _userCard(matches[index], context));
                               }),
                         );
                       } else if (snapshot.hasError) {
@@ -64,7 +64,7 @@ class HomePageState extends State<HomePage> {
                       }
                     }),
               ),
-              backgroundColor: fightbuddyGreen,
+              backgroundColor: fightbuddyLightgreen,
             );
           } else {
             return Container(
@@ -84,7 +84,7 @@ class HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ListTile(
-                contentPadding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+                contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                 leading: CircleAvatar(
                   radius: 30,
                   backgroundImage: NetworkImage(user.profilePicture),
@@ -157,29 +157,12 @@ class HomePageState extends State<HomePage> {
           ],
         ));
   }
-
-  Widget _martialArtsRow(List<String> martialArts, BuildContext context) {
-    return Row(
-      children: [
-        Container(
-            height: 30,
-            width: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(color: Colors.black),
-            ),
-            child: const Center(
-              child: Text("hej"),
-            ))
-      ],
-    );
-  }
 }
 
 Future<List<fightbuddy.User>> _update(List<String> uidList) async {
   List<fightbuddy.User> userList = [];
   for (String uid in uidList) {
-    userList.add(await UserHandler.getUser(uid));
+    userList.add(await UserHandler().getUser(uid));
   }
   return userList;
 }

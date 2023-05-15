@@ -16,4 +16,12 @@ class DatabaseService {
       'name': name,
     });
   }
+
+  static Stream<DocumentSnapshot> getEventStream(
+      String userId, FirebaseFirestore firestore) {
+    return firestore
+        .collection('events')
+        .doc('ITvhZfJbpmPmv3dGirKq')
+        .snapshots();
+  }
 }

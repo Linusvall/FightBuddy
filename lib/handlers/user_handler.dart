@@ -67,7 +67,7 @@ class UserHandler {
   }
 
   //Parameter is a specific user ID and returns a user object tied to it
-  static Future<fightbuddy.User> getUser(String userId) async {
+  Future<fightbuddy.User> getUser(String userId) async {
     DocumentSnapshot document =
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
 

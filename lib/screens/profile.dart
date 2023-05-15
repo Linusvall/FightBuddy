@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   DataCell(Text(thisUser.firstName)),
                 ]),
                 DataRow(cells: <DataCell>[
-                  const DataCell(Text('Efteramn')),
+                  const DataCell(Text('Efternamn')),
                   DataCell(Text(thisUser.lastName)),
                 ]),
                 DataRow(cells: <DataCell>[
@@ -80,6 +80,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 DataRow(cells: <DataCell>[
                   const DataCell(Text('Längd')),
                   DataCell(Text(thisUser.height)),
+                ]),
+                DataRow(cells: <DataCell>[
+                  const DataCell(Text('Kampsporter')),
+                  DataCell(Text(listToString(thisUser.martialArts))),
                 ]),
               ],
             );
@@ -99,5 +103,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ));
           }
         });
+  }
+
+  String listToString(List<String> list) {
+    String string = "";
+    for (String str in list) {
+      string = string + str + ", ";
+    }
+    return string;
   }
 }

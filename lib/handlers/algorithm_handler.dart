@@ -1,14 +1,13 @@
 import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 
-//Måste lägga in så att man inte får upp sig själv som matchning
 Future findMatches(fightbuddy.User user) async {
   List<String> uidList = [];
   Set<String> users =
       await UserHandler().getUIDsFromMartialArt(user.martialArts);
 
   for (String str in users) {
-    fightbuddy.User potentialMatch = await UserHandler.getUser(str);
+    fightbuddy.User potentialMatch = await UserHandler().getUser(str);
 
     bool compatable = compareUserPreferences(user, potentialMatch);
 

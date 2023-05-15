@@ -21,7 +21,7 @@ class MatchProfilePageState extends State<MatchProfilePage> {
   Widget build(BuildContext context) {
     fightbuddy.User user = widget.user;
     return Scaffold(
-        backgroundColor: fightbuddyGreen,
+        backgroundColor: fightbuddyLightgreen,
         appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(MediaQuery.of(context).size.height / 4),

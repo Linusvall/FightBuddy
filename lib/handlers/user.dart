@@ -16,7 +16,7 @@ class User {
   final String prefLevel;
   final List<String> martialArts;
   final List<String> uidList;
-  late List<User> userList = [];
+  late List<User> matches = [];
   final String yearsOfPractice;
   final String profilePicture;
 
