@@ -67,7 +67,7 @@ class LoginPageState extends State<LoginPage> {
                     controller: _nameController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'User name',
+                      labelText: 'E-post',
                       prefixIcon: Icon(Icons.person),
                     )),
               ),
@@ -78,9 +78,8 @@ class LoginPageState extends State<LoginPage> {
                   obscureText: !_passwordVisible,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: 'Password',
-                      errorText:
-                          loginFail ? 'Wrong username or password' : null,
+                      labelText: 'Lösenord',
+                      errorText: loginFail ? 'Fel E-post eller lösenord' : null,
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -116,7 +115,7 @@ class LoginPageState extends State<LoginPage> {
                     if (!mounted) return;
                     try {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: 'emilia@gmail.com', password: '123456');
+                          email: email, password: password);
 
                       loggedIn = true;
                     } on FirebaseAuthException catch (e) {
