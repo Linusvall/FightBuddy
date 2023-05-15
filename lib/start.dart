@@ -9,17 +9,17 @@ import 'screens/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const StartPage());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class StartPage extends StatefulWidget {
+  const StartPage({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<StartPage> createState() => _StartPageState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _StartPageState extends State<StartPage> {
   //Initialization of Firebase
   final Future<FirebaseApp> _initialization = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

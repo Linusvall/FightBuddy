@@ -1,20 +1,13 @@
+import 'package:fight_buddy/screens/create_event.dart';
+import 'package:fight_buddy/screens/homepage.dart';
+import 'package:fight_buddy/screens/login.dart';
 import 'package:fight_buddy/screens/settings/changeemail.dart';
 import 'package:fight_buddy/screens/settings/changepassword.dart';
 import 'package:fight_buddy/screens/settings/changeprofile.dart';
+import 'package:fight_buddy/start.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SettingsPage(),
-    );
-  }
-}
+import 'package:flutter/gestures.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -37,7 +30,6 @@ class _SettingsPageState extends State<SettingsPage> {
           elevation: 0,
           backgroundColor: Colors.white10,
           //Någon titeltext?
-          title: const Text("Inställningar"),
         ),
         body: ListView(children: <Widget>[
           const ListTile(
@@ -101,6 +93,28 @@ class _SettingsPageState extends State<SettingsPage> {
                   });
                 }),
           ),
+          const SizedBox(
+            height: 100,
+          ),
+          RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(children: [
+                TextSpan(
+                  text: 'Logga ut',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      signOut();
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const StartPage()),
+                          (Route<dynamic> route) => false);
+                    },
+                  style: const TextStyle(
+                      fontSize: 17,
+                      decoration: TextDecoration.underline,
+                      color: Color.fromRGBO(3, 137, 129, 50)),
+                )
+              ]))
         ]));
   }
 }

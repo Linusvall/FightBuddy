@@ -1,11 +1,13 @@
-//import '../../handlers/eventDatabase.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-//import '../../handlers/eventAuth.dart';
+import '../handlers/event_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,15 +28,9 @@ class CreateEventPage extends StatefulWidget {
 }
 
 class CreateEventPageState extends State<CreateEventPage> {
-  late GoogleMapController mapController;
+  EventHandler eventHandler = EventHandler();
+  final Map<String, dynamic> eventData = {};
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
-  //AuthService auth = AuthService();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _nameInput = TextEditingController();
   final _dateInput = TextEditingController();
@@ -43,6 +39,9 @@ class CreateEventPageState extends State<CreateEventPage> {
   final _timeToInput = TextEditingController();
   final _placeInput = TextEditingController();
   final _aboutInput = TextEditingController();
+
+  //TODO: Vilka kampsporter ska finnas?
+
   final martialArts = [
     "Boxning",
     "MMA",
@@ -55,8 +54,11 @@ class CreateEventPageState extends State<CreateEventPage> {
     "Wushu",
   ];
 
+  //TODO: Kapacitet, vilken maxkapacitet?
   final eventCapacity = ["2", "3", "4", "5", "6"];
+  //TODO: Vilka viktklasser? Alternativen bör ändras beroende på vald kampsport?
   final weightClasses = ["Inget valt", "Tungvikt", "Fjädervikt"];
+  //TODO: Vilka nivåer?
   final levels = ["Inget valt", "Avancerad", "Nybörjare"];
   String? selectedMartialArts = 'Boxning';
   String? selectedCapacity = '2';
@@ -66,6 +68,7 @@ class CreateEventPageState extends State<CreateEventPage> {
   late TimeOfDay from;
   late TimeOfDay to;
 
+  //TODO: Implementera privat/offentligt event
   bool publicValue = false;
   bool privateValue = false;
   @override
@@ -332,8 +335,9 @@ class CreateEventPageState extends State<CreateEventPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      //On click i denna för att skriva in adress
                       child: TextFormField(
-                          readOnly: true,
+                          readOnly: false,
                           controller: _placeInput,
                           decoration: InputDecoration(
                               filled: true,
@@ -698,12 +702,27 @@ class CreateEventPageState extends State<CreateEventPage> {
                             Icon(Icons.arrow_forward),
                           ],
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          setState(() {
+                            eventData.addAll({
+                              'eventName': _nameInput.text,
+                              'date': _dateInput.text,
+                              'timeFrom': _timeFromInput.text,
+                              'timeTo': _timeToInput.text,
+                              'place': _placeInput.text,
+                              'category': selectedMartialArts,
+                              'capacity': selectedCapacity,
+                              'level': selectedLevel,
+                              'weightClass': selectedClass,
+                              'about': _aboutInput.text,
+                            });
+                          });
                           if (formKey.currentState!.validate()) {
-                            print('validated');
-                            //skicka grejs till databasen
+                            debugPrint('validated');
+                            await eventHandler.createEventDocument(eventData);
+                          } else {
+                            debugPrint('not validated');
                           }
-                          // Navigator.push(     );
                         },
                       ),
                     ),
