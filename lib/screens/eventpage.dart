@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../assets/theme/colors.dart';
-import 'package:fight_buddy/handlers/eventDatabase.dart';
+import 'package:fight_buddy/handlers/event_handler.dart';
 import 'package:fight_buddy/handlers/event.dart';
 
 import 'eventprofilepage.dart';
@@ -24,7 +24,7 @@ class EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         //Realtime updates of changes to users information
-        stream: DatabaseService.getEventStream(
+        stream: EventHandler.getEventStream(
             FirebaseAuth.instance.currentUser!.uid, FirebaseFirestore.instance),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
