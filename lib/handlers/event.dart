@@ -12,7 +12,9 @@ class Event {
   final String timeTo;
   final String weightClass;
   final String eventPicture;
+  final List<String> attendees;
   final String organizer;
+  final String eventid;
 
   Event({
     required this.about,
@@ -27,6 +29,8 @@ class Event {
     required this.weightClass,
     required this.eventPicture,
     required this.organizer,
+    required this.attendees,
+    required this.eventid,
   });
 
   factory Event.fromMap(Map<String, dynamic> data) {
@@ -43,6 +47,8 @@ class Event {
       weightClass: data['weightClass'],
       eventPicture: data['eventPicture'],
       organizer: data['organizer'],
+      attendees: <String>[...data['attendees']],
+      eventid: data['eventid'],
     );
   }
 
@@ -60,6 +66,8 @@ class Event {
       'weightClass': weightClass,
       'eventPicture': eventPicture,
       'organizer': organizer,
+      'attendees': attendees,
+      'eventid': eventid,
     };
   }
 }

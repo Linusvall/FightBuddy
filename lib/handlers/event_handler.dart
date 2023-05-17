@@ -1,20 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class EventHandler {
-  Future<void> createEventDocument(Map<String, dynamic> eventData) async {
-    CollectionReference eventsCollection =
-        FirebaseFirestore.instance.collection('events');
-    await eventsCollection.add(eventData);
+  final eventsCollection = FirebaseFirestore.instance.collection('events');
+
+  createEventDocument(Map<String, dynamic> eventData) {
+    final newDocRef = eventsCollection.doc();
+    eventData['eventid'] = newDocRef.id;
+    newDocRef.set(eventData);
   }
 
   //TODO: Metoder för att uppdatera event, som i user_handler + lägga till användare som skapat eventet?
 
+/*  Future updateEventID() async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({'uid': uid});
+  } */
+
+  /* void addAttendee(String uid){
+    eventsCollection.where('')
+  } */
+
   static Stream<DocumentSnapshot> getEventStream(
-      String userId, FirebaseFirestore firestore) {
-    return firestore
-        .collection('events')
-        .doc('ITvhZfJbpmPmv3dGirKq')
-        .snapshots();
+      String eventId, FirebaseFirestore firestore) {
+    return firestore.collection('events').doc(eventId).snapshots();
   }
 }

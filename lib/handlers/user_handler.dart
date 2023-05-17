@@ -37,6 +37,11 @@ class UserHandler {
     return userIds;
   }
 
+  getUserId() {
+    var uid = user?.uid;
+    return uid;
+  }
+
   Future<Set<String>> getUIDsFromMartialArt(List<String> martialArts) async {
     Set<String> userIDs = <String>{};
     List<Future<void>> futures = [];

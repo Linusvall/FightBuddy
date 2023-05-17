@@ -1,4 +1,6 @@
 import '../handlers/event_handler.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../handlers/user_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +30,10 @@ class CreateEventPage extends StatefulWidget {
 }
 
 class CreateEventPageState extends State<CreateEventPage> {
+  String organizer = UserHandler().getUserId();
+
   EventHandler eventHandler = EventHandler();
+
   final Map<String, dynamic> eventData = {};
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -715,6 +720,9 @@ class CreateEventPageState extends State<CreateEventPage> {
                               'level': selectedLevel,
                               'weightClass': selectedClass,
                               'about': _aboutInput.text,
+                              'organizer': organizer,
+                              'attendees': [],
+                              'eventid': '',
                             });
                           });
                           if (formKey.currentState!.validate()) {
