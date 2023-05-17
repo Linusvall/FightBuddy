@@ -130,10 +130,10 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                     onPressed: () {
                       UserHandler().updatePrefLevel(prefLevel);
                       UserHandler().updateMatches();
-                      Navigator.push(
-                          context,
+                      Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const MainPage()));
+                              builder: (context) => const MainPage()),
+                          (Route<dynamic> route) => false);
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

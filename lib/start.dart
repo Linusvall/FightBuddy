@@ -1,3 +1,4 @@
+import 'package:fight_buddy/assets/theme/colors.dart';
 import 'package:fight_buddy/screens/homepage.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,7 +44,7 @@ class _StartPageState extends State<StartPage> {
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: const Color.fromARGB(255, 211, 0, 253),
+        primaryColor: fightbuddyLightgreen,
 
         // Define the default font family.
         //fontFamily: 'Georgia',

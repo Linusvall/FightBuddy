@@ -40,58 +40,62 @@ class EventProfilePageState extends State<EventProfilePage> {
             ),
           ),
         ),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(100),
-                  topRight: Radius.circular(100))),
-          child: Column(
-            children: [
-              Container(
-                child: _eventCard(event, context),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              _listTile(
-                  const Icon(Icons.calendar_month, color: fightbuddyLightgreen),
-                  event.date,
-                  "${event.timeFrom} - ${event.timeTo}",
-                  context),
-              _listTile(const Icon(Icons.place, color: fightbuddyLightgreen),
-                  event.place, "", context),
-              _listTile(
-                  const Icon(Icons.signal_cellular_alt,
-                      color: fightbuddyLightgreen),
-                  event.level,
-                  "",
-                  context),
-              _userListTile(event.organizer, context),
-              const Text("Om eventet",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              SizedBox(
-                  width: 300,
-                  child: Text(
-                    event.about,
-                    style: const TextStyle(
-                        fontSize: 17, color: Color.fromARGB(255, 94, 90, 90)),
-                  )),
-              const SizedBox(height: 50),
-              SizedBox(
-                  height: 60,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 122, 122, 122))),
-                      onPressed: () {
-                        print("pressed");
-                      },
-                      child:
-                          const Text("DU KAN INTE ANMÄLA DIG TILL EVENTET"))),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(100),
+                    topRight: Radius.circular(100))),
+            child: Column(
+              children: [
+                Container(
+                  child: _eventCard(event, context),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                _listTile(
+                    const Icon(Icons.calendar_month,
+                        color: fightbuddyLightgreen),
+                    event.date,
+                    "${event.timeFrom} - ${event.timeTo}",
+                    context),
+                _listTile(const Icon(Icons.place, color: fightbuddyLightgreen),
+                    event.place, "", context),
+                _listTile(
+                    const Icon(Icons.signal_cellular_alt,
+                        color: fightbuddyLightgreen),
+                    event.level,
+                    "",
+                    context),
+                _userListTile(event.organizer, context),
+                const Text("Om eventet",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                SizedBox(
+                    width: 300,
+                    child: Text(
+                      event.about,
+                      style: const TextStyle(
+                          fontSize: 17, color: Color.fromARGB(255, 94, 90, 90)),
+                    )),
+                const SizedBox(height: 50),
+                SizedBox(
+                    height: 60,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color.fromARGB(255, 122, 122, 122))),
+                        onPressed: () {
+                          print("pressed");
+                        },
+                        child:
+                            const Text("DU KAN INTE ANMÄLA DIG TILL EVENTET"))),
+              ],
+            ),
           ),
         ));
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../assets/theme/colors.dart';
 import 'package:fight_buddy/handlers/event_handler.dart';
 import 'package:fight_buddy/handlers/event.dart';
+import 'package:fight_buddy/screens/create_event.dart';
 
 import 'eventprofilepage.dart';
 
@@ -22,26 +23,52 @@ class EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        //Realtime updates of changes to users information
-        stream: EventHandler.getEventStream(
-            FirebaseAuth.instance.currentUser!.uid, FirebaseFirestore.instance),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Event event = Event.fromMap(((snapshot.data) as DocumentSnapshot)
-                .data() as Map<String, dynamic>);
-            return Scaffold(
-              body: _eventCard(event, context),
-              backgroundColor: fightbuddyLightgreen,
-            );
-          } else {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: const Color.fromRGBO(3, 137, 129, 50),
-            );
-          }
-        });
+    return Scaffold(
+      backgroundColor: fightbuddyLightgreen,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  icon:
+                      const Icon(Icons.add_circle_outline, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CreateEventPage()));
+                  },
+                ),
+              ],
+            ),
+          ),
+          StreamBuilder(
+              //Realtime updates of changes to users information
+              stream: EventHandler.getEventStream(
+                  FirebaseAuth.instance.currentUser!.uid,
+                  FirebaseFirestore.instance),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  Event event = Event.fromMap(
+                      ((snapshot.data) as DocumentSnapshot).data()
+                          as Map<String, dynamic>);
+                  return Container(
+                    child: _eventCard(event, context),
+                  );
+                } else {
+                  return Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: fightbuddyLightgreen,
+                  );
+                }
+              }),
+        ],
+      ),
+    );
   }
 
   Widget _eventCard(Event event, BuildContext context) {
@@ -138,3 +165,22 @@ class EventPageState extends State<EventPage> {
 Future signOut() async {
   await FirebaseAuth.instance.signOut();
 }
+
+
+
+
+
+
+//Knappen i en ny appbar istället?
+
+/*  appBar: AppBar(backgroundColor: fightbuddyLightgreen, actions: [
+        IconButton(
+          icon: const Icon(Icons.add_circle_outline, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CreateEventPage()));
+          },
+        ),
+      ]),*/
