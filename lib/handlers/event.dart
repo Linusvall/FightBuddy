@@ -14,7 +14,8 @@ class Event {
   final String eventPicture;
   final List<String> attendees;
   final String organizer;
-  final String eventid;
+  final String eventId;
+  final String eventImage;
 
   Event({
     required this.about,
@@ -30,25 +31,27 @@ class Event {
     required this.eventPicture,
     required this.organizer,
     required this.attendees,
-    required this.eventid,
+    required this.eventId,
+    required this.eventImage,
   });
 
-  factory Event.fromMap(Map<String, dynamic> data) {
+  factory Event.fromMap(Map<String, dynamic>? data) {
     return Event(
-      about: data['about'],
-      capacity: data['capacity'],
-      category: data['category'],
-      date: data['date'],
-      eventName: data['eventName'],
-      level: data['level'],
-      place: data['place'],
-      timeFrom: data['timeFrom'],
-      timeTo: data['timeTo'],
-      weightClass: data['weightClass'],
-      eventPicture: data['eventPicture'],
-      organizer: data['organizer'],
-      attendees: <String>[...data['attendees']],
-      eventid: data['eventid'],
+      about: data?['about'] ?? '',
+      capacity: data?['capacity'] ?? '',
+      category: data?['category'] ?? '',
+      date: data?['date'] ?? '',
+      eventName: data?['eventName'] ?? '',
+      level: data?['level'] ?? '',
+      place: data?['place'] ?? '',
+      timeFrom: data?['timeFrom'] ?? '',
+      timeTo: data?['timeTo'] ?? '',
+      weightClass: data?['weightClass'] ?? '',
+      eventPicture: data?['eventPicture'] ?? '',
+      organizer: data?['organizer'] ?? '',
+      attendees: List<String>.from(data?['attendees'] ?? []),
+      eventId: data?['eventId'] ?? '',
+      eventImage: data?['eventImage'] ?? '',
     );
   }
 
@@ -67,7 +70,8 @@ class Event {
       'eventPicture': eventPicture,
       'organizer': organizer,
       'attendees': attendees,
-      'eventid': eventid,
+      'eventId': eventId,
+      'eventImage': eventImage,
     };
   }
 }

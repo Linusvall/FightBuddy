@@ -33,7 +33,7 @@ class EventProfilePageState extends State<EventProfilePage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(event.eventPicture),
+                  image: NetworkImage(event.eventImage),
                   fit: BoxFit.cover,
                 ),
               ),
