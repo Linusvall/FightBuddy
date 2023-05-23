@@ -1,5 +1,4 @@
 import 'package:fight_buddy/assets/theme/colors.dart';
-import 'package:fight_buddy/screens/homepage.dart';
 import 'package:fight_buddy/screens/registration/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'handlers/firebase_options.dart';
 import 'screens/login.dart';
+import 'handlers/user_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -133,7 +133,6 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             onPressed: () {
               //gå till login
-              signOut();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),

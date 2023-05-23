@@ -1,4 +1,4 @@
-import 'package:fight_buddy/screens/registration/training.dart';
+import 'place.dart';
 import 'package:flutter/material.dart';
 import '../../handlers/user_handler.dart';
 

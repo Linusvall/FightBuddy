@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 import '../assets/theme/colors.dart';
@@ -23,8 +22,7 @@ class MatchProfilePageState extends State<MatchProfilePage> {
     return Scaffold(
         backgroundColor: fightbuddyLightgreen,
         appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height / 4),
+          preferredSize: const Size.fromHeight(200),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -50,11 +48,20 @@ class MatchProfilePageState extends State<MatchProfilePage> {
               Container(
                 child: _userCard(user, context),
               ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 150,
+                  ),
+                  Icon(Icons.abc),
+                  Icon(Icons.add_chart_sharp)
+                ],
+              ),
               Container(
                 width: 350,
                 height: 90,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 223, 223),
+                  color: const Color.fromARGB(255, 221, 223, 223),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -70,22 +77,73 @@ class MatchProfilePageState extends State<MatchProfilePage> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                  width: 350,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text("Kampsportsstilar",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )))
+              _box(user.martialArts, " Kampsportsstilar", 350, 100),
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                children: [
+                  _box(user.newMartialArts, " Vill prova", 180, 81),
+                  _box(user.club, " Medlem i", 180, 82),
+                ],
+              ),
+              const SizedBox(
+                height: 40,
+              ),
             ],
           ),
         ));
   }
+}
+
+_box(List<String> list, String title, double size, double boxSize) {
+  return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Container(
+        width: size,
+        height: 80,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 5),
+            SizedBox(
+                height: 50,
+                child: Center(
+                    child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Container(
+                        width: boxSize,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: fightbuddyDarkgreen, width: 2),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(list[index]),
+                        ),
+                      ),
+                    );
+                  },
+                ))),
+          ],
+        ),
+      ));
 }
 
 Widget _userCard(fightbuddy.User user, BuildContext context) {
@@ -109,7 +167,7 @@ Widget _userCard(fightbuddy.User user, BuildContext context) {
               ),
             ),
             subtitle: Text(
-                "${user.age}år   ${user.weight}kg   ${user.gender}    ${user.place}",
+                "${user.age} år   ${user.weight}kg   ${user.gender}    ${user.place}",
                 style: const TextStyle(
                   color: Colors.black,
                 )),
@@ -118,8 +176,4 @@ Widget _userCard(fightbuddy.User user, BuildContext context) {
           ),
         ],
       ));
-}
-
-Future signOut() async {
-  await FirebaseAuth.instance.signOut();
 }

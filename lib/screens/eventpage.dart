@@ -162,10 +162,6 @@ class EventPageState extends State<EventPage> {
   }
 }
 
-Future signOut() async {
-  await FirebaseAuth.instance.signOut();
-}
-
 
 
 

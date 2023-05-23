@@ -21,13 +21,14 @@ class UserHandler {
   Future uploadImage(File file) async {
     var uid = user?.uid;
     final Reference storageRef =
-        FirebaseStorage.instance.ref().child('images/${file.path}');
+        FirebaseStorage.instance.ref().child('profilePictures${file.path}');
     final TaskSnapshot snapshot = await storageRef.putFile(file);
     final String downloadUrl = await snapshot.ref.getDownloadURL();
 
     await userCollection.doc(uid).update({'profilePicture': downloadUrl});
   }
 
+/*
   Future<List<String>> getAllUserIds() async {
     List<String> userIds = [];
     QuerySnapshot querySnapshot = await userCollection.get();
@@ -36,6 +37,7 @@ class UserHandler {
     }
     return userIds;
   }
+  */
 
   getUserId() {
     var uid = user?.uid;
@@ -83,6 +85,27 @@ class UserHandler {
   static Stream<DocumentSnapshot> getUserStream(
       String userId, FirebaseFirestore firestore) {
     return firestore.collection('users').doc(userId).snapshots();
+  }
+
+  Future deleteUser() async {
+    var uid = user!.uid;
+    fightbuddy.User fightbuddyUser = await getUser(uid);
+    List<String> totalMartialArts = [];
+
+    final CollectionReference martialArtsCollection =
+        FirebaseFirestore.instance.collection('martialArts');
+    totalMartialArts.addAll(fightbuddyUser.martialArts);
+    totalMartialArts.addAll(fightbuddyUser.newMartialArts);
+
+    for (String str in totalMartialArts) {
+      await martialArtsCollection.doc(str).update({
+        'userIDs': FieldValue.arrayRemove([uid])
+      });
+    }
+
+    //userCollection.doc(uid).delete();
+
+    //user?.delete();
   }
 
   Future putUserInMartialArtsMap(List<String> martialArts) async {
@@ -152,7 +175,7 @@ class UserHandler {
     });
   }
 
-  Future updateMemberOfClub(String club) async {
+  Future updateMemberOfClub(List<String> club) async {
     var uid = user?.uid;
 
     await userCollection.doc(uid).update({
@@ -164,7 +187,7 @@ class UserHandler {
     var uid = user?.uid;
 
     await userCollection.doc(uid).update({
-      'yearsOfPractice': years,
+      'yearsOfPractice': FieldValue.arrayUnion([years]),
     });
   }
 
@@ -176,11 +199,11 @@ class UserHandler {
     });
   }
 
-  Future updateLevel(List<String> level) async {
+  Future updateLevel(String level) async {
     var uid = user?.uid;
 
     await userCollection.doc(uid).update({
-      'level': level,
+      'level': FieldValue.arrayUnion([level]),
     });
   }
 

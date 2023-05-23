@@ -105,7 +105,7 @@ class HeightWeightPageState extends State<HeightWeightPage> {
                         controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Längd cm',
+                          hintText: 'LÄNGD CM',
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 10),
                           border: OutlineInputBorder(

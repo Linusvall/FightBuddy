@@ -27,10 +27,14 @@ class AuthService {
         'prefGender': [],
         'prefWeight': '',
         'prefLevel': '',
-        'uidList': [],
-        'yearsOfPractice': '',
+        'matches': [],
+        'yearsOfPractice': [],
         'uid': '',
       });
     } catch (e) {}
   }
+}
+
+Future signOut() async {
+  await FirebaseAuth.instance.signOut();
 }

@@ -175,7 +175,3 @@ Widget _eventCard(Event event, BuildContext context) {
         ],
       ));
 }
-
-Future signOut() async {
-  await FirebaseAuth.instance.signOut();
-}

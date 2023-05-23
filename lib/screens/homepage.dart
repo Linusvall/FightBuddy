@@ -33,7 +33,7 @@ class HomePageState extends State<HomePage> {
             return Scaffold(
               body: Center(
                 child: FutureBuilder(
-                    future: _update(thisUser.uidList),
+                    future: _update(thisUser.matches),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         List<fightbuddy.User> matches =
@@ -165,8 +165,4 @@ Future<List<fightbuddy.User>> _update(List<String> uidList) async {
     userList.add(await UserHandler().getUser(uid));
   }
   return userList;
-}
-
-Future signOut() async {
-  await FirebaseAuth.instance.signOut();
 }

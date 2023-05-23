@@ -15,10 +15,11 @@ class User {
   final List<String> prefGender;
   final String prefLevel;
   final List<String> martialArts;
-  final List<String> uidList;
-  late List<User> matches = [];
-  final String yearsOfPractice;
+  final List<String> matches;
+  final List<String> yearsOfPractice;
   final String profilePicture;
+  final List<String> newMartialArts;
+  final List<String> club;
 
   User({
     required this.uid,
@@ -35,9 +36,11 @@ class User {
     required this.prefGender,
     required this.prefLevel,
     required this.martialArts,
-    required this.uidList,
+    required this.matches,
     required this.yearsOfPractice,
     required this.profilePicture,
+    required this.newMartialArts,
+    required this.club,
   });
 
   factory User.fromMap(Map<String, dynamic> data) {
@@ -56,9 +59,11 @@ class User {
       prefGender: <String>[...data['prefGender']],
       prefLevel: data['prefLevel'],
       martialArts: <String>[...data['martialArts']],
-      uidList: <String>[...data['uidList']],
-      yearsOfPractice: data['yearsOfPractice'],
+      matches: <String>[...data['matches']],
+      yearsOfPractice: <String>[...data['yearsOfPractice']],
       profilePicture: data['profilePicture'],
+      newMartialArts: <String>[...data['newMartialArts']],
+      club: <String>[...data['club']],
     );
   }
 
@@ -77,9 +82,11 @@ class User {
       'prefGender': prefGender,
       'prefLevel': prefLevel,
       'martialArts': martialArts,
-      'uidList': uidList,
+      'matches': matches,
       'yearsOfPractice': yearsOfPractice,
       'profilePicture': profilePicture,
+      'newMartialArts': newMartialArts,
+      'club': club,
     };
   }
 }

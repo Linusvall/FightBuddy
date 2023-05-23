@@ -1,13 +1,11 @@
-import 'package:fight_buddy/screens/create_event.dart';
-import 'package:fight_buddy/screens/homepage.dart';
-import 'package:fight_buddy/screens/login.dart';
 import 'package:fight_buddy/screens/settings/changeemail.dart';
 import 'package:fight_buddy/screens/settings/changepassword.dart';
 import 'package:fight_buddy/screens/settings/changeprofile.dart';
 import 'package:fight_buddy/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fight_buddy/handlers/auth.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -114,7 +112,54 @@ class _SettingsPageState extends State<SettingsPage> {
                       decoration: TextDecoration.underline,
                       color: Color.fromRGBO(3, 137, 129, 50)),
                 )
-              ]))
+              ])),
+          const SizedBox(height: 100),
+          RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(children: [
+                TextSpan(
+                  text: 'Radera konto',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Radera konto'),
+                            content: const Text(
+                                'Är du säker att du vill radera ditt konto?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  UserHandler().deleteUser();
+                                  signOut();
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const StartPage()),
+                                      (Route<dynamic> route) => false);
+                                },
+                                child: Text('Ja'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Handle the "No" button tap
+                                  Navigator.of(context)
+                                      .pop(false); // Return false to the caller
+                                },
+                                child: const Text('Nej'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  style: const TextStyle(
+                      fontSize: 12,
+                      decoration: TextDecoration.underline,
+                      color: Color.fromRGBO(184, 0, 0, 0.808)),
+                )
+              ])),
         ]));
   }
 }

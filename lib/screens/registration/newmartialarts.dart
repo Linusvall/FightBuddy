@@ -106,7 +106,7 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                 ),
                 const Padding(
                   padding: EdgeInsets.all(5.0),
-                  child: Text("Välj max 6 stycken"),
+                  child: Text("Välj max 2 stycken"),
                 ),
                 Wrap(
                   children: options.map((option) {

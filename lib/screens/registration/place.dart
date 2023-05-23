@@ -1,5 +1,5 @@
 import 'package:fight_buddy/handlers/user_handler.dart';
-import 'package:fight_buddy/screens/registration/martialarts.dart';
+import 'club.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,22 +12,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MembershipPage(),
+      home: TrainingPage(),
     );
   }
 }
 
-class MembershipPage extends StatefulWidget {
-  const MembershipPage({super.key});
+class TrainingPage extends StatefulWidget {
+  const TrainingPage({super.key});
   @override
-  MembershipPageState createState() => MembershipPageState();
+  TrainingPageState createState() => TrainingPageState();
 }
 
-class MembershipPageState extends State<MembershipPage> {
+class TrainingPageState extends State<TrainingPage> {
+  var placeController = TextEditingController();
   UserHandler database = UserHandler();
-
-  var clubController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +47,7 @@ class MembershipPageState extends State<MembershipPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const MartialArtsPage()));
+                          builder: (context) => const MembershipPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -74,25 +72,19 @@ class MembershipPageState extends State<MembershipPage> {
                 const Padding(
                   padding: EdgeInsets.all(70),
                   child: Text(
-                    "Ange vilken klubb är du medlem i ",
+                    "Var vill du träna? ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                      "Ange vilken eller vilka klubbar du är medlem i du kan max välja 3 stycken"),
                 ),
                 Row(
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
-                        controller: clubController,
+                        controller: placeController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search),
-                          hintText: 'Sök...',
+                          hintText: 'Skriv in en eller flera stadsdelar',
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
                           border: OutlineInputBorder(
@@ -105,33 +97,10 @@ class MembershipPageState extends State<MembershipPage> {
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom:
-                240.0, // adjust this value to change the position of the button
-            left:
-                50.0, // adjust this value to change the position of the button
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MartialArtsPage()));
-              },
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
-                  minimumSize: const Size(300, 50)),
-              child: const Text(
-                "Jag är inte medlem i någon klubb",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
+                const Padding(
+                  padding: EdgeInsets.all(100.0),
                 ),
-              ),
+              ],
             ),
           ),
           Padding(
@@ -147,11 +116,11 @@ class MembershipPageState extends State<MembershipPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateMemberOfClub(clubController.text);
+                      database.updatePlace(placeController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MartialArtsPage()));
+                              builder: (context) => const MembershipPage()));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),
