@@ -75,6 +75,8 @@ flutter:
     - lib/assets/images/logo.png
     - lib/assets/images/FightBuddy.png
     - lib/assets/images/face.png
+    - lib/assets/images/chooseImage.png
+    - lib/assets/images/rectangle.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

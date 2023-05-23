@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fight_buddy/handlers/user_handler.dart';
+import 'package:fight_buddy/handlers/picture_handler.dart';
 import 'package:fight_buddy/screens/registration/aboutyou.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,24 +30,6 @@ class ProfilePicture extends StatefulWidget {
 
 class ProfilePictureState extends State<ProfilePicture> {
   File? image;
-
-  Future pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-
-      final imageTemporary = File(image.path);
-
-      //Spara bilden permanent (funkar inte av någon anledning, ska kika på det)
-      // final imagePermanent = await saveImagePermanently(image.path);
-
-      setState(() {
-        this.image = imageTemporary;
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
 
   /* Future<File> saveImagePermanently(String imagePath) async {
     final directory = await getApplicationDocumentsDirectory();
@@ -135,8 +118,11 @@ class ProfilePictureState extends State<ProfilePicture> {
               'Välj bild',
               style: TextStyle(color: Colors.black54, fontSize: 15),
             ),
-            onPressed: () {
-              pickImage(ImageSource.gallery);
+            onPressed: () async {
+              File pickedImage = await pickImageFromGallery();
+              setState(() {
+                image = pickedImage;
+              });
             },
           ),
           const SizedBox(
@@ -152,8 +138,11 @@ class ProfilePictureState extends State<ProfilePicture> {
             ),
             child: const Text('Ta en selfie',
                 style: TextStyle(color: Colors.black54, fontSize: 15)),
-            onPressed: () {
-              pickImage(ImageSource.camera);
+            onPressed: () async {
+              File pickedImage = await pickImageFromCamera();
+              setState(() {
+                image = pickedImage;
+              });
             },
           ),
           const SizedBox(
