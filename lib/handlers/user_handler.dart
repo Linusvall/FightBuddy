@@ -243,4 +243,57 @@ class UserHandler {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
   }
+
+  Future updateCreatedEvents(String eventId) async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({
+      'createdEvents': FieldValue.arrayUnion([eventId]),
+    });
+  }
+
+  Future deleteCreatedEvents(String eventId) async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({
+      'createdEvents': FieldValue.arrayRemove([eventId]),
+    });
+  }
+
+  Future updateAttendingEvents(String eventId) async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({
+      'attendingEvents': FieldValue.arrayUnion([eventId]),
+    });
+  }
+
+  Future deleteAttendingEvents(String eventId) async {
+    var uid = user?.uid;
+
+    await userCollection.doc(uid).update({
+      'attendingEvents': FieldValue.arrayRemove([eventId]),
+    });
+  }
+
+  getAttendingEvents() {
+    var uid = user?.uid;
+    final userDocument =
+        FirebaseFirestore.instance.collection('users').doc(uid);
+
+    userDocument.get().then((snapshot) {
+      if (snapshot.exists) {
+        // Retrieve the value of a specific field using square bracket notation
+        final eventId = snapshot.data()?['attendingEvents'];
+        // Use the fieldValue as needed
+        return (eventId);
+      } else {
+        // Document does not exist
+        print('Document does not exist');
+      }
+    }).catchError((error) {
+      // Error occurred while fetching the document
+      print('Error: $error');
+    });
+  }
 }

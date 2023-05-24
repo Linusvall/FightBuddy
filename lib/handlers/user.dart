@@ -20,6 +20,8 @@ class User {
   final String profilePicture;
   final List<String> newMartialArts;
   final List<String> club;
+  final List<String> createdEvents;
+  final List<String> attendingEvents;
 
   User({
     required this.uid,
@@ -41,6 +43,8 @@ class User {
     required this.profilePicture,
     required this.newMartialArts,
     required this.club,
+    required this.createdEvents,
+    required this.attendingEvents,
   });
 
   factory User.fromMap(Map<String, dynamic> data) {
@@ -64,6 +68,8 @@ class User {
       profilePicture: data['profilePicture'],
       newMartialArts: <String>[...data['newMartialArts']],
       club: <String>[...data['club']],
+      createdEvents: <String>[...data['createdEvents']],
+      attendingEvents: <String>[...data['attendingEvents']],
     );
   }
 
@@ -87,6 +93,8 @@ class User {
       'profilePicture': profilePicture,
       'newMartialArts': newMartialArts,
       'club': club,
+      'createdEvents': createdEvents,
+      'attendingEvents': attendingEvents,
     };
   }
 }

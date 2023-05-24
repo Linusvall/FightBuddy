@@ -1,38 +1,64 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
-import '../assets/theme/colors.dart';
+import 'package:fight_buddy/handlers/user_handler.dart';
+import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
-import 'package:fight_buddy/screens/create_event.dart';
+import 'package:fight_buddy/screens/events/create_event.dart';
 
-class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
+String uid = UserHandler().getUserId();
+
+class MyEventsPage extends StatefulWidget {
+  const MyEventsPage({Key? key}) : super(key: key);
   @override
-  _EventPageState createState() => _EventPageState();
+  _MyEventsPageState createState() => _MyEventsPageState();
 }
 
-class _EventPageState extends State<EventPage> {
-  List<Event> _events = [];
+class _MyEventsPageState extends State<MyEventsPage> {
+  List<Event> _createdEvents = [];
+  List<Event> _attendingEvents = [];
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _loadEvents();
+    _loadCreatedEvents();
+    _loadAttendingEvents();
   }
 
-  void _loadEvents() {
+  void _loadCreatedEvents() {
     setState(() {
       _isLoading = true;
     });
 
     FirebaseFirestore.instance
         .collection('events')
+        .where('organizer', isEqualTo: uid)
         .limit(10)
         .get()
         .then((QuerySnapshot snapshot) {
       setState(() {
-        _events = _convertSnapshotToList(snapshot);
+        _createdEvents = _convertSnapshotToList(snapshot);
+        _isLoading = false;
+      });
+    });
+  }
+
+  //Inneffektiv temporär lösning, istället för att matcha direkt med dokument med rätt eventId söks varje events "attendees" igenom
+  void _loadAttendingEvents() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    FirebaseFirestore.instance
+        .collection('events')
+        .where('attendees', arrayContains: uid)
+        .limit(10)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      setState(() {
+        _attendingEvents = _convertSnapshotToList(snapshot);
         _isLoading = false;
       });
     });
@@ -47,37 +73,93 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: fightbuddyLightgreen,
       appBar: AppBar(
-          backgroundColor: fightbuddyLightgreen,
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.add_circle_outline, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CreateEventPage()));
+          iconTheme: const IconThemeData(
+            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          title: const Text(
+            "Dina event",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          actions: const <Widget>[
+            //Inget här tror jag kan tas bort
+          ]),
+      body: Column(
+        children: [
+          Container(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                        style: GoogleFonts.lato(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        'Värd:')
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _createdEvents.length + 1,
+              itemBuilder: (context, index) {
+                if (index < _createdEvents.length) {
+                  // Visa eventet
+                  final event = _createdEvents[index];
+                  return _eventCard(event, context);
+                } else if (_isLoading) {
+                  // Visa cirkel om det laddar
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  // Nått slutet av listan
+                  return Container();
+                }
               },
             ),
-          ]),
-      body: ListView.builder(
-        itemCount: _events.length + 1,
-        itemBuilder: (context, index) {
-          if (index < _events.length) {
-            // Visa eventet
-            final event = _events[index];
-            return _eventCard(event, context);
-          } else if (_isLoading) {
-            // Visa cirkel om det laddar
-            return Center(child: CircularProgressIndicator());
-          } else {
-            // Nått slutet av listan
-            return Container();
-          }
-        },
+          ),
+          Container(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                        style: GoogleFonts.lato(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        'Övriga:')
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _attendingEvents.length + 1,
+              itemBuilder: (context, index) {
+                if (index < _attendingEvents.length) {
+                  // Visa eventet
+                  final event = _attendingEvents[index];
+                  return _eventCard(event, context);
+                } else if (_isLoading) {
+                  // Visa cirkel om det laddar
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  // Nått slutet av listan
+                  return Container();
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
