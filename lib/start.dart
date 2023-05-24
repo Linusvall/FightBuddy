@@ -6,7 +6,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'handlers/firebase_options.dart';
 import 'screens/login.dart';
-import 'handlers/user_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

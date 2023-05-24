@@ -14,6 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  bool isFirstButtonPressed = true;
+  bool isSecondButtonPressed = false;
+
+  List<fightbuddy.User> matches = [];
+  List<fightbuddy.User> savedUsers = [];
+
   @override
   void initState() {
     super.initState();
@@ -31,39 +37,92 @@ class HomePageState extends State<HomePage> {
                 ((snapshot.data) as DocumentSnapshot).data()
                     as Map<String, dynamic>);
             return Scaffold(
-              body: Center(
-                child: FutureBuilder(
-                    future: _update(thisUser.matches),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<fightbuddy.User> matches =
-                            snapshot.data as List<fightbuddy.User>;
-                        return Center(
-                          child: ListView.builder(
-                              itemCount: matches.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return SizedBox(
-                                    height: 150,
-                                    child: _userCard(matches[index], context));
-                              }),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text(
-                          'Delivery error: ${snapshot.error.toString()}',
-                          style: const TextStyle(color: Colors.black),
-                        );
-                      } else {
-                        return Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            color: const Color.fromRGBO(3, 137, 129, 50),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [Text("Updating...")],
-                            ));
-                      }
-                    }),
-              ),
+              appBar: AppBar(
+                  backgroundColor: fightbuddyLightgreen,
+                  centerTitle: true,
+                  title: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                isFirstButtonPressed = true;
+                                isSecondButtonPressed = false;
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              backgroundColor: isFirstButtonPressed
+                                  ? fightbuddySuperLightGreen
+                                  : Colors.white,
+                              fixedSize: Size(135, 30),
+                            ),
+                            child: const Text("Matchningar",
+                                style: TextStyle(color: Colors.black)),
+                          )),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isFirstButtonPressed = false;
+                            isSecondButtonPressed = true;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: isSecondButtonPressed
+                              ? fightbuddySuperLightGreen
+                              : Colors.white,
+                          fixedSize: Size(135, 30),
+                        ),
+                        child: const Text(
+                          "Sparade",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      )
+                    ],
+                  )),
+              body: FutureBuilder(
+                  future: _update(thisUser.matches, thisUser.savedUsers),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<List<fightbuddy.User>> data =
+                          snapshot.data as List<List<fightbuddy.User>>;
+                      matches = data[0];
+                      savedUsers = data[1];
+                      List<fightbuddy.User> displayedUsers =
+                          isFirstButtonPressed ? matches : savedUsers;
+                      return Center(
+                        child: ListView.builder(
+                            itemCount: displayedUsers.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return SizedBox(
+                                  height: 150,
+                                  child: _userCard(displayedUsers[index],
+                                      isSecondButtonPressed, context));
+                            }),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text(
+                        'Delivery error: ${snapshot.error.toString()}',
+                        style: const TextStyle(color: Colors.black),
+                      );
+                    } else {
+                      return Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: const Color.fromRGBO(3, 137, 129, 50),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [Text("Updating...")],
+                          ));
+                    }
+                  }),
               backgroundColor: fightbuddyLightgreen,
             );
           } else {
@@ -76,7 +135,7 @@ class HomePageState extends State<HomePage> {
         });
   }
 
-  Widget _userCard(fightbuddy.User user, BuildContext context) {
+  Widget _userCard(fightbuddy.User user, bool isSaved, BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -104,10 +163,13 @@ class HomePageState extends State<HomePage> {
                     Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
-                        icon: const Icon(Icons.message_rounded),
+                        icon: isSaved
+                            ? const Icon(Icons.bookmark)
+                            : const Icon(Icons.bookmark_outline),
                         onPressed: () {
-                          //Implementera att den gå till chatten
-                          print("pressed icon message");
+                          isSaved
+                              ? UserHandler().removeUserFromSaved(user.uid)
+                              : UserHandler().addUserToSaved(user.uid);
                         },
                       ),
                     ),
@@ -159,10 +221,18 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-Future<List<fightbuddy.User>> _update(List<String> uidList) async {
-  List<fightbuddy.User> userList = [];
-  for (String uid in uidList) {
-    userList.add(await UserHandler().getUser(uid));
+Future<List<List<fightbuddy.User>>> _update(
+    List<String> matchesList, List<String> savedList) async {
+  List<fightbuddy.User> matches = [];
+  List<fightbuddy.User> savedUsers = [];
+
+  for (String uid in matchesList) {
+    matches.add(await UserHandler().getUser(uid));
   }
-  return userList;
+
+  for (String uid in savedList) {
+    savedUsers.add(await UserHandler().getUser(uid));
+  }
+
+  return [matches, savedUsers];
 }

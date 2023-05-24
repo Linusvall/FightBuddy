@@ -18,26 +18,15 @@ class UserHandler {
     await userCollection.doc(uid).update({'uid': uid});
   }
 
-  Future uploadImage(File file) async {
+  Future uploadImage(File file, String path) async {
     var uid = user?.uid;
     final Reference storageRef =
-        FirebaseStorage.instance.ref().child('profilePictures${file.path}');
+        FirebaseStorage.instance.ref().child(path + file.path);
     final TaskSnapshot snapshot = await storageRef.putFile(file);
     final String downloadUrl = await snapshot.ref.getDownloadURL();
 
-    await userCollection.doc(uid).update({'profilePicture': downloadUrl});
+    await userCollection.doc(uid).update({path: downloadUrl});
   }
-
-/*
-  Future<List<String>> getAllUserIds() async {
-    List<String> userIds = [];
-    QuerySnapshot querySnapshot = await userCollection.get();
-    for (var document in querySnapshot.docs) {
-      userIds.add(document.id);
-    }
-    return userIds;
-  }
-  */
 
   getUserId() {
     var uid = user?.uid;
@@ -87,6 +76,27 @@ class UserHandler {
     return firestore.collection('users').doc(userId).snapshots();
   }
 
+  Future addUserToSaved(String saved) async {
+    var uid = user?.uid;
+    await userCollection.doc(uid).update({
+      'savedUsers': FieldValue.arrayUnion([saved])
+    });
+
+    await userCollection.doc(uid).update({
+      'matches': FieldValue.arrayRemove([saved])
+    });
+  }
+
+  Future removeUserFromSaved(String saved) async {
+    var uid = user?.uid;
+    await userCollection.doc(uid).update({
+      'savedUsers': FieldValue.arrayRemove([saved])
+    });
+    await userCollection.doc(uid).update({
+      'matches': FieldValue.arrayUnion([saved])
+    });
+  }
+
   Future deleteUser() async {
     var uid = user!.uid;
     fightbuddy.User fightbuddyUser = await getUser(uid);
@@ -103,9 +113,9 @@ class UserHandler {
       });
     }
 
-    //userCollection.doc(uid).delete();
+    userCollection.doc(uid).delete();
 
-    //user?.delete();
+    user?.delete();
   }
 
   Future putUserInMartialArtsMap(List<String> martialArts) async {

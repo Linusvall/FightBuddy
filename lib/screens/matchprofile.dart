@@ -29,70 +29,63 @@ class MatchProfilePageState extends State<MatchProfilePage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(user.profilePicture),
+                  image: NetworkImage(user.coverPicture),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
         ),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(100),
-                  topRight: Radius.circular(100))),
-          child: Column(
-            children: [
-              Container(
-                child: _userCard(user, context),
-              ),
-              Row(
+        body: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(100),
+                      topRight: Radius.circular(100))),
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: 150,
+                  Container(
+                    child: _userCard(user, context),
                   ),
-                  Icon(Icons.abc),
-                  Icon(Icons.add_chart_sharp)
+                  Container(
+                    width: 350,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 221, 223, 223),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Center(
+                          child: Text(user.information,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                              ))),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _box(user.martialArts, " Kampsportsstilar", 350, 100),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      _box(user.newMartialArts, " Vill prova", 180, 81),
+                      _box(user.club, " Medlem i", 180, 82),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
                 ],
               ),
-              Container(
-                width: 350,
-                height: 90,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 221, 223, 223),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Center(
-                      child: Text(user.information,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                          ))),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              _box(user.martialArts, " Kampsportsstilar", 350, 100),
-              const SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  _box(user.newMartialArts, " Vill prova", 180, 81),
-                  _box(user.club, " Medlem i", 180, 82),
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-            ],
-          ),
-        ));
+            )));
   }
 }
 

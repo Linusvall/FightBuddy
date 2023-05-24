@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/handlers/picture_handler.dart';
 import 'package:fight_buddy/screens/registration/aboutyou.dart';
-import 'package:fight_buddy/screens/registration/coverpicture.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,28 +14,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: ProfilePicture(),
+      home: CoverPicture(),
     );
   }
 }
 
-class ProfilePicture extends StatefulWidget {
-  const ProfilePicture({super.key});
+class CoverPicture extends StatefulWidget {
+  const CoverPicture({super.key});
 
   @override
-  ProfilePictureState createState() => ProfilePictureState();
+  CoverPictureState createState() => CoverPictureState();
 }
 
-class ProfilePictureState extends State<ProfilePicture> {
+class CoverPictureState extends State<CoverPicture> {
   File? image;
-
-  /* Future<File> saveImagePermanently(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${directory.path}/$name');
-
-    return File(imagePath).copy(imagePath);
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +74,7 @@ class ProfilePictureState extends State<ProfilePicture> {
           const SizedBox(
             height: 15,
           ),
-          const Text('Lägg till en profilbild',
+          const Text('Lägg till en omslagsbild',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -98,9 +89,9 @@ class ProfilePictureState extends State<ProfilePicture> {
                   height: 160,
                 )
               : Image.asset(
-                  'lib/assets/images/face.png',
+                  'lib/assets/images/image_icon.png',
                   fit: BoxFit.contain,
-                  height: 150,
+                  height: 200,
                 ),
           const SizedBox(
             height: 50,
@@ -135,7 +126,7 @@ class ProfilePictureState extends State<ProfilePicture> {
               backgroundColor: Colors.white,
               fixedSize: const Size(250, 50),
             ),
-            child: const Text('Ta en selfie',
+            child: const Text('Ta en bild',
                 style: TextStyle(color: Colors.black54, fontSize: 15)),
             onPressed: () async {
               File pickedImage = await pickImageFromCamera();
@@ -159,11 +150,11 @@ class ProfilePictureState extends State<ProfilePicture> {
                         fixedSize: const Size(250, 50),
                       ),
                       onPressed: () {
-                        UserHandler().uploadImage(image!, "profilePicture");
+                        UserHandler().uploadImage(image!, "coverPicture");
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CoverPicture()));
+                                builder: (context) => const AboutYouPage()));
                       },
                       child: const Text('Gå vidare',
                           style: TextStyle(fontSize: 20))))),

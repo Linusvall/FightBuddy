@@ -30,6 +30,8 @@ class AuthService {
         'matches': [],
         'yearsOfPractice': [],
         'uid': '',
+        'savedUsers': [],
+        'coverPicture': '',
       });
     } catch (e) {}
   }
