@@ -1,4 +1,5 @@
 import '../../handlers/event_handler.dart';
+import 'package:fight_buddy/screens/events/event_main_page.dart';
 import 'package:fight_buddy/handlers/picture_handler.dart';
 import '../../handlers/user_handler.dart';
 import 'package:flutter/material.dart';
@@ -754,6 +755,8 @@ class CreateEventPageState extends State<CreateEventPage> {
                     if (formKey.currentState!.validate()) {
                       debugPrint('validated');
                       await eventHandler.createEventDocument(eventData);
+                      if (!mounted) return;
+                      Navigator.pop(context);
                     } else {
                       debugPrint('not validated');
                     }
