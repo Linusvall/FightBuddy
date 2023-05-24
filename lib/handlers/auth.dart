@@ -32,6 +32,8 @@ class AuthService {
         'uid': '',
         'savedUsers': [],
         'coverPicture': '',
+        'createdEvents': [],
+        'attendingEvents': [],
       });
     } catch (e) {}
   }

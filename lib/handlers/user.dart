@@ -20,6 +20,8 @@ class User {
   final String profilePicture;
   final List<String> newMartialArts;
   final List<String> club;
+  final List<String> createdEvents;
+  final List<String> attendingEvents;
   final List<String> savedUsers;
   final String coverPicture;
 
@@ -43,6 +45,8 @@ class User {
     required this.profilePicture,
     required this.newMartialArts,
     required this.club,
+    required this.createdEvents,
+    required this.attendingEvents,
     required this.savedUsers,
     required this.coverPicture,
   });
@@ -68,6 +72,8 @@ class User {
       profilePicture: data['profilePicture'],
       newMartialArts: <String>[...data['newMartialArts']],
       club: <String>[...data['club']],
+      createdEvents: <String>[...data['createdEvents']],
+      attendingEvents: <String>[...data['attendingEvents']],
       savedUsers: <String>[...data['savedUsers']],
       coverPicture: data['coverPicture'],
     );
@@ -93,6 +99,8 @@ class User {
       'profilePicture': profilePicture,
       'newMartialArts': newMartialArts,
       'club': club,
+      'createdEvents': createdEvents,
+      'attendingEvents': attendingEvents,
       'savedUsers': savedUsers,
       'coverPicture': coverPicture,
     };

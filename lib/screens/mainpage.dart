@@ -1,5 +1,5 @@
-import 'package:fight_buddy/screens/create_event.dart';
-import 'package:fight_buddy/screens/eventpage.dart';
+import 'package:fight_buddy/screens/events/create_event.dart';
+import 'package:fight_buddy/screens/events/event_main_page.dart';
 import 'package:fight_buddy/screens/settings/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    EventPage(),
+    EventMainPage(),
     ChatPage(),
     SettingsPage(),
     ProfilePage(),
