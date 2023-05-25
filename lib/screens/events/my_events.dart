@@ -7,8 +7,6 @@ import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
 
-String uid = UserHandler().getUserId();
-
 class MyEventsPage extends StatefulWidget {
   const MyEventsPage({Key? key}) : super(key: key);
   @override
@@ -16,6 +14,7 @@ class MyEventsPage extends StatefulWidget {
 }
 
 class _MyEventsPageState extends State<MyEventsPage> {
+  String uid = UserHandler().getUserId();
   List<Event> _createdEvents = [];
   List<Event> _attendingEvents = [];
   bool _isLoading = false;

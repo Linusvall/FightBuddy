@@ -14,13 +14,14 @@ class EventHandler {
     UserHandler().updateCreatedEvents(eventId);
     UserHandler().updateAttendingEvents(eventId);
     File? image = eventData['eventImage'];
-    eventData['eventImage'] = '';
+    eventData['eventImage'] =
+        'https://firebasestorage.googleapis.com/v0/b/fight-buddy.appspot.com/o/eventPictures%2FdefaultImages%2Frectangle.png?alt=media&token=27c13225-4862-47b2-9cd4-1e2f6937a188';
     newDocRef.set(eventData);
     if (image != null) {
       await uploadImage(image, eventId);
     }
     UserHandler().updateCreatedEvents(eventId);
-    updateAttendees(eventId, UserHandler().getUserId());
+    addAttendee(eventId, UserHandler().getUserId());
   }
 
   //TODO: Metoder för att uppdatera event, som i user_handler + lägga till användare som skapat eventet?
@@ -32,8 +33,9 @@ class EventHandler {
   Future uploadImage(File file, String eventId) async {
     //Hämta eventId här, inte uid
 
-    final Reference storageRef =
-        FirebaseStorage.instance.ref().child('eventPictures/$eventId');
+    final Reference storageRef = FirebaseStorage.instance
+        .ref()
+        .child('eventPictures/events/$eventId/$eventId');
     final TaskSnapshot snapshot = await storageRef.putFile(file);
     final String downloadUrl = await snapshot.ref.getDownloadURL();
 
@@ -46,9 +48,15 @@ class EventHandler {
     return firestore.collection('events').doc(eventId).snapshots();
   }
 
-  Future updateAttendees(String eventId, String uid) async {
+  Future addAttendee(String eventId, String uid) async {
     await eventsCollection.doc(eventId).update({
       'attendees': FieldValue.arrayUnion([uid]),
+    });
+  }
+
+  Future removeAttendee(String eventId, String uid) async {
+    await eventsCollection.doc(eventId).update({
+      'attendees': FieldValue.arrayRemove([uid]),
     });
   }
 }

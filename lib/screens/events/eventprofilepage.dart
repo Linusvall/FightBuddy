@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../assets/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/handlers/event_handler.dart';
 import '../../assets/theme/colors.dart';
 import '../../handlers/event.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
@@ -22,6 +24,8 @@ class EventProfilePageState extends State<EventProfilePage> {
   @override
   Widget build(BuildContext context) {
     Event event = widget.event;
+    String eventId = event.eventId;
+    bool isFull = event.attendees.length < int.parse(event.capacity);
     return Scaffold(
         backgroundColor: fightbuddyLightgreen,
         appBar: PreferredSize(
@@ -88,12 +92,18 @@ class EventProfilePageState extends State<EventProfilePage> {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color.fromARGB(255, 122, 122, 122))),
+                                const Color.fromRGBO(3, 137, 129, 50))),
                         onPressed: () {
-                          print("pressed");
+                          //Lägg till användare i eventet, ändra knappen så att det står "Du är anmäld till detta event"
+
+                          if (!isFull) {
+                            String userId = UserHandler().getUserId();
+                            EventHandler().addAttendee(eventId, userId);
+                          } else {
+                            print('Du kan inte anmäla dig');
+                          }
                         },
-                        child:
-                            const Text("DU KAN INTE ANMÄLA DIG TILL EVENTET"))),
+                        child: Text(_getButtonText(event)))),
               ],
             ),
           ),
@@ -174,4 +184,14 @@ Widget _eventCard(Event event, BuildContext context) {
           ),
         ],
       ));
+}
+
+String _getButtonText(Event event) {
+  if (event.attendees.length >= int.parse(event.capacity)) {
+    return 'Eventet är fullt';
+  } else if (event.attendees.contains(UserHandler().getUserId())) {
+    return 'Du är anmäld till detta event';
+  } else {
+    return 'Anmäl dig till eventet';
+  }
 }
