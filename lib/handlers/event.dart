@@ -7,7 +7,7 @@ class Event {
   final String date;
   final String eventName;
   final String level;
-  final String place;
+  final Map<String, dynamic> place;
   final String timeFrom;
   final String timeTo;
   final String weightClass;
@@ -43,7 +43,7 @@ class Event {
       date: data?['date'] ?? '',
       eventName: data?['eventName'] ?? '',
       level: data?['level'] ?? '',
-      place: data?['place'] ?? '',
+      place: data?['place'] ?? {},
       timeFrom: data?['timeFrom'] ?? '',
       timeTo: data?['timeTo'] ?? '',
       weightClass: data?['weightClass'] ?? '',

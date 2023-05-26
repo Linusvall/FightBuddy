@@ -67,7 +67,7 @@ class EventProfilePageState extends State<EventProfilePage> {
                     "${event.timeFrom} - ${event.timeTo}",
                     context),
                 _listTile(const Icon(Icons.place, color: fightbuddyLightgreen),
-                    event.place, "", context),
+                    event.place['location'], "", context),
                 _listTile(
                     const Icon(Icons.signal_cellular_alt,
                         color: fightbuddyLightgreen),

@@ -9,6 +9,8 @@ import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'dart:io';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -47,6 +49,10 @@ class CreateEventPageState extends State<CreateEventPage> {
   final _timeFromInput = TextEditingController();
   final _timeToInput = TextEditingController();
   final _placeInput = TextEditingController();
+  String lat = '';
+  String lng = '';
+
+  String location = '';
   final _aboutInput = TextEditingController();
 
   //TODO: Vilka kampsporter ska finnas?
@@ -374,7 +380,9 @@ class CreateEventPageState extends State<CreateEventPage> {
                   ),
                 ),
               ),
-              Padding(
+              placesAutoCompleteTextField(),
+
+              /* Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 //On click i denna för att skriva in adress
                 child: TextFormField(
@@ -405,7 +413,8 @@ class CreateEventPageState extends State<CreateEventPage> {
                       }
                       return null;
                     }),
-              ),
+              ), */
+
               const SizedBox(
                 height: 40,
               ),
@@ -740,7 +749,11 @@ class CreateEventPageState extends State<CreateEventPage> {
                         'date': _dateInput.text,
                         'timeFrom': _timeFromInput.text,
                         'timeTo': _timeToInput.text,
-                        'place': _placeInput.text,
+                        'place': {
+                          'location': location,
+                          'lat': lat,
+                          'lng': lng,
+                        },
                         'category': selectedMartialArts,
                         'capacity': selectedCapacity,
                         'level': selectedLevel,
@@ -769,5 +782,32 @@ class CreateEventPageState extends State<CreateEventPage> {
             ]),
           ),
         ));
+  }
+
+  placesAutoCompleteTextField() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: GooglePlaceAutoCompleteTextField(
+          textEditingController: _placeInput,
+          googleAPIKey: 'AIzaSyBwvbdFgwl502-cIPhBQfa7Hpujp4jK6Co',
+          inputDecoration: const InputDecoration(
+              hintText: "Sök plats",
+              suffixIcon: Icon(Icons.place, color: Colors.blue)),
+          debounceTime: 800,
+          countries: ["swe"],
+          isLatLngRequired: true,
+          getPlaceDetailWithLatLng: (Prediction prediction) {
+            lat = prediction.lat.toString();
+            lng = prediction.lng.toString();
+          },
+          itmClick: (Prediction prediction) {
+            _placeInput.text = prediction.description as String;
+            location = _placeInput.text;
+            final int descriptionLength = prediction.description?.length ?? 0;
+
+            _placeInput.selection = TextSelection.fromPosition(
+                TextPosition(offset: descriptionLength));
+          }),
+    );
   }
 }

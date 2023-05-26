@@ -1,6 +1,8 @@
 import 'package:fight_buddy/handlers/user_handler.dart';
 import 'club.dart';
 import 'package:flutter/material.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +26,7 @@ class TrainingPage extends StatefulWidget {
 }
 
 class TrainingPageState extends State<TrainingPage> {
-  var placeController = TextEditingController();
+  var _placeInput = TextEditingController();
   UserHandler database = UserHandler();
   @override
   Widget build(BuildContext context) {
@@ -80,8 +82,10 @@ class TrainingPageState extends State<TrainingPage> {
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
-                      child: TextField(
-                        controller: placeController,
+                      child: placesAutoCompleteTextField(),
+
+                      /*TextField(
+                        controller: _placeInput,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           hintText: 'Skriv in en eller flera stadsdelar',
@@ -93,7 +97,7 @@ class TrainingPageState extends State<TrainingPage> {
                           isDense: true,
                         ),
                         style: const TextStyle(fontSize: 16),
-                      ),
+                      ),*/
                     ),
                   ],
                 ),
@@ -116,7 +120,7 @@ class TrainingPageState extends State<TrainingPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePlace(placeController.text);
+                      database.updatePlace(_placeInput.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -127,6 +131,33 @@ class TrainingPageState extends State<TrainingPage> {
           ),
         ],
       ),
+    );
+  }
+
+  placesAutoCompleteTextField() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: GooglePlaceAutoCompleteTextField(
+          textEditingController: _placeInput,
+          googleAPIKey: 'AIzaSyBwvbdFgwl502-cIPhBQfa7Hpujp4jK6Co',
+          inputDecoration: const InputDecoration(
+              hintText: "Sök plats",
+              suffixIcon: Icon(Icons.place, color: Colors.blue)),
+          debounceTime: 800,
+          countries: ["swe"],
+          isLatLngRequired: true,
+          getPlaceDetailWithLatLng: (Prediction prediction) {
+            //  lat = prediction.lat.toString();
+            //  lng = prediction.lng.toString();
+          },
+          itmClick: (Prediction prediction) {
+            _placeInput.text = prediction.description as String;
+
+            final int descriptionLength = prediction.description?.length ?? 0;
+
+            _placeInput.selection = TextSelection.fromPosition(
+                TextPosition(offset: descriptionLength));
+          }),
     );
   }
 }

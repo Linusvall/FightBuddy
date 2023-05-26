@@ -143,7 +143,7 @@ class EventPageState extends State<EventPage> {
                     Row(
                       children: [
                         const Icon(Icons.place),
-                        Text(event.place),
+                        Text(event.place['location']),
                       ],
                     ),
                   ],

@@ -161,7 +161,7 @@ Widget _eventCard(Event event, BuildContext context) {
                   Row(
                     children: [
                       const Icon(Icons.place),
-                      Text(event.place),
+                      Text(event.place['location']),
                     ],
                   ),
                 ],

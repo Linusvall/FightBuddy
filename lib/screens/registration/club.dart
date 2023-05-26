@@ -1,6 +1,8 @@
 import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/martialarts.dart';
 import 'package:flutter/material.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -87,7 +89,9 @@ class MembershipPageState extends State<MembershipPage> {
                   children: [
                     const SizedBox(width: 16),
                     Expanded(
-                      child: TextField(
+                      child: placesAutoCompleteTextField(),
+
+                      /*TextField(
                         controller: clubController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
@@ -101,7 +105,7 @@ class MembershipPageState extends State<MembershipPage> {
                           isDense: true,
                         ),
                         style: const TextStyle(fontSize: 16),
-                      ),
+                      ), */
                     ),
                   ],
                 ),
@@ -159,6 +163,33 @@ class MembershipPageState extends State<MembershipPage> {
           ),
         ],
       ),
+    );
+  }
+
+  placesAutoCompleteTextField() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: GooglePlaceAutoCompleteTextField(
+          textEditingController: clubController,
+          googleAPIKey: 'AIzaSyBwvbdFgwl502-cIPhBQfa7Hpujp4jK6Co',
+          inputDecoration: const InputDecoration(
+              hintText: "Sök klubb",
+              suffixIcon: Icon(Icons.house, color: Colors.blue)),
+          debounceTime: 800,
+          countries: ["swe"],
+          isLatLngRequired: true,
+          getPlaceDetailWithLatLng: (Prediction prediction) {
+            //  lat = prediction.lat.toString();
+            //  lng = prediction.lng.toString();
+          },
+          itmClick: (Prediction prediction) {
+            clubController.text = prediction.description as String;
+
+            final int descriptionLength = prediction.description?.length ?? 0;
+
+            clubController.selection = TextSelection.fromPosition(
+                TextPosition(offset: descriptionLength));
+          }),
     );
   }
 }
