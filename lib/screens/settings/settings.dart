@@ -1,3 +1,4 @@
+import 'package:fight_buddy/assets/theme/colors.dart';
 import 'package:fight_buddy/screens/settings/changeemail.dart';
 import 'package:fight_buddy/screens/settings/changepassword.dart';
 import 'package:fight_buddy/screens/settings/changeprofile.dart';
@@ -139,7 +140,11 @@ class _SettingsPageState extends State<SettingsPage> {
                                               const StartPage()),
                                       (Route<dynamic> route) => false);
                                 },
-                                child: Text('Ja'),
+                                child: const Text(
+                                  'Ja, radera mitt konto',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 184, 14, 1)),
+                                ),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -147,7 +152,9 @@ class _SettingsPageState extends State<SettingsPage> {
                                   Navigator.of(context)
                                       .pop(false); // Return false to the caller
                                 },
-                                child: const Text('Nej'),
+                                child: const Text('Avbryt',
+                                    style:
+                                        TextStyle(color: fightbuddyLightgreen)),
                               ),
                             ],
                           );

@@ -2,30 +2,16 @@ import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/preflevel.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: PrefWeightPage(),
-    );
-  }
-}
-
 class PrefWeightPage extends StatefulWidget {
-  const PrefWeightPage({Key? key}) : super(key: key);
+  final String sourceScreen;
+  const PrefWeightPage({Key? key, required this.sourceScreen})
+      : super(key: key);
 
   @override
   PrefWeightPageState createState() => PrefWeightPageState();
 }
 
 class PrefWeightPageState extends State<PrefWeightPage> {
-  UserHandler database = UserHandler();
   bool _value1 = false;
   bool _value2 = false;
   bool _value3 = false;
@@ -50,10 +36,16 @@ class PrefWeightPageState extends State<PrefWeightPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Hoppa över och gå vidare
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PrefLevelPage()));
+                  if (widget.sourceScreen == 'updateProfile') {
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PrefLevelPage(
+                                  sourceScreen: 'registration',
+                                )));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -163,11 +155,13 @@ class PrefWeightPageState extends State<PrefWeightPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updatePrefWeight(weight);
+                      UserHandler().updatePrefWeight(weight);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PrefLevelPage()));
+                              builder: (context) => const PrefLevelPage(
+                                    sourceScreen: 'registration',
+                                  )));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

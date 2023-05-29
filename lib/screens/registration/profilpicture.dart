@@ -30,14 +30,6 @@ class ProfilePicture extends StatefulWidget {
 class ProfilePictureState extends State<ProfilePicture> {
   File? image;
 
-  /* Future<File> saveImagePermanently(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${directory.path}/$name');
-
-    return File(imagePath).copy(imagePath);
-  } */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

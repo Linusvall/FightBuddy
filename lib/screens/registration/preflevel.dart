@@ -3,23 +3,9 @@ import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/mainpage.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: PrefLevelPage(),
-    );
-  }
-}
-
 class PrefLevelPage extends StatefulWidget {
-  const PrefLevelPage({Key? key}) : super(key: key);
+  final String sourceScreen;
+  const PrefLevelPage({Key? key, required this.sourceScreen}) : super(key: key);
 
   @override
   PrefLevelPageState createState() => PrefLevelPageState();
@@ -130,10 +116,15 @@ class PrefLevelPageState extends State<PrefLevelPage> {
                     onPressed: () {
                       UserHandler().updatePrefLevel(prefLevel);
                       UserHandler().updateMatches();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const MainPage()),
-                          (Route<dynamic> route) => false);
+
+                      if (widget.sourceScreen == "updateProfile") {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const MainPage()),
+                            (Route<dynamic> route) => false);
+                      }
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

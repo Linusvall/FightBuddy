@@ -2,23 +2,10 @@ import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/prefweight.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: PrefGenderPage(),
-    );
-  }
-}
-
 class PrefGenderPage extends StatefulWidget {
-  const PrefGenderPage({Key? key}) : super(key: key);
+  final String sourceScreen;
+  const PrefGenderPage({Key? key, required this.sourceScreen})
+      : super(key: key);
 
   @override
   PrefGenderPageState createState() => PrefGenderPageState();
@@ -69,10 +56,16 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                 onPressed: () {
                   //Hoppa över och gå vidare
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PrefWeightPage()));
+                  if (widget.sourceScreen == "updateProfile") {
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PrefWeightPage(
+                                  sourceScreen: 'registration',
+                                )));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -180,10 +173,17 @@ class PrefGenderPageState extends State<PrefGenderPage> {
                     onPressed: () {
                       updateGenderList();
                       database.updatePrefGender(prefGender);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PrefWeightPage()));
+
+                      if (widget.sourceScreen == "updateProfile") {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PrefWeightPage(
+                                      sourceScreen: 'registration',
+                                    )));
+                      }
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

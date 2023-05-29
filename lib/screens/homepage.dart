@@ -43,6 +43,13 @@ class HomePageState extends State<HomePage> {
                   title: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      GestureDetector(
+                        onTap: () {
+                          UserHandler().updateMatches();
+                        },
+                        child: const Icon(Icons.refresh),
+                      ),
+                      const SizedBox(width: 40),
                       Padding(
                           padding: EdgeInsets.all(5),
                           child: ElevatedButton(
@@ -84,7 +91,7 @@ class HomePageState extends State<HomePage> {
                           "Sparade",
                           style: TextStyle(color: Colors.black),
                         ),
-                      )
+                      ),
                     ],
                   )),
               body: FutureBuilder(

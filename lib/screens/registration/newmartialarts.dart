@@ -69,7 +69,9 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const PrefGenderPage()));
+                          builder: (context) => const PrefGenderPage(
+                                sourceScreen: 'Registration',
+                              )));
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -141,7 +143,9 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PrefGenderPage()));
+                              builder: (context) => const PrefGenderPage(
+                                    sourceScreen: 'Registration',
+                                  )));
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

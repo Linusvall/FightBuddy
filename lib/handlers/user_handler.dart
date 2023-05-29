@@ -28,6 +28,12 @@ class UserHandler {
     await userCollection.doc(uid).update({path: downloadUrl});
   }
 
+  Future deleteImage(String url) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.refFromURL(url);
+    ref.delete().then((_) {}).catchError((error) {});
+  }
+
   getUserId() {
     var uid = user?.uid;
     return uid;
@@ -99,23 +105,24 @@ class UserHandler {
 
   Future deleteUser() async {
     var uid = user!.uid;
-    fightbuddy.User fightbuddyUser = await getUser(uid);
-    List<String> totalMartialArts = [];
+    fightbuddy.User fightbuddyUser = await getUser(uid!);
+    deleteUserFromMartialArtsCollection(uid, fightbuddyUser.martialArts);
+    deleteUserFromMartialArtsCollection(uid, fightbuddyUser.newMartialArts);
+    userCollection.doc(uid).delete();
 
+    user?.delete();
+  }
+
+  Future deleteUserFromMartialArtsCollection(
+      String uid, List<String> martialArts) async {
     final CollectionReference martialArtsCollection =
         FirebaseFirestore.instance.collection('martialArts');
-    totalMartialArts.addAll(fightbuddyUser.martialArts);
-    totalMartialArts.addAll(fightbuddyUser.newMartialArts);
 
-    for (String str in totalMartialArts) {
+    for (String str in martialArts) {
       await martialArtsCollection.doc(str).update({
         'userIDs': FieldValue.arrayRemove([uid])
       });
     }
-
-    userCollection.doc(uid).delete();
-
-    user?.delete();
   }
 
   Future putUserInMartialArtsMap(List<String> martialArts) async {
