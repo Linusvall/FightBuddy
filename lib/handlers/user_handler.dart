@@ -139,7 +139,7 @@ class UserHandler {
   Future updateUserMatchesList(List<String> matches) async {
     var uid = user?.uid;
 
-    await userCollection.doc(uid).update({'uidList': matches});
+    await userCollection.doc(uid).update({'matches': matches});
   }
 
   Future updateUserGender(String gender) async {

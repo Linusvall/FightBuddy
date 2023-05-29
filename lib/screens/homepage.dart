@@ -101,7 +101,9 @@ class HomePageState extends State<HomePage> {
                       List<List<fightbuddy.User>> data =
                           snapshot.data as List<List<fightbuddy.User>>;
                       matches = data[0];
+                      print(matches);
                       savedUsers = data[1];
+                      print(savedUsers);
                       List<fightbuddy.User> displayedUsers =
                           isFirstButtonPressed ? matches : savedUsers;
                       return Center(
