@@ -2,23 +2,9 @@ import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/prefgender.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: NewMartialArtsPage(),
-    );
-  }
-}
-
 class NewMartialArtsPage extends StatefulWidget {
-  const NewMartialArtsPage({super.key});
+  final String sourceScreen;
+  const NewMartialArtsPage({super.key, required this.sourceScreen});
   @override
   NewMartialArtsPageState createState() => NewMartialArtsPageState();
 }
@@ -52,42 +38,12 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white10,
-          //Någon titeltext?
-          title: const Text(""),
-          centerTitle: true,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  //Hoppa över och gå vidare
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PrefGenderPage(
-                                sourceScreen: 'Registration',
-                              )));
-                },
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    backgroundColor: Colors.white,
-                    minimumSize: const Size(160, 10)),
-                child: const Text(
-                  "Hoppa över",
-                  style: TextStyle(
-                    color: Color.fromRGBO(3, 137, 129, 50),
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ]),
+        iconTheme: const IconThemeData(
+          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+      ),
       body: Stack(
         children: [
           Center(
@@ -140,12 +96,16 @@ class NewMartialArtsPageState extends State<NewMartialArtsPage> {
                     onPressed: () {
                       UserHandler().updateNewMartialArts(selectedOptions);
                       UserHandler().putUserInMartialArtsMap(selectedOptions);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PrefGenderPage(
-                                    sourceScreen: 'Registration',
-                                  )));
+                      if (widget.sourceScreen == 'updateProfile') {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PrefGenderPage(
+                                      sourceScreen: 'Registration',
+                                    )));
+                      }
                     },
                     child: const Text('Gå vidare',
                         style: TextStyle(fontSize: 20)))),

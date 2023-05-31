@@ -1,5 +1,4 @@
 import '../../handlers/event_handler.dart';
-import 'package:fight_buddy/screens/events/event_main_page.dart';
 import 'package:fight_buddy/handlers/picture_handler.dart';
 import '../../handlers/user_handler.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +8,15 @@ import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'dart:io';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -148,7 +147,6 @@ class CreateEventPageState extends State<CreateEventPage> {
                           setState(() {
                             image = pickedImage;
                           });
-                          ;
                         },
                         child: Image.asset(
                           'lib/assets/images/chooseImage.png',
@@ -786,7 +784,7 @@ class CreateEventPageState extends State<CreateEventPage> {
 
   placesAutoCompleteTextField() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GooglePlaceAutoCompleteTextField(
           textEditingController: _placeInput,
           googleAPIKey: 'AIzaSyBwvbdFgwl502-cIPhBQfa7Hpujp4jK6Co',
@@ -794,7 +792,7 @@ class CreateEventPageState extends State<CreateEventPage> {
               hintText: "Sök plats",
               suffixIcon: Icon(Icons.place, color: Colors.blue)),
           debounceTime: 800,
-          countries: ["swe"],
+          countries: const ["swe"],
           isLatLngRequired: true,
           getPlaceDetailWithLatLng: (Prediction prediction) {
             lat = prediction.lat.toString();

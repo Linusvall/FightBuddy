@@ -15,7 +15,6 @@ Future findMatches(fightbuddy.User user) async {
       uidList.add(str);
     }
   }
-
   UserHandler().updateUserMatchesList(uidList);
 }
 
@@ -28,8 +27,12 @@ bool compareUserPreferences(
   }
 
   if (!user.prefGender.contains("none")) {
-    if (!user.prefGender.contains(potentialMatch.gender) ||
-        !potentialMatch.prefGender.contains(user.gender)) {
+    if (!user.prefGender.contains(potentialMatch.gender)) {
+      if (!potentialMatch.prefGender.contains("none")) {
+        if (!potentialMatch.prefGender.contains(user.gender)) {
+          return false;
+        }
+      }
       return false;
     }
   }
@@ -47,9 +50,6 @@ bool compareUserPreferences(
           foundCommonValue = true;
           break;
         }
-      }
-      if (foundCommonValue) {
-        break;
       }
     }
     if (foundCommonValue == false) {

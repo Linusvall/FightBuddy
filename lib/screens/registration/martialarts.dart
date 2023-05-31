@@ -2,23 +2,9 @@ import 'package:fight_buddy/handlers/user_handler.dart';
 import 'package:fight_buddy/screens/registration/newmartialarts.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MartialArtsPage(),
-    );
-  }
-}
-
 class MartialArtsPage extends StatefulWidget {
-  const MartialArtsPage({super.key});
+  final String sourceScreen;
+  const MartialArtsPage({super.key, required this.sourceScreen});
   @override
   MartialArtsPageState createState() => MartialArtsPageState();
 }
@@ -48,12 +34,21 @@ class MartialArtsPageState extends State<MartialArtsPage> {
           ),
         ),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const NewMartialArtsPage(),
-        ),
-      );
+
+      if (widget.sourceScreen == 'updateProfile') {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+      } else {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const NewMartialArtsPage(
+              sourceScreen: 'registration',
+            ),
+          ),
+        );
+      }
     }
   }
 

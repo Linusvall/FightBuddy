@@ -147,12 +147,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       _box(thisUser.martialArts, " Kampsportsstilar", 350, 100),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Row(
                         children: [
                           _box(thisUser.newMartialArts, " Vill prova", 180, 82),
-                          _box(thisUser.club, " Medlem i", 180, 82),
+                          _box(thisUser.club, " Medlem i", 180, 168),
                         ],
                       ),
                     ],
@@ -248,10 +248,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     File pickedImage = await pickImageFromGallery();
                     UserHandler().deleteImage(currentPicture);
                     UserHandler().uploadImage(pickedImage, path);
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pop();
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -268,10 +269,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     File pickedImage = await pickImageFromCamera();
                     UserHandler().deleteImage(currentPicture);
                     UserHandler().uploadImage(pickedImage, path);
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pop();
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),

@@ -105,7 +105,7 @@ class UserHandler {
 
   Future deleteUser() async {
     var uid = user!.uid;
-    fightbuddy.User fightbuddyUser = await getUser(uid!);
+    fightbuddy.User fightbuddyUser = await getUser(uid);
     deleteUserFromMartialArtsCollection(uid, fightbuddyUser.martialArts);
     deleteUserFromMartialArtsCollection(uid, fightbuddyUser.newMartialArts);
     userCollection.doc(uid).delete();
@@ -306,11 +306,11 @@ class UserHandler {
         return (eventId);
       } else {
         // Document does not exist
-        print('Document does not exist');
+        ('Document does not exist');
       }
     }).catchError((error) {
       // Error occurred while fetching the document
-      print('Error: $error');
+      ('Error: $error');
     });
   }
 }

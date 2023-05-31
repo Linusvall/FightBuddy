@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../assets/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
 import 'package:fight_buddy/handlers/event_handler.dart';
-import '../../assets/theme/colors.dart';
 import '../../handlers/event.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
 

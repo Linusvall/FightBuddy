@@ -3,9 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
 import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
-import 'package:fight_buddy/screens/events/create_event.dart';
-import 'package:flutter/gestures.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AllEventsPage extends StatefulWidget {
   const AllEventsPage({Key? key}) : super(key: key);
@@ -75,7 +72,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();

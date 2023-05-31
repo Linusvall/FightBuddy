@@ -1,17 +1,16 @@
 import 'package:fight_buddy/handlers/google_maps/location_service.dart';
-import 'package:fight_buddy/screens/events/create_event.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import 'package:google_places_flutter/google_places_flutter.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Google Maps demo',
       home: MapSample(),
     );
@@ -31,8 +30,8 @@ class MapSampleState extends State<MapSample> {
 
   final TextEditingController _searchController = TextEditingController();
 
-  Set<Marker> _markers = Set<Marker>();
-  Set<Polygon> _polygons = Set<Polygon>();
+  final Set<Marker> _markers = Set<Marker>();
+  final Set<Polygon> _polygons = Set<Polygon>();
   List<LatLng> polygonLatLngs = <LatLng>[];
 
   int _polygonIdCounter = 1;
@@ -46,13 +45,13 @@ class MapSampleState extends State<MapSample> {
   void initState() {
     super.initState();
 
-    _setMarker(LatLng(37.42796133580664, -122.085749655962));
+    _setMarker(const LatLng(37.42796133580664, -122.085749655962));
   }
 
   void _setMarker(LatLng point) {
     setState(() {
       _markers.add(Marker(
-        markerId: MarkerId('marker'),
+        markerId: const MarkerId('marker'),
         position: point,
       ));
     });
@@ -78,7 +77,7 @@ class MapSampleState extends State<MapSample> {
 
  */
 
-  static final Polygon _kPolygon = Polygon(
+  static const Polygon _kPolygon = Polygon(
     polygonId: PolygonId('_kPolygon'),
     points: [
       LatLng(37.43296265331129, -122.08832357078792),
@@ -93,7 +92,7 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Google Maps')),
+      appBar: AppBar(title: const Text('Google Maps')),
       body: Column(
         children: [
           Row(children: [
@@ -101,7 +100,7 @@ class MapSampleState extends State<MapSample> {
                 child: TextFormField(
               controller: _searchController,
               textCapitalization: TextCapitalization.words,
-              decoration: InputDecoration(hintText: 'Search by City'),
+              decoration: const InputDecoration(hintText: 'Search by City'),
               onChanged: (value) {
                 print(value);
               },
@@ -113,7 +112,7 @@ class MapSampleState extends State<MapSample> {
                   print(place);
                   _goToPlace(place);
                 },
-                icon: Icon(Icons.search)),
+                icon: const Icon(Icons.search)),
           ]),
           Expanded(
             child: GoogleMap(

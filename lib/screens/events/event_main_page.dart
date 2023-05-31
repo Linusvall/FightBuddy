@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
 import '../../assets/theme/colors.dart';
-import 'eventprofilepage.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
 import 'package:fight_buddy/screens/events/all_events.dart';
 import 'package:flutter/gestures.dart';
@@ -59,7 +58,7 @@ class _EventMainPageState extends State<EventMainPage> {
               children: [
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.add_circle_outline,
                           color: Colors.white),
@@ -88,7 +87,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -130,7 +129,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),

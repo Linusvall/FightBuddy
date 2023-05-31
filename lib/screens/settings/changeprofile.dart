@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/assets/theme/colors.dart';
+import 'package:fight_buddy/screens/registration/martialarts.dart';
+import 'package:fight_buddy/screens/registration/newmartialarts.dart';
 import 'package:fight_buddy/screens/registration/prefgender.dart';
 import 'package:fight_buddy/screens/registration/preflevel.dart';
 import 'package:fight_buddy/screens/registration/prefweight.dart';
@@ -95,7 +97,10 @@ class ChangeProfilePageState extends State<ChangeProfilePage> {
                   ListTile(
                       title: const Text("Kampsporter"),
                       trailing: GestureDetector(
-                          child: const Icon(Icons.edit), onTap: () {})),
+                          child: const Icon(Icons.edit),
+                          onTap: () {
+                            martialArtPopup();
+                          })),
                 ]));
           }
           return Container();
@@ -108,49 +113,108 @@ class ChangeProfilePageState extends State<ChangeProfilePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Preferenser"),
-            content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-                return Column(children: [
-                  ListTile(
-                      title: const Text("Kön"),
-                      trailing: GestureDetector(
-                          child: const Icon(Icons.edit),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const PrefGenderPage(
-                                          sourceScreen: 'updateProfile',
-                                        )));
-                          })),
-                  const Divider(),
-                  ListTile(
-                      title: const Text("Viktklass"),
-                      trailing: GestureDetector(
-                          child: const Icon(Icons.edit),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const PrefWeightPage(
-                                          sourceScreen: 'updateProfile',
-                                        )));
-                          })),
-                  const Divider(),
-                  ListTile(
-                      title: const Text("Nivå"),
-                      trailing: GestureDetector(
-                          child: const Icon(Icons.edit),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const PrefLevelPage(
-                                          sourceScreen: 'updateProfile',
-                                        )));
-                          }))
-                ]);
-              },
+            content: SingleChildScrollView(
+              child: Column(children: [
+                ListTile(
+                    title: const Text("Kön"),
+                    trailing: GestureDetector(
+                        child: const Icon(Icons.edit),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PrefGenderPage(
+                                        sourceScreen: 'updateProfile',
+                                      )));
+                        })),
+                const Divider(),
+                ListTile(
+                    title: const Text("Viktklass"),
+                    trailing: GestureDetector(
+                        child: const Icon(Icons.edit),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PrefWeightPage(
+                                        sourceScreen: 'updateProfile',
+                                      )));
+                        })),
+                const Divider(),
+                ListTile(
+                    title: const Text("Nivå"),
+                    trailing: GestureDetector(
+                        child: const Icon(Icons.edit),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PrefLevelPage(
+                                        sourceScreen: 'updateProfile',
+                                      )));
+                        }))
+              ]),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  UserHandler().updateUserGender(gender);
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  "Uppdatera",
+                  style: TextStyle(color: fightbuddyLightgreen),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Avbryt',
+                  style: TextStyle(color: fightbuddyLightgreen),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  martialArtPopup() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Kampsporter"),
+            content: SingleChildScrollView(
+              child: Column(children: [
+                ListTile(
+                    title: const Text("Kampsporter jag utövar"),
+                    trailing: GestureDetector(
+                        child: const Icon(Icons.edit),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MartialArtsPage(
+                                        sourceScreen: 'updateProfile',
+                                      )));
+                        })),
+                const Divider(),
+                ListTile(
+                    title: const Text("Kampsporter jag vill prova"),
+                    trailing: GestureDetector(
+                        child: const Icon(Icons.edit),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NewMartialArtsPage(
+                                        sourceScreen: 'updateProfile',
+                                      )));
+                        })),
+              ]),
             ),
             actions: [
               TextButton(
@@ -277,28 +341,4 @@ class ChangeProfilePageState extends State<ChangeProfilePage> {
       },
     );
   }
-
-  /* buttons() {
-    return Row(children: [
-      TextButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: const Text(
-          "Uppdatera",
-          style: TextStyle(color: Colors.red),
-        ),
-      ),
-      TextButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: const Text(
-          'Avbryt',
-          style: TextStyle(color: Colors.red),
-        ),
-      ),
-    ]);
-  }
-  */
 }
