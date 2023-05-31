@@ -52,6 +52,7 @@ dependencies:
   google_maps_flutter: ^2.2.6
   google_places_flutter: ^2.0.5
   google_fonts: ^4.0.4
+  custom_info_window: ^1.0.1
 
 dev_dependencies:
   flutter_test:

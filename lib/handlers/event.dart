@@ -43,7 +43,11 @@ class Event {
       date: data?['date'] ?? '',
       eventName: data?['eventName'] ?? '',
       level: data?['level'] ?? '',
-      place: data?['place'] ?? {},
+      place: {
+        'location': data?['place']['location'] ?? '',
+        'lat': double.tryParse(data?['place']['lat'] ?? '0') ?? 0.0,
+        'lng': double.tryParse(data?['place']['lng'] ?? '0') ?? 0.0,
+      },
       timeFrom: data?['timeFrom'] ?? '',
       timeTo: data?['timeTo'] ?? '',
       weightClass: data?['weightClass'] ?? '',

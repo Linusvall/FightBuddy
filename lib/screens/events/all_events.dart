@@ -3,6 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
 import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
+import 'package:fight_buddy/screens/events/create_event.dart';
+import 'package:flutter/gestures.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:fight_buddy/handlers/google_maps/google_maps_events.dart';
 
 class AllEventsPage extends StatefulWidget {
   const AllEventsPage({Key? key}) : super(key: key);
@@ -54,7 +58,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
           backgroundColor: Colors.white10,
           title: const Text(
             "Kommande Event",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontFamily: 'auto'),
           ),
           centerTitle: true,
           actions: const <Widget>[
@@ -174,23 +178,3 @@ Widget _eventCard(Event event, BuildContext context) {
         ],
       ));
 }
-
-
-
-
-
-
-//Knappen i en ny appbar istället?
-
-/*  appBar: AppBar(backgroundColor: fightbuddyLightgreen, actions: [
-        IconButton(
-          icon: const Icon(Icons.add_circle_outline, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const CreateEventPage()));
-          },
-        ),
-      ]),*/
-
