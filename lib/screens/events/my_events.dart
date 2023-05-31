@@ -13,17 +13,20 @@ class MyEventsPage extends StatefulWidget {
   _MyEventsPageState createState() => _MyEventsPageState();
 }
 
-class _MyEventsPageState extends State<MyEventsPage> {
+class _MyEventsPageState extends State<MyEventsPage>
+    with SingleTickerProviderStateMixin {
   String uid = UserHandler().getUserId();
   List<Event> _createdEvents = [];
   List<Event> _attendingEvents = [];
   bool _isLoading = false;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _loadCreatedEvents();
     _loadAttendingEvents();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   void _loadCreatedEvents() {
@@ -73,21 +76,91 @@ class _MyEventsPageState extends State<MyEventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white10,
-          title: const Text(
-            "Dina event",
-            style: TextStyle(color: Colors.black),
-          ),
-          centerTitle: true,
-          actions: const <Widget>[
-            //Inget här tror jag kan tas bort
-          ]),
-      body: Column(
+        iconTheme: const IconThemeData(
+          color: fightbuddyLightgreen, //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        title: const Text(
+          "Dina event",
+          style: TextStyle(color: Colors.black, fontFamily: 'auto'),
+        ),
+        centerTitle: true,
+        actions: const <Widget>[
+          //Inget här tror jag kan tas bort
+        ],
+        bottom: TabBar(
+          controller: _tabController,
+          indicatorColor: fightbuddyLightgreen,
+          tabs: [
+            Tab(
+              child: Text(
+                'Alla',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'Skapade',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+          labelColor: fightbuddyLightgreen,
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
         children: [
+          // Widget for 'Alla' tab
+
+          // Widget for 'Skapade' tab
+          Expanded(
+            child: ListView.builder(
+              itemCount: _attendingEvents.length + 1,
+              itemBuilder: (context, index) {
+                if (index < _attendingEvents.length) {
+                  // Visa eventet
+                  final event = _attendingEvents[index];
+                  return _eventCard(event, context);
+                } else if (_isLoading) {
+                  // Visa cirkel om det laddar
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  // Nått slutet av listan
+                  return Container();
+                }
+              },
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _createdEvents.length + 1,
+              itemBuilder: (context, index) {
+                if (index < _createdEvents.length) {
+                  // Visa eventet
+                  final event = _createdEvents[index];
+                  return _eventCard(event, context);
+                } else if (_isLoading) {
+                  // Visa cirkel om det laddar
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  // Nått slutet av listan
+                  return Container();
+                }
+              },
+            ),
+          ),
+        ],
+      ), /* Column(
+        children: [
+          
           Container(
             child: Column(
               children: [
@@ -159,7 +232,7 @@ class _MyEventsPageState extends State<MyEventsPage> {
             ),
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

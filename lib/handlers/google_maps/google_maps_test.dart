@@ -54,6 +54,10 @@ class MapSampleState extends State<MapSample> {
       _markers.add(Marker(
         markerId: MarkerId('marker'),
         position: point,
+        infoWindow: InfoWindow(
+          title: 'Marker 1',
+          snippet: 'Text on the marker',
+        ),
       ));
     });
   }
@@ -125,10 +129,7 @@ class MapSampleState extends State<MapSample> {
                   _controller.complete(controller);
                 },
                 onTap: (point) {
-                  setState(() {
-                    polygonLatLngs.add(point);
-                    _setPolygon();
-                  });
+                  setState(() {});
                 }),
           ),
         ],

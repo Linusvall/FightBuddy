@@ -9,8 +9,6 @@ import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'dart:io';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -111,7 +109,7 @@ class CreateEventPageState extends State<CreateEventPage> {
             backgroundColor: Colors.white10,
             title: const Text(
               "Skapa event",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black, fontFamily: 'auto'),
             ),
             centerTitle: true,
             actions: const <Widget>[
@@ -153,7 +151,7 @@ class CreateEventPageState extends State<CreateEventPage> {
                         child: Image.asset(
                           'lib/assets/images/chooseImage.png',
                           fit: BoxFit.contain,
-                          height: 80,
+                          height: 60,
                         ),
                       ),
                     ],
@@ -645,45 +643,7 @@ class CreateEventPageState extends State<CreateEventPage> {
                 ),
               ),
               const SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    child: Icon(Icons.public),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: RichText(
-                        text: const TextSpan(
-                          text: "Offentligt event",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Switch(
-                        // This bool value toggles the switch.
-                        value: publicValue,
-                        activeColor: const Color.fromRGBO(3, 137, 129, 50),
-                        onChanged: (bool value) {
-                          // This is called when the user toggles the switch.
-                          setState(() {
-                            publicValue = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+                height: 25,
               ),
               Row(
                 children: <Widget>[
@@ -707,6 +667,9 @@ class CreateEventPageState extends State<CreateEventPage> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -724,6 +687,9 @@ class CreateEventPageState extends State<CreateEventPage> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Center(
                 child: ElevatedButton(
