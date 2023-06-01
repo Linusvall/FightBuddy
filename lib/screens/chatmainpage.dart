@@ -26,7 +26,6 @@ class _ChatMainPageState extends State<ChatMainPage> {
     Intl.defaultLocale = 'sv_SE';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(0, 182, 170, 100),
-      /*
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(0, 182, 170, 100),
         elevation: 0,
@@ -45,7 +44,6 @@ class _ChatMainPageState extends State<ChatMainPage> {
           ),
         ),
       ),
-      */
       body: Column(children: [
         SearchFieldWidget(width: MediaQuery.of(context).size.width),
         SafeArea(

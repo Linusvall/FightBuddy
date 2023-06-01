@@ -156,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             _box(thisUser.newMartialArts, " Vill prova", 180,
                                 82),
-                            _box(thisUser.club, " Medlem i", 180, 168),
+                            _box1(thisUser.club, " Medlem i", 180, 168),
                           ],
                         ),
                       ],
