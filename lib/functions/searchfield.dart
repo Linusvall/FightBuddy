@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fight_buddy/screens/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../screens/chat.dart';
 import 'widgets.dart';
 
 class SearchFieldWidget extends StatefulWidget {
@@ -55,8 +55,10 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
             ? []
             : snapshot.data!.docs
                 .where((element) =>
-                    element['firstName'].toString().contains(search) ||
-                    element['lastName'].toString().contains(search))
+                    RegExp(search, caseSensitive: false)
+                        .hasMatch(element['firstName']) ||
+                    RegExp(search, caseSensitive: false)
+                        .hasMatch(element['lastName']))
                 .toList();
 
         matchingUsersCount = data.length;
@@ -116,7 +118,7 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
                                   child: ListView.builder(
                                     itemCount: data.length,
                                     itemBuilder: (context, i) {
-                                      return ChatUI.personCard(
+                                      return ChatUI.searchFieldPersonCard(
                                         title:
                                             '${data[i]['firstName']} ${data[i]['lastName']}',
                                         onTap: () {

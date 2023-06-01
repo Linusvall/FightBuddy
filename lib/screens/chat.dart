@@ -55,8 +55,8 @@ class _ChatPageState extends State<ChatPage> {
                           ? Container()
                           : Text(
                               'Senast aktiv: ' +
-                                  DateFormat('EEE hh:mm').format(
-                                      snapshot.data!['date_time'].toDate()),
+                                  DateFormat('EEE HH:mm')
+                                      .format(DateTime.now()),
                               style: Styles.h1().copyWith(
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
@@ -110,7 +110,7 @@ class _ChatPageState extends State<ChatPage> {
                                                     FirebaseAuth.instance
                                                         .currentUser!.uid,
                                                 snap.data!.docs[i]['message'],
-                                                DateFormat('EEE hh:mm').format(
+                                                DateFormat('EEE HH:mm').format(
                                                     snap.data!
                                                         .docs[i]['datetime']
                                                         .toDate()),

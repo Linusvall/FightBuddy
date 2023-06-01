@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'chat.dart';
+import 'package:fight_buddy/functions/styles.dart';
 import 'package:fight_buddy/functions/widgets.dart';
 import 'package:fight_buddy/functions/searchfield.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:fight_buddy/functions/styles.dart';
 
 class ChatMainPage extends StatefulWidget {
   const ChatMainPage({Key? key}) : super(key: key);
@@ -26,24 +26,6 @@ class _ChatMainPageState extends State<ChatMainPage> {
     Intl.defaultLocale = 'sv_SE';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(0, 182, 170, 100),
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 182, 170, 100),
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(25.0),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                SearchFieldWidget(
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
       body: SafeArea(
         child: Stack(
           alignment: AlignmentDirectional.topEnd,
@@ -51,6 +33,16 @@ class _ChatMainPageState extends State<ChatMainPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /*
+                Container(
+                  color: const Color.fromRGBO(0, 182, 170, 100),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: SearchFieldWidget(
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ),
+                */
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -73,38 +65,25 @@ class _ChatMainPageState extends State<ChatMainPage> {
                                   height: 80,
                                   child: StreamBuilder(
                                     stream: firestore
-                                        .collection('rooms')
+                                        .collection('users')
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser!.uid)
                                         .snapshots(),
                                     builder: (context,
-                                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      List data = !snapshot.hasData
-                                          ? []
-                                          : snapshot.data!.docs
-                                              .where((element) =>
-                                                  element['users']
-                                                      .toString()
-                                                      .contains(FirebaseAuth
-                                                          .instance
-                                                          .currentUser!
-                                                          .uid))
-                                              .toList();
+                                        AsyncSnapshot<DocumentSnapshot>
+                                            snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Container();
+                                      }
+
+                                      List savedUsers =
+                                          snapshot.data!['savedUsers'] ?? [];
+
                                       return ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: data.length,
+                                        itemCount: savedUsers.length,
                                         itemBuilder: (context, i) {
-                                          List users = data[i]['users'];
-                                          var friend = users.where((element) =>
-                                              element !=
-                                              FirebaseAuth
-                                                  .instance.currentUser!.uid);
-                                          var user = friend.isNotEmpty
-                                              ? friend.first
-                                              : users
-                                                  .where((element) =>
-                                                      element ==
-                                                      FirebaseAuth.instance
-                                                          .currentUser!.uid)
-                                                  .first;
+                                          String user = savedUsers[i];
                                           return FutureBuilder(
                                             future: firestore
                                                 .collection('users')
@@ -112,27 +91,29 @@ class _ChatMainPageState extends State<ChatMainPage> {
                                                 .get(),
                                             builder:
                                                 (context, AsyncSnapshot snap) {
-                                              return !snap.hasData
-                                                  ? Container()
-                                                  : ChatUI.profileCircle(
-                                                      coverPicture: snap
-                                                          .data['coverPicture'],
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                          MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return ChatPage(
-                                                                id: user,
-                                                                name:
-                                                                    '${snap.data['firstName']} ${snap.data['lastName']}',
-                                                              );
-                                                            },
-                                                          ),
+                                              if (!snap.hasData) {
+                                                return Container();
+                                              }
+                                              var userData = snap.data;
+                                              return ChatUI.profileCircle(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return ChatPage(
+                                                          id: user,
+                                                          name: userData[
+                                                              'firstName'],
                                                         );
                                                       },
-                                                      name:
-                                                          '${snap.data['firstName']} ${snap.data['lastName']}');
+                                                    ),
+                                                  );
+                                                },
+                                                name:
+                                                    '${userData['firstName']} ${userData['lastName']}',
+                                                coverPicture:
+                                                    userData['profilePicture'],
+                                              );
                                             },
                                           );
                                         },
@@ -188,33 +169,33 @@ class _ChatMainPageState extends State<ChatMainPage> {
                                           .doc(user)
                                           .get(),
                                       builder: (context, AsyncSnapshot snap) {
-                                        return !snap.hasData
-                                            ? Container()
-                                            : ChatUI.personCard(
-                                                title:
-                                                    '${snap.data['firstName']} ${snap.data['lastName']}',
-                                                subtitle: data[i]
-                                                    ['last_message'],
-                                                time: DateFormat('EEE hh:mm')
-                                                    .format(data[i][
-                                                            'last_message_time']
-                                                        .toDate()),
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) {
-                                                        return ChatPage(
-                                                          id: user,
-                                                          name: snap.data[
-                                                              'firstName'],
-                                                        );
-                                                      },
-                                                    ),
+                                        if (!snap.hasData) {
+                                          return Container();
+                                        }
+                                        var userData = snap.data;
+                                        return ChatUI.personCard(
+                                          title:
+                                              '${userData['firstName']} ${userData['lastName']}',
+                                          subtitle: data[i]['last_message'],
+                                          time: DateFormat('EEE HH:mm').format(
+                                              data[i]['last_message_time']
+                                                  .toDate()),
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ChatPage(
+                                                    id: user,
+                                                    name:
+                                                        '${userData['firstName']} ${userData['lastName']}',
                                                   );
                                                 },
-                                                coverPicture:
-                                                    snap.data['coverPicture'],
-                                              );
+                                              ),
+                                            );
+                                          },
+                                          coverPicture:
+                                              userData['coverPicture'],
+                                        );
                                       },
                                     );
                                   },

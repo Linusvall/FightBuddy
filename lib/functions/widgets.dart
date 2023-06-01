@@ -5,14 +5,8 @@ import 'searchfield.dart';
 import 'styles.dart';
 
 class ChatUI {
-  static Widget personCard({
-    title,
-    time,
-    subtitle,
-    onTap,
-    String? coverPicture,
-    bool isOnline = false,
-  }) {
+  static Widget personCard(
+      {title, time, subtitle, onTap, String? coverPicture}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Card(
@@ -20,43 +14,68 @@ class ChatUI {
         child: ListTile(
           onTap: onTap,
           contentPadding: const EdgeInsets.all(5),
-          leading: Stack(
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.grey,
-                child: coverPicture != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          coverPicture,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    : const Icon(
-                        Icons.person,
-                        size: 30,
-                        color: Colors.white,
+          leading: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.grey,
+              child: coverPicture != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        coverPicture,
+                        fit: BoxFit.cover,
                       ),
-              ),
-              if (isOnline)
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 12,
-                    height: 12,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.green,
+                    )
+                  : const Icon(
+                      Icons.person,
+                      size: 30,
+                      color: Colors.white,
                     ),
-                  ),
-                ),
-            ],
+            ),
           ),
           title: Text(title),
           subtitle: subtitle != null ? Text(subtitle) : null,
           trailing: Padding(
             padding: const EdgeInsets.only(right: 8.0),
+            child: Text(time),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget searchFieldPersonCard(
+      {title, subtitle, onTap, String? coverPicture}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      child: Card(
+        elevation: 0,
+        child: ListTile(
+          onTap: onTap,
+          contentPadding: const EdgeInsets.all(5),
+          leading: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.grey,
+              child: coverPicture != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        coverPicture,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : const Icon(
+                      Icons.person,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+            ),
+          ),
+          title: Text(title),
+          subtitle: subtitle != null ? Text(subtitle) : null,
+          trailing: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
           ),
         ),
       ),

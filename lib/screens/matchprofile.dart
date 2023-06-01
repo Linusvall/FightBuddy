@@ -77,7 +77,7 @@ class MatchProfilePageState extends State<MatchProfilePage> {
                   Row(
                     children: [
                       _box(user.newMartialArts, " Vill prova", 180, 81),
-                      _box1(user.club, " Medlem i", 180, 82),
+                      _box1(user.club, " Medlem i", 180, 168),
                     ],
                   ),
                   const SizedBox(
