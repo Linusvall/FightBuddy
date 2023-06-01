@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
 import '../../assets/theme/colors.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
+import 'package:fight_buddy/screens/events/eventprofilepage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fight_buddy/handlers/google_maps/google_maps_events.dart';

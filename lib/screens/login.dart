@@ -111,7 +111,7 @@ class LoginPageState extends State<LoginPage> {
                     if (!mounted) return;
                     try {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: 'linus@gmail.com', password: '123456');
+                          email: email, password: password);
 
                       loggedIn = true;
                     } on FirebaseAuthException catch (e) {
