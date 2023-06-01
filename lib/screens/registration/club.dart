@@ -125,8 +125,7 @@ class MembershipPageState extends State<MembershipPage> {
                       fixedSize: const Size(250, 50),
                     ),
                     onPressed: () {
-                      database.updateMemberOfClub(
-                          clubController.text as List<String>);
+                      database.updateMemberOfClub(clubController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

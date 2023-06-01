@@ -192,7 +192,7 @@ class UserHandler {
     });
   }
 
-  Future updateMemberOfClub(List<String> club) async {
+  Future updateMemberOfClub(String club) async {
     var uid = user?.uid;
 
     await userCollection.doc(uid).update({

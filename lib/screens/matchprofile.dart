@@ -77,7 +77,7 @@ class MatchProfilePageState extends State<MatchProfilePage> {
                   Row(
                     children: [
                       _box(user.newMartialArts, " Vill prova", 180, 81),
-                      _box(user.club, " Medlem i", 180, 82),
+                      _box1(user.club, " Medlem i", 180, 82),
                     ],
                   ),
                   const SizedBox(
@@ -87,6 +87,56 @@ class MatchProfilePageState extends State<MatchProfilePage> {
               ),
             )));
   }
+}
+
+_box1(String list, String title, double size, double boxSize) {
+  return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Container(
+        width: size,
+        height: 80,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 5),
+            SizedBox(
+                height: 50,
+                child: Center(
+                    child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Container(
+                        width: boxSize,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: fightbuddyDarkgreen, width: 2),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(list[index]),
+                        ),
+                      ),
+                    );
+                  },
+                ))),
+          ],
+        ),
+      ));
 }
 
 _box(List<String> list, String title, double size, double boxSize) {

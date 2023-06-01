@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fight_buddy/handlers/event.dart';
 import '../../assets/theme/colors.dart';
+import 'eventprofilepage.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
-import 'package:fight_buddy/screens/events/eventprofilepage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fight_buddy/handlers/google_maps/google_maps_events.dart';
@@ -188,7 +188,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const Spacer(),
+              Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -233,7 +233,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const Spacer(),
+              Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),

@@ -19,7 +19,7 @@ class User {
   final List<String> yearsOfPractice;
   final String profilePicture;
   final List<String> newMartialArts;
-  final List<String> club;
+  final String club;
   final List<String> createdEvents;
   final List<String> attendingEvents;
   final List<String> savedUsers;
@@ -71,7 +71,7 @@ class User {
       yearsOfPractice: <String>[...data['yearsOfPractice']],
       profilePicture: data['profilePicture'],
       newMartialArts: <String>[...data['newMartialArts']],
-      club: <String>[...data['club']],
+      club: data['club'],
       createdEvents: <String>[...data['createdEvents']],
       attendingEvents: <String>[...data['attendingEvents']],
       savedUsers: <String>[...data['savedUsers']],

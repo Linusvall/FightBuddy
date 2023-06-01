@@ -20,7 +20,7 @@ class AuthService {
         'profilePicture': '',
         'information': '',
         'place': '',
-        'club': [],
+        'club': '',
         'martialArts': [],
         'level': [],
         'newMartialArts': [],
