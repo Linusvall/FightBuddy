@@ -51,7 +51,7 @@ class HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(width: 40),
                       Padding(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: ElevatedButton(
                             onPressed: () {
                               setState(() {
@@ -66,7 +66,7 @@ class HomePageState extends State<HomePage> {
                               backgroundColor: isFirstButtonPressed
                                   ? fightbuddySuperLightGreen
                                   : Colors.white,
-                              fixedSize: Size(135, 30),
+                              fixedSize: const Size(135, 30),
                             ),
                             child: const Text("Matchningar",
                                 style: TextStyle(color: Colors.black)),
@@ -85,7 +85,7 @@ class HomePageState extends State<HomePage> {
                           backgroundColor: isSecondButtonPressed
                               ? fightbuddySuperLightGreen
                               : Colors.white,
-                          fixedSize: Size(135, 30),
+                          fixedSize: const Size(135, 30),
                         ),
                         child: const Text(
                           "Sparade",
@@ -101,9 +101,7 @@ class HomePageState extends State<HomePage> {
                       List<List<fightbuddy.User>> data =
                           snapshot.data as List<List<fightbuddy.User>>;
                       matches = data[0];
-                      print(matches);
                       savedUsers = data[1];
-                      print(savedUsers);
                       List<fightbuddy.User> displayedUsers =
                           isFirstButtonPressed ? matches : savedUsers;
                       return Center(
@@ -111,7 +109,7 @@ class HomePageState extends State<HomePage> {
                             itemCount: displayedUsers.length,
                             itemBuilder: (BuildContext context, int index) {
                               return SizedBox(
-                                  height: 150,
+                                  height: 165,
                                   child: _userCard(displayedUsers[index],
                                       isSecondButtonPressed, context));
                             }),

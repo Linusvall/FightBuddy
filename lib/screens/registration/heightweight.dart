@@ -35,40 +35,12 @@ class HeightWeightPageState extends State<HeightWeightPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color.fromRGBO(3, 137, 129, 50), //change your color here
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white10,
-          //Någon titeltext?
-          title: const Text(""),
-          centerTitle: true,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  //Hoppa över och gå vidare¨
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfilePicture()));
-                },
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    backgroundColor: Colors.white,
-                    minimumSize: const Size(160, 10)),
-                child: const Text(
-                  "Hoppa över",
-                  style: TextStyle(
-                    color: Color.fromRGBO(3, 137, 129, 50),
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ]),
+        iconTheme: const IconThemeData(
+          color: Color.fromRGBO(3, 137, 129, 50), //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white10,
+      ),
       body: Stack(
         children: [
           Center(

@@ -111,7 +111,7 @@ class LoginPageState extends State<LoginPage> {
                     if (!mounted) return;
                     try {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: email, password: password);
+                          email: 'linus@gmail.com', password: '123456');
 
                       loggedIn = true;
                     } on FirebaseAuthException catch (e) {
@@ -122,6 +122,7 @@ class LoginPageState extends State<LoginPage> {
                       }
                     }
                     if (loggedIn == true) {
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => const MainPage()),

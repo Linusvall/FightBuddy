@@ -1,4 +1,3 @@
-import 'package:fight_buddy/screens/events/create_event.dart';
 import 'package:fight_buddy/screens/events/event_main_page.dart';
 import 'package:fight_buddy/screens/settings/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';

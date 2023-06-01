@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -34,13 +34,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Autocomplete'),
+        title: const Text('Autocomplete'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             placesAutoCompleteTextField(),
           ],
         ),
@@ -50,19 +50,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   placesAutoCompleteTextField() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GooglePlaceAutoCompleteTextField(
           textEditingController: controller,
           googleAPIKey: 'AIzaSyBwvbdFgwl502-cIPhBQfa7Hpujp4jK6Co',
-          inputDecoration: InputDecoration(hintText: "Search your location"),
+          inputDecoration:
+              const InputDecoration(hintText: "Search your location"),
           debounceTime: 800,
-          countries: ["swe"],
+          countries: const ["swe"],
           isLatLngRequired: true,
           getPlaceDetailWithLatLng: (Prediction prediction) {
             lat = prediction.lat.toString();
             lng = prediction.lng.toString();
-            print("Lattitude: " + lat);
-            print("Longitude: " + lng);
+            print("Lattitude: $lat");
+            print("Longitude: $lng");
           },
           itmClick: (Prediction prediction) {
             controller.text = prediction.description as String;

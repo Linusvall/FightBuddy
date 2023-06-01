@@ -5,7 +5,6 @@ import 'package:fight_buddy/handlers/event.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
 import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
-import 'package:fight_buddy/screens/events/create_event.dart';
 
 class MyEventsPage extends StatefulWidget {
   const MyEventsPage({Key? key}) : super(key: key);
@@ -188,7 +187,7 @@ class _MyEventsPageState extends State<MyEventsPage>
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();
@@ -223,7 +222,7 @@ class _MyEventsPageState extends State<MyEventsPage>
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();

@@ -76,7 +76,7 @@ class _AllEventsPageState extends State<AllEventsPage> {
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();

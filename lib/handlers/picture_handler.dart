@@ -12,9 +12,7 @@ Future pickImageFromGallery() async {
     // final imagePermanent = await saveImagePermanently(image.path);
 
     return File(image.path);
-  } on PlatformException catch (e) {
-    print('Failed to pick image: $e');
-  }
+  } on PlatformException catch (e) {}
 }
 
 Future pickImageFromCamera() async {
@@ -27,7 +25,5 @@ Future pickImageFromCamera() async {
     // final imagePermanent = await saveImagePermanently(image.path);
 
     return File(image.path);
-  } on PlatformException catch (e) {
-    print('Failed to pick image: $e');
-  }
+  } on PlatformException catch (e) {}
 }
