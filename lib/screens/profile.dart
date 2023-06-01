@@ -59,103 +59,108 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50))),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              child: const Text(
-                                "Byt bild",
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                child: const Text(
+                                  "Byt bild",
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                onTap: () {
+                                  changePicturePopup(
+                                    "Byt omslagsbild",
+                                    thisUser.coverPicture,
+                                    "coverPicture",
+                                  );
+                                },
+                              ),
+                              const Icon(Icons.edit),
+                              const SizedBox(width: 25),
+                              Text(
+                                "${thisUser.firstName} ${thisUser.lastName}",
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              onTap: () {
-                                changePicturePopup(
-                                  "Byt omslagsbild",
-                                  thisUser.coverPicture,
-                                  "coverPicture",
-                                );
-                              },
-                            ),
-                            const Icon(Icons.edit),
-                            const SizedBox(width: 25),
-                            Text(
-                              "${thisUser.firstName} ${thisUser.lastName}",
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(thisUser.profilePicture),
-                      ),
-                      GestureDetector(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text("Byt bild",
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline)),
-                            Icon(Icons.edit)
-                          ],
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundImage:
+                              NetworkImage(thisUser.profilePicture),
                         ),
-                        onTap: () {
-                          changePicturePopup("Byt profilbild",
-                              thisUser.profilePicture, "profilePicture");
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 40),
-                          child: GestureDetector(
-                            child: Row(children: const [
-                              Text("Redigera",
+                        GestureDetector(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Text("Byt bild",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline)),
-                              Icon(Icons.edit),
-                            ]),
-                            onTap: () {
-                              updateInformationPopUp(thisUser.information);
-                            },
-                          )),
-                      Container(
-                        width: 350,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 221, 223, 223),
-                          borderRadius: BorderRadius.circular(10),
+                              Icon(Icons.edit)
+                            ],
+                          ),
+                          onTap: () {
+                            changePicturePopup("Byt profilbild",
+                                thisUser.profilePicture, "profilePicture");
+                          },
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Center(
-                              child: Text(thisUser.information,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ))),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 40),
+                            child: GestureDetector(
+                              child: Row(children: const [
+                                Text("Redigera",
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline)),
+                                Icon(Icons.edit),
+                              ]),
+                              onTap: () {
+                                updateInformationPopUp(thisUser.information);
+                              },
+                            )),
+                        Container(
+                          width: 350,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 221, 223, 223),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Center(
+                                child: Text(thisUser.information,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                    ))),
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _box(thisUser.martialArts, " Kampsportsstilar", 350, 100),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          _box(thisUser.newMartialArts, " Vill prova", 180, 82),
-                          _box(thisUser.club, " Medlem i", 180, 168),
-                        ],
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        _box(thisUser.martialArts, " Kampsportsstilar", 350,
+                            100),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            _box(thisUser.newMartialArts, " Vill prova", 180,
+                                82),
+                            _box(thisUser.club, " Medlem i", 180, 168),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ));
           }
