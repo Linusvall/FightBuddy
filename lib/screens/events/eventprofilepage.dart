@@ -14,16 +14,19 @@ class EventProfilePage extends StatefulWidget {
 }
 
 class EventProfilePageState extends State<EventProfilePage> {
+  String buttonText = '';
+
   @override
   void initState() {
     super.initState();
+    buttonText = _getButtonText(widget.event);
   }
 
   @override
   Widget build(BuildContext context) {
     Event event = widget.event;
     String eventId = event.eventId;
-    bool isFull = event.attendees.length < int.parse(event.capacity);
+    bool isFull = event.attendees.length > int.parse(event.capacity);
     return Scaffold(
         backgroundColor: fightbuddyLightgreen,
         appBar: PreferredSize(
@@ -91,17 +94,19 @@ class EventProfilePageState extends State<EventProfilePage> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromRGBO(3, 137, 129, 50))),
-                        onPressed: () {
+                        onPressed: () async {
                           //Lägg till användare i eventet, ändra knappen så att det står "Du är anmäld till detta event"
-
                           if (!isFull) {
                             String userId = UserHandler().getUserId();
-                            EventHandler().addAttendee(eventId, userId);
+                            await EventHandler().addAttendee(eventId, userId);
+                            setState(() {
+                              buttonText = 'Du är anmäld till detta event';
+                            });
                           } else {
                             print('Du kan inte anmäla dig');
                           }
                         },
-                        child: Text(_getButtonText(event)))),
+                        child: Text(buttonText))),
               ],
             ),
           ),
@@ -185,10 +190,10 @@ Widget _eventCard(Event event, BuildContext context) {
 }
 
 String _getButtonText(Event event) {
-  if (event.attendees.length >= int.parse(event.capacity)) {
-    return 'Eventet är fullt';
-  } else if (event.attendees.contains(UserHandler().getUserId())) {
+  if (event.attendees.contains(UserHandler().getUserId())) {
     return 'Du är anmäld till detta event';
+  } else if (event.attendees.length >= int.parse(event.capacity)) {
+    return 'Eventet är fullt';
   } else {
     return 'Anmäl dig till eventet';
   }
