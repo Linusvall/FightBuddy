@@ -128,7 +128,7 @@ _box1(String list, String title, double size, double boxSize) {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
-                          child: Text(list[index]),
+                          child: Text(list),
                         ),
                       ),
                     );

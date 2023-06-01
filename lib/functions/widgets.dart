@@ -57,7 +57,6 @@ class ChatUI {
           subtitle: subtitle != null ? Text(subtitle) : null,
           trailing: Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: Text(time),
           ),
         ),
       ),

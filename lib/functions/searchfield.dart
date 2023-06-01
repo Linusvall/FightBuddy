@@ -116,12 +116,9 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
                                   child: ListView.builder(
                                     itemCount: data.length,
                                     itemBuilder: (context, i) {
-                                      Timestamp time = data[i]['date_time'];
                                       return ChatUI.personCard(
                                         title:
                                             '${data[i]['firstName']} ${data[i]['lastName']}',
-                                        time: DateFormat('EEE hh:mm')
-                                            .format(time.toDate()),
                                         onTap: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(

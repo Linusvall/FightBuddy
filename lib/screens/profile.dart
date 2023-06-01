@@ -207,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Center(
-                            child: Text(list[index]),
+                            child: Text(list),
                           ),
                         ),
                       );
