@@ -38,55 +38,61 @@ class TrainingPageState extends State<TrainingPage> {
         elevation: 0,
         backgroundColor: Colors.white10,
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(70),
-                  child: Text(
-                    "Var vill du träna? ",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              child: Column(
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(70),
+                    child: Text(
+                      "Var vill du träna? ",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: placesAutoCompleteTextField(),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(100.0),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(40),
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                  Row(
+                    children: [
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: placesAutoCompleteTextField(),
                       ),
-                      backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
-                      fixedSize: const Size(250, 50),
-                    ),
-                    onPressed: () {
-                      database.updatePlace(_placeInput.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MembershipPage()));
-                    },
-                    child: const Text('Gå vidare',
-                        style: TextStyle(fontSize: 20)))),
-          ),
-        ],
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(100.0),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 160,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(40),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
+                        fixedSize: const Size(250, 50),
+                      ),
+                      onPressed: () {
+                        database.updatePlace(_placeInput.text);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MembershipPage()));
+                      },
+                      child: const Text('Gå vidare',
+                          style: TextStyle(fontSize: 20)))),
+            ),
+          ],
+        ),
       ),
     );
   }

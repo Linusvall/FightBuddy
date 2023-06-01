@@ -41,92 +41,91 @@ class HeightWeightPageState extends State<HeightWeightPage> {
         elevation: 0,
         backgroundColor: Colors.white10,
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(90),
-                  child: Text(
-                    "Vikt & Längd",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: weightController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'VIKT KG',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              child: Column(
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(90),
+                    child: Text(
+                      "Vikt & Längd",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: heightController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: 'LÄNGD CM',
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          isDense: true,
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(40),
-                  /*
-                  child: Text(
-                    "Eller",
-                    style: TextStyle(fontSize: 30),
                   ),
-                  */
-                ),
-              ],
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: weightController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'VIKT KG',
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            isDense: true,
+                          ),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: TextField(
+                          controller: heightController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'LÄNGD CM',
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            isDense: true,
+                          ),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 320,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              backgroundColor:
+                                  const Color.fromRGBO(3, 137, 129, 50),
+                              fixedSize: const Size(250, 50),
+                            ),
+                            onPressed: () {
+                              UserHandler().updateUserHeightAndWeight(
+                                  heightController.text,
+                                  int.parse(weightController.text));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfilePicture()));
+                            },
+                            child: const Text('Gå vidare',
+                                style: TextStyle(fontSize: 20)))),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(40),
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      backgroundColor: const Color.fromRGBO(3, 137, 129, 50),
-                      fixedSize: const Size(250, 50),
-                    ),
-                    onPressed: () {
-                      UserHandler().updateUserHeightAndWeight(
-                          heightController.text,
-                          int.parse(weightController.text));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePicture()));
-                    },
-                    child: const Text('Gå vidare',
-                        style: TextStyle(fontSize: 20)))),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -171,12 +171,12 @@ class RegisterPageState extends State<RegisterPage> {
                     UserHandler()
                         .updateUserFirstAndLastName(firstName, lastName);
                     UserHandler().updateUserID();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const GenderPage()));
                   }
                   // ignore: use_build_context_synchronously
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const GenderPage()));
                 },
               ),
             ),
