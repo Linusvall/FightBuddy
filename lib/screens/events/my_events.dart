@@ -309,7 +309,7 @@ Widget _eventCard(Event event, BuildContext context) {
                   Row(
                     children: [
                       const Icon(Icons.place),
-                      Text(event.place['location']),
+                      Expanded(child: Text(event.place['location'])),
                     ],
                   ),
                 ],
