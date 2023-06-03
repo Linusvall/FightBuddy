@@ -1,11 +1,9 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'chat.dart';
-import 'package:fight_buddy/functions/styles.dart';
-import 'package:fight_buddy/functions/widgets.dart';
-import 'package:fight_buddy/functions/searchfield.dart';
+import 'package:fight_buddy/screens/chat/styles.dart';
+import 'package:fight_buddy/screens/chat/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

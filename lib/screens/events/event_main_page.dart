@@ -2,7 +2,7 @@ import 'package:fight_buddy/screens/events/all_events.dart';
 import 'package:fight_buddy/screens/events/my_events.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fight_buddy/handlers/event.dart';
+import 'package:fight_buddy/model/event.dart';
 import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: EventMainPage(),
+      home: const EventMainPage(),
     );
   }
 }
@@ -129,12 +129,12 @@ class _EventMainPageState extends State<EventMainPage> {
       body: Column(
         children: [
           Container(
-            color: Color.fromRGBO(0, 182, 170, 1),
+            color: const Color.fromRGBO(0, 182, 170, 1),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     RichText(
                       text: TextSpan(
                         children: [
@@ -145,7 +145,8 @@ class _EventMainPageState extends State<EventMainPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EventMapScreen()),
+                                      builder: (context) =>
+                                          const EventMapScreen()),
                                 );
                               },
                             style: GoogleFonts.lato(
@@ -188,7 +189,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -211,7 +212,7 @@ class _EventMainPageState extends State<EventMainPage> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      WidgetSpan(
+                      const WidgetSpan(
                         child: Icon(Icons.arrow_right_outlined, size: 20),
                       ),
                     ],
@@ -233,7 +234,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -256,7 +257,7 @@ class _EventMainPageState extends State<EventMainPage> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      WidgetSpan(
+                      const WidgetSpan(
                         child: Icon(Icons.arrow_right_outlined, size: 20),
                       ),
                     ],
@@ -269,14 +270,14 @@ class _EventMainPageState extends State<EventMainPage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                SizedBox(width: 10), // Padding at the start
+                const SizedBox(width: 10), // Padding at the start
                 ..._attendingEvents.take(3).map((event) {
                   return SizedBox(
                     width: 300, // Adjust the width as needed
                     child: _eventCard(event, context),
                   );
                 }),
-                SizedBox(width: 10), // Padding at the end
+                const SizedBox(width: 10), // Padding at the end
               ],
             ),
           ),
@@ -290,7 +291,7 @@ class _EventMainPageState extends State<EventMainPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -304,7 +305,7 @@ class _EventMainPageState extends State<EventMainPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EventMapScreen()),
+                                  builder: (context) => const EventMapScreen()),
                             );
                           },
                         style: GoogleFonts.lato(
@@ -313,7 +314,7 @@ class _EventMainPageState extends State<EventMainPage> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      WidgetSpan(
+                      const WidgetSpan(
                         child: Icon(Icons.arrow_right_outlined, size: 20),
                       ),
                     ],
@@ -329,14 +330,14 @@ class _EventMainPageState extends State<EventMainPage> {
               // Replace `AnotherPage()` with the desired page/widget you want to navigate to
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => EventMapScreen()),
+                MaterialPageRoute(builder: (context) => const EventMapScreen()),
               );
             },
             child: GoogleMap(
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
               },
-              initialCameraPosition: CameraPosition(
+              initialCameraPosition: const CameraPosition(
                 target: LatLng(59.334591, 18.063240),
                 zoom: 13,
               ),

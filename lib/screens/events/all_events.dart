@@ -1,20 +1,17 @@
+import 'package:fight_buddy/screens/chat/chatmainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fight_buddy/handlers/event.dart';
+import 'package:fight_buddy/model/event.dart';
 import '../../assets/theme/colors.dart';
 import 'eventprofilepage.dart';
-import 'package:fight_buddy/screens/events/create_event.dart';
-import 'package:flutter/gestures.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:fight_buddy/handlers/google_maps/google_maps_events.dart';
 
 class AllEventsPage extends StatefulWidget {
   const AllEventsPage({Key? key}) : super(key: key);
   @override
-  _AllEventsPageState createState() => _AllEventsPageState();
+  AllEventsPageState createState() => AllEventsPageState();
 }
 
-class _AllEventsPageState extends State<AllEventsPage> {
+class AllEventsPageState extends State<AllEventsPage> {
   List<Event> _events = [];
   bool _isLoading = false;
 
@@ -128,8 +125,10 @@ Widget _eventCard(Event event, BuildContext context) {
                     child: IconButton(
                       icon: const Icon(Icons.message_rounded),
                       onPressed: () {
-                        //Implementera att den gå till chatten
-                        print("pressed icon message");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatMainPage()));
                       },
                     ),
                   ),

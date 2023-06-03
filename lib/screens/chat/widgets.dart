@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'searchfield.dart';
 import 'styles.dart';
 
 class ChatUI {
@@ -130,7 +128,7 @@ class ChatUI {
       future: FirebaseFirestore.instance.collection('users').doc(userId).get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
@@ -150,7 +148,7 @@ class ChatUI {
               if (!check) const Spacer(),
               if (check)
                 CircleAvatar(
-                  backgroundColor: Color.fromRGBO(242, 242, 247, 90),
+                  backgroundColor: const Color.fromRGBO(242, 242, 247, 90),
                   radius: 13,
                   child: coverPicture != null
                       ? CircleAvatar(

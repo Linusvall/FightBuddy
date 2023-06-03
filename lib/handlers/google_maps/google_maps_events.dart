@@ -1,20 +1,15 @@
-import 'package:fight_buddy/handlers/google_maps/location_service.dart';
-import 'package:fight_buddy/screens/events/create_event.dart';
-import 'package:fight_buddy/handlers/event.dart';
-import 'package:fight_buddy/handlers/event_handler.dart';
+import 'package:fight_buddy/model/event.dart';
 import 'package:fight_buddy/screens/events/eventprofilepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
-import 'package:google_places_flutter/google_places_flutter.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Google Maps events test',
       home: EventMapScreen(),
     );
@@ -22,11 +17,13 @@ class MyApp extends StatelessWidget {
 }
 
 class EventMapScreen extends StatefulWidget {
+  const EventMapScreen({super.key});
+
   @override
-  _EventMapScreenState createState() => _EventMapScreenState();
+  EventMapScreenState createState() => EventMapScreenState();
 }
 
-class _EventMapScreenState extends State<EventMapScreen> {
+class EventMapScreenState extends State<EventMapScreen> {
   late GoogleMapController mapController;
   List<Event> events = [];
 
@@ -105,7 +102,7 @@ class _EventMapScreenState extends State<EventMapScreen> {
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
               },
-              initialCameraPosition: CameraPosition(
+              initialCameraPosition: const CameraPosition(
                 target: LatLng(59.334591, 18.063240),
                 zoom: 13,
               ),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,10 +23,10 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   String lat = '';
   String lng = '';
   String location = '';
@@ -62,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
           getPlaceDetailWithLatLng: (Prediction prediction) {
             lat = prediction.lat.toString();
             lng = prediction.lng.toString();
-            print("Lattitude: $lat");
-            print("Longitude: $lng");
+            ("Lattitude: $lat");
+            ("Longitude: $lng");
           },
           itmClick: (Prediction prediction) {
             controller.text = prediction.description as String;

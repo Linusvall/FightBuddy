@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/model/user.dart' as fightbuddy;
 import '../assets/theme/colors.dart';
 
 class MatchProfilePage extends StatefulWidget {

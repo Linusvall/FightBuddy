@@ -1,18 +1,18 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fight_buddy/handlers/event.dart';
+import 'package:fight_buddy/model/event.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
 import '../../assets/theme/colors.dart';
+import '../chat/chatmainpage.dart';
 import 'eventprofilepage.dart';
 
 class MyEventsPage extends StatefulWidget {
   const MyEventsPage({Key? key}) : super(key: key);
   @override
-  _MyEventsPageState createState() => _MyEventsPageState();
+  MyEventsPageState createState() => MyEventsPageState();
 }
 
-class _MyEventsPageState extends State<MyEventsPage>
+class MyEventsPageState extends State<MyEventsPage>
     with SingleTickerProviderStateMixin {
   String uid = UserHandler().getUserId();
   List<Event> _createdEvents = [];
@@ -91,7 +91,7 @@ class _MyEventsPageState extends State<MyEventsPage>
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: fightbuddyLightgreen,
-          tabs: [
+          tabs: const [
             Tab(
               child: Text(
                 'Alla',
@@ -130,7 +130,7 @@ class _MyEventsPageState extends State<MyEventsPage>
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();
@@ -148,7 +148,7 @@ class _MyEventsPageState extends State<MyEventsPage>
                   return _eventCard(event, context);
                 } else if (_isLoading) {
                   // Visa cirkel om det laddar
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   // Nått slutet av listan
                   return Container();
@@ -275,7 +275,10 @@ Widget _eventCard(Event event, BuildContext context) {
                       icon: const Icon(Icons.message_rounded),
                       onPressed: () {
                         //Implementera att den gå till chatten
-                        print("pressed icon message");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ChatMainPage()));
                       },
                     ),
                   ),

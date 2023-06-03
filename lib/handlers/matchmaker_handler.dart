@@ -1,5 +1,5 @@
 import 'package:fight_buddy/handlers/user_handler.dart';
-import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/model/user.dart' as fightbuddy;
 
 Future findMatches(fightbuddy.User user) async {
   List<String> uidList = [];

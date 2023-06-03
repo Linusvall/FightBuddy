@@ -23,8 +23,6 @@ class EventHandler {
     addAttendee(eventId, UserHandler().getUserId());
   }
 
-  //TODO: Metoder för att uppdatera event, som i user_handler + lägga till användare som skapat eventet?
-
   /* void addAttendee(String uid){
     eventsCollection.where('')
   } */

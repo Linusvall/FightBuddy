@@ -12,10 +12,10 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  SettingsPageState createState() => SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class SettingsPageState extends State<SettingsPage> {
   bool notificationsValue = true;
   bool weightValue = false;
 
@@ -115,6 +115,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 )
               ])),
           const SizedBox(height: 100),
+          //Couldnt fix in time so user is deleted from everybodys matches, resulting in null error
+          /*
           RichText(
               textAlign: TextAlign.center,
               text: TextSpan(children: [
@@ -167,6 +169,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Color.fromRGBO(184, 0, 0, 0.808)),
                 )
               ])),
+              */
         ]));
   }
 }

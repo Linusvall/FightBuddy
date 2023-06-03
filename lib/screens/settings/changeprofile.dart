@@ -7,7 +7,7 @@ import 'package:fight_buddy/screens/registration/preflevel.dart';
 import 'package:fight_buddy/screens/registration/prefweight.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/model/user.dart' as fightbuddy;
 
 import '../../handlers/user_handler.dart';
 

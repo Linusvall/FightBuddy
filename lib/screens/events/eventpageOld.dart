@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../assets/theme/colors.dart';
 import 'package:fight_buddy/handlers/event_handler.dart';
-import 'package:fight_buddy/handlers/event.dart';
+import 'package:fight_buddy/model/event.dart';
 import 'package:fight_buddy/screens/events/create_event.dart';
 
 import 'eventprofilepage.dart';

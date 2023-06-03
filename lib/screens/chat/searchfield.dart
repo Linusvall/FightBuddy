@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../screens/chat.dart';
+import 'chat.dart';
 import 'widgets.dart';
 
 class SearchFieldWidget extends StatefulWidget {

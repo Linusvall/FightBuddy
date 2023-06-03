@@ -1,11 +1,10 @@
-import 'package:fight_buddy/screens/chatmainpage.dart';
+import 'package:fight_buddy/screens/chat/chatmainpage.dart';
 import 'package:fight_buddy/screens/events/event_main_page.dart';
 import 'package:fight_buddy/screens/settings/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'profile.dart';
-import 'chat.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

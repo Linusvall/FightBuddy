@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fight_buddy/handlers/algorithm_handler.dart';
+import 'package:fight_buddy/handlers/matchmaker_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/model/user.dart' as fightbuddy;
 import 'package:firebase_storage/firebase_storage.dart';
 
 class UserHandler {

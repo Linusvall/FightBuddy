@@ -53,7 +53,7 @@ class MapSampleState extends State<MapSample> {
       _markers.add(Marker(
         markerId: const MarkerId('marker'),
         position: point,
-        infoWindow: InfoWindow(
+        infoWindow: const InfoWindow(
           title: 'Marker 1',
           snippet: 'Text on the marker',
         ),
@@ -105,15 +105,13 @@ class MapSampleState extends State<MapSample> {
               controller: _searchController,
               textCapitalization: TextCapitalization.words,
               decoration: const InputDecoration(hintText: 'Search by City'),
-              onChanged: (value) {
-                print(value);
-              },
+              onChanged: (value) {},
             )),
             IconButton(
                 onPressed: () async {
                   var place =
                       await LocationService().getPlace(_searchController.text);
-                  print(place);
+
                   _goToPlace(place);
                 },
                 icon: const Icon(Icons.search)),
@@ -138,9 +136,7 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _goToPlace(Map<String, dynamic> place) async {
     final double lat = place['geometry']['location']['lat'];
-    print(lat);
     final double lng = place['geometry']['location']['lng'];
-    print(lng);
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(
       CameraUpdate.newCameraPosition(

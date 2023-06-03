@@ -1,8 +1,8 @@
 import '../../assets/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fight_buddy/handlers/user.dart' as fightbuddy;
+import 'package:fight_buddy/model/user.dart' as fightbuddy;
 import 'package:fight_buddy/handlers/event_handler.dart';
-import '../../handlers/event.dart';
+import '../../model/event.dart';
 import 'package:fight_buddy/handlers/user_handler.dart';
 
 class EventProfilePage extends StatefulWidget {

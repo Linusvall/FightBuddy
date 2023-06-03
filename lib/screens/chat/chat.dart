@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fight_buddy/functions/styles.dart';
-import 'package:fight_buddy/functions/widgets.dart';
+import 'package:fight_buddy/screens/chat/styles.dart';
+import 'package:fight_buddy/screens/chat/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -54,9 +54,7 @@ class _ChatPageState extends State<ChatPage> {
                       return !snapshot.hasData
                           ? Container()
                           : Text(
-                              'Senast aktiv: ' +
-                                  DateFormat('EEE HH:mm')
-                                      .format(DateTime.now()),
+                              'Senast aktiv: ${DateFormat('EEE HH:mm').format(DateTime.now())}',
                               style: Styles.h1().copyWith(
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
